@@ -1,0 +1,6 @@
+[submodule "codt"]
+	path = codt
+	url = git@github.com:mimvdb/codt.git
+[submodule "contree"]
+	path = contree
+	url = git@github.com:mimvdb/contree.git

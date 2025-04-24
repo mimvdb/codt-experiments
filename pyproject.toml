@@ -1,0 +1,10 @@
+[project]
+name = "codt-experiments"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "codt @ file:///${PROJECT_ROOT}/codt",
+    "pycontree @ file:///${PROJECT_ROOT}/contree"
+]
