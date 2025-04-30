@@ -1,13 +1,15 @@
 from codt_py import OptimalDecisionTreeClassifier
+from juliacall import Main as jl
 from pycontree import ConTree
 from sklearn.metrics import accuracy_score
 from sklearn.tree import DecisionTreeClassifier
+import numpy as np
 import pandas as pd
 
-df = pd.read_csv("../contree/datasets/bank.txt", sep=" ", header=None)
+df = pd.read_csv("./contree/datasets/bank.txt", sep=" ", header=None)
 
-X = df[df.columns[1:]]#.to_numpy()
-y = df[0]#.to_numpy()
+X = df[df.columns[1:]]
+y = df[0]
 
 max_depth=2
 
@@ -27,3 +29,8 @@ print("ConTree Accuracy: " , accuracy_score(y, contree_ypred))
 
 cart_ypred = cart.predict(X)
 print("CART Accuracy: " , accuracy_score(y, cart_ypred))
+
+jl.seval("include(\"Quant-BnB/call.jl\")")
+y_quant = np.zeros((y.size, y.max() + 1))
+y_quant[np.arange(y.size), y] = 1
+print("Quant-BnB Accuracy: ", jl.optimal_classification_2d(X.to_numpy(), y_quant))

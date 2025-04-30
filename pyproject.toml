@@ -6,5 +6,6 @@ readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
     "codt @ file:///${PROJECT_ROOT}/codt",
-    "pycontree @ file:///${PROJECT_ROOT}/contree"
+    "juliacall>=0.9.24",
+    "pycontree @ file:///${PROJECT_ROOT}/contree",
 ]
