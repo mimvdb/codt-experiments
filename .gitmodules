@@ -6,4 +6,4 @@
 	url = git@github.com:mimvdb/contree.git
 [submodule "Quant-BnB"]
 	path = Quant-BnB
-	url = git@github.com:mengxianglgal/Quant-BnB.git
+	url = git@github.com:mimvdb/Quant-BnB.git
