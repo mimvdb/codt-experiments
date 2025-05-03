@@ -6,4 +6,4 @@ This repository hosts the experiment setup for CODT, including comparisons again
 2. Install [`uv`](https://github.com/astral-sh/uv) (faster pip replacement).
 
 ## Running experiments
-Run `uv run scripts/simple.py`.
+Run `uv run main.py`.
