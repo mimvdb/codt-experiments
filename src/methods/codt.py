@@ -1,21 +1,45 @@
 import numpy as np
 import time
-from sklearn.metrics import r2_score
+from sklearn.metrics import accuracy_score, r2_score
 from sklearn.model_selection import GridSearchCV
-from codt.codt_py.tree import OptimalDecisionTreeRegressor
+from codt.codt_py import OptimalDecisionTreeClassifier, OptimalDecisionTreeRegressor, SearchStrategyEnum
 from .base import BaseMethod, RunOutput, RunParams
 
 class CodtMethod(BaseMethod):
-    def __init__(self):
-        super().__init__("codt", ["regression"])
+    def __init__(self, task):
+        super().__init__("codt", task)
+        if task == "classification":
+            self.model = OptimalDecisionTreeClassifier
+            self.score_func = accuracy_score
+        elif task == "regression":
+            self.model = OptimalDecisionTreeRegressor
+            self.score_func = r2_score
 
     def run_method(self, X_train, y_train, X_test, y_test, params: RunParams):
-
         start_time = time.time() # Start timer after reading data
+
+        if params.strategy == "dfs":
+            strategy = SearchStrategyEnum.Dfs
+        elif params.strategy == "and-or":
+            strategy = SearchStrategyEnum.AndOr
+        elif params.strategy == "bfs-lb":
+            strategy = SearchStrategyEnum.BfsLb
+        elif params.strategy == "bfs-curiosity":
+            strategy = SearchStrategyEnum.BfsCuriosity
+        elif params.strategy == "bfs-gosdt":
+            strategy = SearchStrategyEnum.BfsGosdt
+        elif params.strategy == "dfs-prio":
+            strategy = SearchStrategyEnum.DfsPrio
+        elif params.strategy == "":
+            # Default strategy
+            strategy = SearchStrategyEnum.DfsPrio
+        else:
+            assert False, f"Search strategy {params.strategy} not supported"
 
         if params.tune:
             model = OptimalDecisionTreeRegressor()
             parameters = {
+                "strategy": [strategy],
                 "max_depth": [params.max_depth],
                 "cp": np.array([0.1, 0.05, 0.025, 0.01, 0.0075, 0.005, 0.0025, 0.001, 0.0005, 0.0001])
             }
@@ -27,7 +51,7 @@ class CodtMethod(BaseMethod):
             model = OptimalDecisionTreeRegressor(**tuning_model.best_params_)
             tuning_output = tuning_model.cv_results_
         else:
-            model = OptimalDecisionTreeRegressor(max_depth=params.max_depth)
+            model = self.model(max_depth=params.max_depth, strategy=strategy)
             tuning_output = None
 
         model.fit(X_train, y_train)
@@ -36,8 +60,8 @@ class CodtMethod(BaseMethod):
 
         return RunOutput(
             time=duration,
-            train_score=r2_score(y_train, model.predict(X_train)),
-            test_score=r2_score(y_test, model.predict(X_test)),
+            train_score=self.score_func(y_train, model.predict(X_train)),
+            test_score=self.score_func(y_test, model.predict(X_test)),
             depth=0, # TODO
             leaves=0, # TODO
             output="",

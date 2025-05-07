@@ -1,7 +1,7 @@
 import numpy as np
 import time
 from sklearn.base import BaseEstimator, ClassifierMixin, RegressorMixin, check_is_fitted, validate_data
-from sklearn.metrics import r2_score
+from sklearn.metrics import accuracy_score, r2_score
 from .base import BaseMethod, RunOutput, RunParams
 
 from juliacall import Main as jl
@@ -9,8 +9,9 @@ jl.seval("include(\"Quant-BnB/call.jl\")")
 jl.seval("include(\"Quant-BnB/gen_data.jl\")") # for tree_eval
 
 class QuantBnBDecisionTreeClassifier(BaseEstimator, ClassifierMixin):
-    def __init__(self, max_depth):
+    def __init__(self, max_depth, timeout):
         self.max_depth = max_depth
+        self.timeout = timeout
 
     def fit(self, X, y):
         X, y = validate_data(self, X, y, ensure_min_samples=2, dtype=np.float64)
@@ -21,9 +22,11 @@ class QuantBnBDecisionTreeClassifier(BaseEstimator, ClassifierMixin):
         y_quant[np.arange(y.size), y] = 1
 
         # Quant-BnB can only do depth 2 or 3 trees.
-        assert self.max_depth == 2
-
-        _, self.tree_ = jl.optimal_classification_2d(X, y_quant)
+        assert self.max_depth in [2, 3]
+        if self.max_depth == 2:
+            _, self.tree_ = jl.optimal_classification_2d(X, y_quant)
+        elif self.max_depth == 3:
+            _, self.tree_ = jl.optimal_classification_3d(X, y_quant, 60) # TODO timelimit
 
     def predict(self, X):
         check_is_fitted(self)
@@ -31,8 +34,9 @@ class QuantBnBDecisionTreeClassifier(BaseEstimator, ClassifierMixin):
         return np.take(self.classes_, jl.tree_eval(self.tree_, X, 2, len(self.classes_)))
 
 class QuantBnBDecisionTreeRegressor(BaseEstimator, RegressorMixin):
-    def __init__(self, max_depth):
+    def __init__(self, max_depth, timeout):
         self.max_depth = max_depth
+        self.timeout = timeout
 
     def fit(self, X, y):
         X, y = validate_data(self, X, y, ensure_min_samples=2, dtype=np.float64, y_numeric=True)
@@ -41,9 +45,12 @@ class QuantBnBDecisionTreeRegressor(BaseEstimator, RegressorMixin):
         y_quant = np.array([y]).T
 
         # Quant-BnB can only do depth 2 or 3 trees.
-        assert self.max_depth == 2
+        assert self.max_depth in [2, 3]
+        if self.max_depth == 2:
+            _, self.tree_ = jl.optimal_regression_2d(X, y_quant)
+        elif self.max_depth == 3:
+            _, self.tree_ = jl.optimal_regression_3d(X, y_quant, 60) # TODO timelimit
 
-        _, self.tree_ = jl.optimal_regression_2d(X, y_quant)
 
     def predict(self, X):
         check_is_fitted(self)
@@ -52,25 +59,29 @@ class QuantBnBDecisionTreeRegressor(BaseEstimator, RegressorMixin):
 
 
 class QuantBnBMethod(BaseMethod):
-    def __init__(self):
-        super().__init__("quantbnb", ["regression"])
+    def __init__(self, task):
+        super().__init__("quantbnb", task)
+        if task == "classification":
+            self.model = QuantBnBDecisionTreeClassifier
+            self.score_func = accuracy_score
+        elif task == "regression":
+            self.model = QuantBnBDecisionTreeRegressor
+            self.score_func = r2_score
 
     def run_method(self, X_train, y_train, X_test, y_test, params: RunParams):
         start_time = time.time() # Start timer after reading data
 
-        model = QuantBnBDecisionTreeRegressor(max_depth=params.max_depth)
-        tuning_output = None
+        model = self.model(max_depth=params.max_depth, timeout=params.timeout)
 
         model.fit(X_train, y_train)
 
+        # TODO: Do timing for this method inside julia, so no overhead is taken in the measurements
         duration = time.time() - start_time            
 
         return RunOutput(
             time=duration,
-            train_score=r2_score(y_train, model.predict(X_train)),
-            test_score=r2_score(y_test, model.predict(X_test)),
+            train_score=self.score_func(y_train, model.predict(X_train)),
+            test_score=self.score_func(y_test, model.predict(X_test)),
             depth=0, # TODO model.get_depth(),
             leaves=0, # TODO model.get_n_leaves(),
-            output="",
-            intermediates=None,
-            tuning_output=tuning_output)
+            output="")

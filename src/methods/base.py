@@ -1,7 +1,9 @@
 from abc import ABC, abstractmethod
+from contextlib import redirect_stderr, redirect_stdout
 from dataclasses import dataclass, asdict
+from io import StringIO
 from typing import Dict, List, Optional
-
+from traceback import format_exc
 from src.util import get_test_set, get_train_set
 
 @dataclass
@@ -16,8 +18,10 @@ class RunParams():
         test_set: Name of the test dataset.
         max_depth: Enforce a maximum depth limit for the tree.
         cp: Complexity penalty.
+        strategy: Use the specified search strategy
         intermediates: If true, keep scores of intermediate solutions.
         tune: If true, tune hyperparameters for out-of-sample performance.
+        base_case_solver: The base case of a decision tree. I.e. "leaf" or "d1.5" or "d2"
     """
     method: str
     task: str
@@ -26,6 +30,7 @@ class RunParams():
     test_set: str
     max_depth: int
     cp: float = 0.0
+    strategy: str = ""
     intermediates: bool = False
     tune: bool = False
 
@@ -55,6 +60,11 @@ class RunOutput():
     intermediates: Optional[List[float]] = None
     tuning_output: Optional[Dict] = None
 
+    @staticmethod
+    def empty_with_output(output: str):
+        return RunOutput(-1.0, 0.0, 0.0, 0, 0, output)
+
+
 @dataclass
 class Run():
     p: RunParams
@@ -64,17 +74,38 @@ class Run():
         return {"p": self.p.as_dict(), "o": asdict(self.o)}
 
 class BaseMethod(ABC):
-    def __init__(self, method_id: str, tasks: List[str]):
+    def __init__(self, method_id: str, task: str):
         self.method_id = method_id
-        self.tasks = tasks
+        self.task = task
 
     def run(self, params: RunParams) -> RunOutput:
         assert params.method == self.method_id
-        assert params.task in self.tasks
+        assert params.task in self.task
+        assert params.task == "regression" or not params.tune # OOS experiments only for regression
 
         X_train, y_train = get_train_set(params.train_set, params.task)
         X_test, y_test = get_test_set(params.test_set, params.task)
-        return self.run_method(X_train, y_train, X_test, y_test, params)
+
+        stdout_io = StringIO()
+        stderr_io = StringIO()
+
+        def append_std(output):
+            stdout_str = stdout_io.getvalue()
+            stderr_str = stderr_io.getvalue()
+            if len(stdout_str) > 0: output += f"\nSTDOUT\n{stdout_str}"
+            if len(stderr_str) > 0: output += f"\nSTDERR\n{stderr_str}"
+            return output
+
+        try:
+            with redirect_stdout(stdout_io), redirect_stderr(stderr_io):
+                result = self.run_method(X_train, y_train, X_test, y_test, params)
+                result.output = append_std(result.output)
+        except Exception as e:
+            result = RunOutput.empty_with_output(format_exc(e))
+            result.output = append_std(result.output)
+        
+        return result
+
 
     @abstractmethod
     def run_method(self, X_train, y_train, X_test, y_test, params: RunParams) -> RunOutput:
