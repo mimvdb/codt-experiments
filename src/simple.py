@@ -5,7 +5,7 @@ from sklearn.metrics import accuracy_score
 from sklearn.tree import DecisionTreeClassifier
 import numpy as np
 
-from .util import read_quant_dataset
+from .data import read_quant_dataset
 
 def main():
 

@@ -1,23 +1,22 @@
 import numpy as np
-import time
-from sklearn.metrics import accuracy_score, r2_score
 from sklearn.model_selection import GridSearchCV
-from codt.codt_py import OptimalDecisionTreeClassifier, OptimalDecisionTreeRegressor, SearchStrategyEnum
-from .base import BaseMethod, RunOutput, RunParams
+from codt_py import (
+    OptimalDecisionTreeClassifier,
+    OptimalDecisionTreeRegressor,
+    SearchStrategyEnum,
+)
+from .base import BaseMethod, RunParams
+
 
 class CodtMethod(BaseMethod):
     def __init__(self, task):
         super().__init__("codt", task)
         if task == "classification":
             self.model = OptimalDecisionTreeClassifier
-            self.score_func = accuracy_score
         elif task == "regression":
             self.model = OptimalDecisionTreeRegressor
-            self.score_func = r2_score
 
-    def run_method(self, X_train, y_train, X_test, y_test, params: RunParams):
-        start_time = time.time() # Start timer after reading data
-
+    def train_model(self, X, y, params: RunParams):
         if params.strategy == "dfs":
             strategy = SearchStrategyEnum.Dfs
         elif params.strategy == "and-or":
@@ -41,29 +40,35 @@ class CodtMethod(BaseMethod):
             parameters = {
                 "strategy": [strategy],
                 "max_depth": [params.max_depth],
-                "cp": np.array([0.1, 0.05, 0.025, 0.01, 0.0075, 0.005, 0.0025, 0.001, 0.0005, 0.0001])
+                "cp": np.array(
+                    [
+                        0.1,
+                        0.05,
+                        0.025,
+                        0.01,
+                        0.0075,
+                        0.005,
+                        0.0025,
+                        0.001,
+                        0.0005,
+                        0.0001,
+                    ]
+                ),
             }
 
             tuning_model = GridSearchCV(
-                model, param_grid=parameters, scoring="neg_mean_squared_error", cv=5, verbose=0
+                model,
+                param_grid=parameters,
+                scoring="neg_mean_squared_error",
+                cv=5,
+                verbose=0,
             )
-            tuning_model.fit(X_train, y_train)
+            tuning_model.fit(X, y)
             model = OptimalDecisionTreeRegressor(**tuning_model.best_params_)
             tuning_output = tuning_model.cv_results_
         else:
             model = self.model(max_depth=params.max_depth, strategy=strategy)
             tuning_output = None
 
-        model.fit(X_train, y_train)
-
-        duration = time.time() - start_time            
-
-        return RunOutput(
-            time=duration,
-            train_score=self.score_func(y_train, model.predict(X_train)),
-            test_score=self.score_func(y_test, model.predict(X_test)),
-            depth=0, # TODO
-            leaves=0, # TODO
-            output="",
-            intermediates=None,
-            tuning_output=tuning_output)
+        model.fit(X, y)
+        return (model, {"tuning_output": tuning_output})

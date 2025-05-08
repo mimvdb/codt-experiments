@@ -1,12 +1,18 @@
 import numpy as np
-import time
-from sklearn.base import BaseEstimator, ClassifierMixin, RegressorMixin, check_is_fitted, validate_data
-from sklearn.metrics import accuracy_score, r2_score
-from .base import BaseMethod, RunOutput, RunParams
+from sklearn.base import (
+    BaseEstimator,
+    ClassifierMixin,
+    RegressorMixin,
+    check_is_fitted,
+    validate_data,
+)
+from .base import BaseMethod, RunParams
 
 from juliacall import Main as jl
-jl.seval("include(\"Quant-BnB/call.jl\")")
-jl.seval("include(\"Quant-BnB/gen_data.jl\")") # for tree_eval
+
+jl.seval('include("Quant-BnB/call.jl")')
+jl.seval('include("Quant-BnB/gen_data.jl")')  # for tree_eval
+
 
 class QuantBnBDecisionTreeClassifier(BaseEstimator, ClassifierMixin):
     def __init__(self, max_depth, timeout):
@@ -26,12 +32,16 @@ class QuantBnBDecisionTreeClassifier(BaseEstimator, ClassifierMixin):
         if self.max_depth == 2:
             _, self.tree_ = jl.optimal_classification_2d(X, y_quant)
         elif self.max_depth == 3:
-            _, self.tree_ = jl.optimal_classification_3d(X, y_quant, 60) # TODO timelimit
+            _, self.tree_ = jl.optimal_classification_3d(X, y_quant, self.timeout)
 
     def predict(self, X):
         check_is_fitted(self)
         X = validate_data(self, X, reset=False, dtype=np.float64)
-        return np.take(self.classes_, jl.tree_eval(self.tree_, X, 2, len(self.classes_)))
+        return np.take(
+            self.classes_,
+            np.argmax(jl.tree_eval(self.tree_, X, 2, len(self.classes_)), axis=1),
+        )
+
 
 class QuantBnBDecisionTreeRegressor(BaseEstimator, RegressorMixin):
     def __init__(self, max_depth, timeout):
@@ -39,7 +49,9 @@ class QuantBnBDecisionTreeRegressor(BaseEstimator, RegressorMixin):
         self.timeout = timeout
 
     def fit(self, X, y):
-        X, y = validate_data(self, X, y, ensure_min_samples=2, dtype=np.float64, y_numeric=True)
+        X, y = validate_data(
+            self, X, y, ensure_min_samples=2, dtype=np.float64, y_numeric=True
+        )
 
         # Quant-BnB wants a column vector
         y_quant = np.array([y]).T
@@ -49,8 +61,7 @@ class QuantBnBDecisionTreeRegressor(BaseEstimator, RegressorMixin):
         if self.max_depth == 2:
             _, self.tree_ = jl.optimal_regression_2d(X, y_quant)
         elif self.max_depth == 3:
-            _, self.tree_ = jl.optimal_regression_3d(X, y_quant, 60) # TODO timelimit
-
+            _, self.tree_ = jl.optimal_regression_3d(X, y_quant, self.timeout)
 
     def predict(self, X):
         check_is_fitted(self)
@@ -63,25 +74,25 @@ class QuantBnBMethod(BaseMethod):
         super().__init__("quantbnb", task)
         if task == "classification":
             self.model = QuantBnBDecisionTreeClassifier
-            self.score_func = accuracy_score
         elif task == "regression":
             self.model = QuantBnBDecisionTreeRegressor
-            self.score_func = r2_score
 
-    def run_method(self, X_train, y_train, X_test, y_test, params: RunParams):
-        start_time = time.time() # Start timer after reading data
+    def tree_to_list(self, tree):
+        if len(tree) == 4:
+            return [
+                tree[0],
+                tree[1],
+                self.tree_to_list(tree[2]),
+                self.tree_to_list(tree[3]),
+            ]
+        else:
+            if self.task == "classification":
+                return np.argmax(tree)
+            elif self.task == "regression":
+                return np.array(tree)[0, 0]
 
+    def train_model(self, X, y, params: RunParams):
         model = self.model(max_depth=params.max_depth, timeout=params.timeout)
+        model.fit(X, y)
 
-        model.fit(X_train, y_train)
-
-        # TODO: Do timing for this method inside julia, so no overhead is taken in the measurements
-        duration = time.time() - start_time            
-
-        return RunOutput(
-            time=duration,
-            train_score=self.score_func(y_train, model.predict(X_train)),
-            test_score=self.score_func(y_test, model.predict(X_test)),
-            depth=0, # TODO model.get_depth(),
-            leaves=0, # TODO model.get_n_leaves(),
-            output="")
+        return (model, {"tree": self.tree_to_list(model.tree_)})

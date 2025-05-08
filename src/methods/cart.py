@@ -1,52 +1,70 @@
+from typing import List
 import numpy as np
-import time
-from sklearn.metrics import accuracy_score, r2_score
 from sklearn.model_selection import GridSearchCV
 from sklearn.tree import DecisionTreeClassifier, DecisionTreeRegressor
-from .base import BaseMethod, RunOutput, RunParams
+from .base import BaseMethod, RunParams
+
+
+def desired_alphas(alpha_thresholds):
+    """Returns the geometric mean between each threshold. This makes the alpha more robust against slight dataset changes."""
+    alpha_thresholds.append(1.0)
+    alphas = []
+    for i in range(len(alpha_thresholds) - 1):
+        alphas.append(np.sqrt(alpha_thresholds[i] * alpha_thresholds[i + 1]))
+    return alphas
+
 
 class CartMethod(BaseMethod):
     def __init__(self, task):
         super().__init__("cart", task)
         if task == "classification":
             self.model = DecisionTreeClassifier
-            self.score_func = accuracy_score
         elif task == "regression":
             self.model = DecisionTreeRegressor
-            self.score_func = r2_score
 
-    def run_method(self, X_train, y_train, X_test, y_test, params: RunParams):
-        x = np.std(y_train) * np.std(y_train) if self.task == "regression" else len(y_train)
+    def tree_to_list(self, tree, node_id) -> List | float:
+        # TREE_UNDEFINED == -2, means its a leaf
+        if tree.feature[node_id] == -2:
+            if tree.n_outputs == 1:
+                value = tree.value[node_id][0]
+            else:
+                value = tree.value[node_id].T[0]
+            return np.argmax(value) if self.task == "classification" else value
+        else:
+            # Children exist
+            return [
+                tree.feature[node_id],
+                tree.threshold[node_id],
+                self.tree_to_list(tree, tree.children_left[node_id]),
+                self.tree_to_list(tree, tree.children_right[node_id]),
+            ]
 
-        start_time = time.time() # Start timer after reading data
+    def train_model(self, X, y, params: RunParams):
+        x = np.std(y) * np.std(y) if self.task == "regression" else len(y)
 
         if params.tune:
-            model = DecisionTreeRegressor()
-            parameters = {
-                "max_depth": [params.max_depth],
-                "ccp_alpha": np.array([0.1, 0.05, 0.025, 0.01, 0.0075, 0.005, 0.0025, 0.001, 0.0005, 0.0001]) * x
-            }
+            model = DecisionTreeRegressor(max_depth=params.max_depth)
+            ccp_path = model.cost_complexity_pruning_path(X, y)
+            ccp_alphas = desired_alphas(ccp_path.ccp_alphas)
+            parameters = {"max_depth": [params.max_depth], "ccp_alpha": ccp_alphas}
 
             tuning_model = GridSearchCV(
-                model, param_grid=parameters, scoring="neg_mean_squared_error", cv=5, verbose=0
+                model,
+                param_grid=parameters,
+                scoring="neg_mean_squared_error",
+                cv=5,
+                verbose=0,
             )
-            tuning_model.fit(X_train, y_train)
+            tuning_model.fit(X, y)
             model = DecisionTreeRegressor(**tuning_model.best_params_)
             tuning_output = tuning_model.cv_results_
         else:
             model = self.model(max_depth=params.max_depth, ccp_alpha=params.cp * x)
             tuning_output = None
 
-        model.fit(X_train, y_train)
-
-        duration = time.time() - start_time            
-
-        return RunOutput(
-            time=duration,
-            train_score=self.score_func(y_train, model.predict(X_train)),
-            test_score=self.score_func(y_test, model.predict(X_test)),
-            depth=model.get_depth(),
-            leaves=model.get_n_leaves(),
-            output="",
-            intermediates=None,
-            tuning_output=tuning_output)
+        model.fit(X, y)
+        extra = {
+            "tuning_output": tuning_output,
+            "tree": self.tree_to_list(model.tree_, 0),
+        }
+        return (model, extra)

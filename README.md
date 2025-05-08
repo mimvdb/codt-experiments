@@ -6,4 +6,4 @@ This repository hosts the experiment setup for CODT, including comparisons again
 2. Install [`uv`](https://github.com/astral-sh/uv) (faster pip replacement).
 
 ## Running experiments
-Run `uv run main.py`.
+Start with running `uv run util.py quant_to_csv` to generate the required datasets, then `uv run setup.py` to setup an experiment, then `uv run run.py < experiments.json` to run it.

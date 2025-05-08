@@ -3,12 +3,13 @@ from typing import List
 from src.methods import RunParams
 
 
-def setup_debug() -> List[RunParams]:
+def setup_generalisation() -> List[RunParams]:
     runs = []
     methods = ["codt", "cart", "quantbnb"]
     datasets = ["qsar", "fish", "concrete"]
     depths = [2]
-    for m, d, data in itertools.product(methods, depths, datasets):
+    test_sets = ["0", "1", "2", "3", "4"]
+    for m, d, data, test_set in itertools.product(methods, depths, datasets, test_sets):
         runs.append(
             RunParams(
                 method=m,
@@ -16,7 +17,8 @@ def setup_debug() -> List[RunParams]:
                 timeout=120,
                 dataset=data,
                 max_depth=d,
-                test_set="0",
+                test_set=test_set,
+                tune=True
             )
         )
     return runs

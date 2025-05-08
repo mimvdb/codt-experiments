@@ -1,10 +1,14 @@
+import numpy as np
+import time
 from abc import ABC, abstractmethod
 from contextlib import redirect_stderr, redirect_stdout
 from dataclasses import dataclass, asdict
 from io import StringIO
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Tuple
 from traceback import format_exc
-from src.util import get_test_set, get_train_set
+from sklearn.base import BaseEstimator
+from sklearn.metrics import accuracy_score, r2_score
+from src.data import get_dataset, get_test_indices
 
 @dataclass
 class RunParams():
@@ -14,9 +18,9 @@ class RunParams():
         method: String id of the method
         task: Task of decision tree. E.g. "classification" or "regression"
         timeout: Timeout in seconds.
-        train_set: Name of the train dataset.
-        test_set: Name of the test dataset.
+        dataset: Name of the dataset.
         max_depth: Enforce a maximum depth limit for the tree.
+        test_set: Index set to use as test set, empty string for none.
         cp: Complexity penalty.
         strategy: Use the specified search strategy
         intermediates: If true, keep scores of intermediate solutions.
@@ -26,9 +30,9 @@ class RunParams():
     method: str
     task: str
     timeout: int
-    train_set: str
-    test_set: str
+    dataset: str
     max_depth: int
+    test_set: str = ""
     cp: float = 0.0
     strategy: str = ""
     intermediates: bool = False
@@ -48,7 +52,8 @@ class RunOutput():
         depth: The deepest path in the resulting tree, a tree with only a root node is depth 0.
         leaves: The number of leaf nodes in the resulting tree.
         output: Output string, used for debugging.
-        intermediates: Optionally, the training scores of intermediate solutions.
+        tree: The tree, format is a nested list of [feature, threshold, left_child, right_child] for internal nodes and the label for leafs
+        intermediates: Optionally, a list of tuples with the training scores, graph expansions, and time of intermediate solutions.
         tuning_output: Optionally, the extra information during tuning.
     """
     time: float
@@ -57,12 +62,13 @@ class RunOutput():
     depth: int
     leaves: int
     output: str
-    intermediates: Optional[List[float]] = None
-    tuning_output: Optional[Dict] = None
+    tree: Optional[List | float]
+    intermediates: Optional[List[Tuple[float, int, float]]]
+    tuning_output: Optional[Dict]
 
     @staticmethod
     def empty_with_output(output: str):
-        return RunOutput(-1.0, 0.0, 0.0, 0, 0, output)
+        return RunOutput(-1.0, 0.0, 0.0, 0, 0, output, None, None, None)
 
 
 @dataclass
@@ -83,8 +89,14 @@ class BaseMethod(ABC):
         assert params.task in self.task
         assert params.task == "regression" or not params.tune # OOS experiments only for regression
 
-        X_train, y_train = get_train_set(params.train_set, params.task)
-        X_test, y_test = get_test_set(params.test_set, params.task)
+        X, y = get_dataset(params.dataset, params.task)
+        if params.test_set == "":
+            X_train, y_train, X_test, y_test = X, y, None, None
+        else:
+            test_idx = get_test_indices(params.dataset, params.task, params.test_set)
+            train_select = np.full(y.shape, True)
+            train_select[test_idx] = False
+            X_train, y_train, X_test, y_test = X[train_select], y[train_select], X[test_idx], y[test_idx]
 
         stdout_io = StringIO()
         stderr_io = StringIO()
@@ -98,16 +110,35 @@ class BaseMethod(ABC):
 
         try:
             with redirect_stdout(stdout_io), redirect_stderr(stderr_io):
-                result = self.run_method(X_train, y_train, X_test, y_test, params)
+                start_time = time.time()
+                (model, extra) = self.train_model(X_train, y_train, params)
+                duration = time.time() - start_time
+
+                if params.task == "classification":
+                    score_func = accuracy_score
+                elif params.task == "regression":
+                    score_func = r2_score
+
+                result = RunOutput(
+                    time=duration,
+                    train_score=score_func(y_train, model.predict(X_train)),
+                    test_score=0.0 if X_test is None else score_func(y_test, model.predict(X_test)),
+                    depth=0, # TODO model.get_depth(),
+                    leaves=0, # TODO model.get_n_leaves(),
+                    output="",
+                    tree=extra.get("tree"),
+                    intermediates=extra.get("intermediates"),
+                    tuning_output=extra.get("tuning_output"))
+
                 result.output = append_std(result.output)
-        except Exception as e:
-            result = RunOutput.empty_with_output(format_exc(e))
+        except Exception:
+            result = RunOutput.empty_with_output(format_exc())
             result.output = append_std(result.output)
         
         return result
 
 
     @abstractmethod
-    def run_method(self, X_train, y_train, X_test, y_test, params: RunParams) -> RunOutput:
-        """ Run the method and produce a result
+    def train_model(self, X, y, params: RunParams) -> Tuple[BaseEstimator, Dict]:
+        """ Use the method to train a model
         """

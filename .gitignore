@@ -1,3 +1,5 @@
 __pycache__/
+# Ignore datasets, but keep index sets.
+datasets/*/*.csv
 experiments.json
 results_*.json
