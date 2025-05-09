@@ -80,7 +80,7 @@ class QuantBnBMethod(BaseMethod):
     def tree_to_list(self, tree):
         if len(tree) == 4:
             return [
-                tree[0],
+                tree[0] - 1, # 1-indexed to 0-indexed features
                 tree[1],
                 self.tree_to_list(tree[2]),
                 self.tree_to_list(tree[3]),

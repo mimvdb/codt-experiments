@@ -26,7 +26,7 @@ class CartMethod(BaseMethod):
         # TREE_UNDEFINED == -2, means its a leaf
         if tree.feature[node_id] == -2:
             if tree.n_outputs == 1:
-                value = tree.value[node_id][0]
+                value = tree.value[node_id][0][0]
             else:
                 value = tree.value[node_id].T[0]
             return np.argmax(value) if self.task == "classification" else value

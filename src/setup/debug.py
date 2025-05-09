@@ -16,7 +16,17 @@ def setup_debug() -> List[RunParams]:
                 timeout=120,
                 dataset=data,
                 max_depth=d,
-                test_set="0",
+            )
+        )
+    datasets = ["bank"]
+    for m, d, data in itertools.product(methods, depths, datasets):
+        runs.append(
+            RunParams(
+                method=m,
+                task="classification",
+                timeout=120,
+                dataset=data,
+                max_depth=d,
             )
         )
     return runs

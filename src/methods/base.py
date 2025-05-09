@@ -10,6 +10,25 @@ from sklearn.base import BaseEstimator
 from sklearn.metrics import accuracy_score, r2_score
 from src.data import get_dataset, get_test_indices
 
+
+def depth_from_tree(tree):
+    if tree is None:
+        return -1
+    elif hasattr(tree, "__len__") and len(tree) == 4:
+        return max(depth_from_tree(tree[2]), depth_from_tree(tree[3])) + 1
+    else:
+        return 0
+
+
+def leaves_from_tree(tree):
+    if tree is None:
+        return -1
+    elif hasattr(tree, "__len__") and len(tree) == 4:
+        return leaves_from_tree(tree[2]) + leaves_from_tree(tree[3])
+    else:
+        return 1
+
+
 @dataclass
 class RunParams():
     """ All parameters for a single run of a method.
@@ -118,15 +137,17 @@ class BaseMethod(ABC):
                     score_func = accuracy_score
                 elif params.task == "regression":
                     score_func = r2_score
+                
+                tree = extra.get("tree")
 
                 result = RunOutput(
                     time=duration,
                     train_score=score_func(y_train, model.predict(X_train)),
                     test_score=0.0 if X_test is None else score_func(y_test, model.predict(X_test)),
-                    depth=0, # TODO model.get_depth(),
-                    leaves=0, # TODO model.get_n_leaves(),
+                    depth=depth_from_tree(tree),
+                    leaves=leaves_from_tree(tree),
                     output="",
-                    tree=extra.get("tree"),
+                    tree=tree,
                     intermediates=extra.get("intermediates"),
                     tuning_output=extra.get("tuning_output"))
 
