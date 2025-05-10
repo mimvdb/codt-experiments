@@ -7,7 +7,6 @@ from io import StringIO
 from typing import Dict, List, Optional, Tuple
 from traceback import format_exc
 from sklearn.base import BaseEstimator
-from sklearn.metrics import accuracy_score, r2_score
 from src.data import get_dataset, get_test_indices
 
 
@@ -134,18 +133,13 @@ class BaseMethod(ABC):
                 start_time = time.time()
                 (model, extra) = self.train_model(X_train, y_train, params)
                 duration = time.time() - start_time
-
-                if params.task == "classification":
-                    score_func = accuracy_score
-                elif params.task == "regression":
-                    score_func = r2_score
                 
                 tree = extra.get("tree")
 
                 result = RunOutput(
                     time=extra.get("time", duration),
-                    train_score=score_func(y_train, model.predict(X_train)),
-                    test_score=0.0 if X_test is None else score_func(y_test, model.predict(X_test)),
+                    train_score=model.score(X_train, y_train),
+                    test_score=0.0 if X_test is None else model.score(X_test, y_test),
                     depth=depth_from_tree(tree),
                     leaves=leaves_from_tree(tree),
                     output="",

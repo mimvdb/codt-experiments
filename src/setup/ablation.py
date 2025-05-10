@@ -1,11 +1,11 @@
 import itertools
 from typing import List
 from src.methods import RunParams
-
+from codt_py import all_search_strategies
 
 def setup_ablation() -> List[RunParams]:
     runs = []
-    strategies = ["dfs", "bfs-lb", "bfs-curiosity", "bfs-gosdt", "dfs-prio", "and-or"]
+    strategies = all_search_strategies()
     datasets = ["qsar", "fish", "concrete"]
     depths = [2]
     for s, d, data in itertools.product(strategies, depths, datasets):

@@ -7,7 +7,7 @@ from .base import BaseMethod, RunParams
 
 def desired_alphas(alpha_thresholds):
     """Returns the geometric mean between each threshold. This makes the alpha more robust against slight dataset changes."""
-    alpha_thresholds.append(1.0)
+    np.append(alpha_thresholds, 1.0)
     alphas = []
     for i in range(len(alpha_thresholds) - 1):
         alphas.append(np.sqrt(alpha_thresholds[i] * alpha_thresholds[i + 1]))

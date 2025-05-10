@@ -3,7 +3,6 @@ from sklearn.model_selection import GridSearchCV
 from codt_py import (
     OptimalDecisionTreeClassifier,
     OptimalDecisionTreeRegressor,
-    SearchStrategyEnum,
 )
 from .base import BaseMethod, RunParams
 
@@ -17,30 +16,17 @@ class CodtMethod(BaseMethod):
             self.model = OptimalDecisionTreeRegressor
 
     def train_model(self, X, y, params: RunParams):
-        if params.strategy == "dfs":
-            strategy = SearchStrategyEnum.Dfs
-        elif params.strategy == "and-or":
-            strategy = SearchStrategyEnum.AndOr
-        elif params.strategy == "bfs-lb":
-            strategy = SearchStrategyEnum.BfsLb
-        elif params.strategy == "bfs-curiosity":
-            strategy = SearchStrategyEnum.BfsCuriosity
-        elif params.strategy == "bfs-gosdt":
-            strategy = SearchStrategyEnum.BfsGosdt
-        elif params.strategy == "dfs-prio":
-            strategy = SearchStrategyEnum.DfsPrio
-        elif params.strategy == "":
-            # Default strategy
-            strategy = SearchStrategyEnum.DfsPrio
+        if params.strategy == "":
+            strategy = "dfs-prio"
         else:
-            assert False, f"Search strategy {params.strategy} not supported"
+            strategy = params.strategy
 
         if params.tune:
             model = OptimalDecisionTreeRegressor()
             parameters = {
                 "strategy": [strategy],
                 "max_depth": [params.max_depth],
-                "cp": np.array(
+                "complexity_cost": np.array(
                     [
                         0.1,
                         0.05,
