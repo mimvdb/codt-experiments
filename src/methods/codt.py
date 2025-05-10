@@ -71,4 +71,12 @@ class CodtMethod(BaseMethod):
             tuning_output = None
 
         model.fit(X, y)
-        return (model, {"tuning_output": tuning_output, "tree": model.get_tree()})
+        return (
+            model,
+            {
+                "tuning_output": tuning_output,
+                "tree": model.get_tree(),
+                "intermediate_lbs": model.intermediate_lbs(),
+                "intermediate_ubs": model.intermediate_ubs(),
+            },
+        )

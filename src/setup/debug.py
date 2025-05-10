@@ -16,6 +16,7 @@ def setup_debug() -> List[RunParams]:
                 timeout=120,
                 dataset=data,
                 max_depth=d,
+                intermediates=True,
             )
         )
     datasets = ["bank"]
@@ -27,6 +28,7 @@ def setup_debug() -> List[RunParams]:
                 timeout=120,
                 dataset=data,
                 max_depth=d,
+                intermediates=True,
             )
         )
     return runs

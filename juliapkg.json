@@ -1,0 +1,11 @@
+{
+    "julia": "1.11",
+    "packages": {
+        "QuantBnBWrapper": {
+            "path": ".",
+            "subdir": "QuantBnBWrapper",
+            "uuid": "ee039a4e-c733-4877-ae00-b01eb7161a14",
+            "dev": true
+        }
+    }
+}

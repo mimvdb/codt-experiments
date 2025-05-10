@@ -1,7 +1,8 @@
 import argparse
 from src.data import generate_index_sets, quant_to_csv
+from src.julia_compile import create_julia_sysimage
 
-UTIL_FUNCS = {"quant_to_csv": quant_to_csv, "generate_index_sets": generate_index_sets}
+UTIL_FUNCS = {"quant_to_csv": quant_to_csv, "generate_index_sets": generate_index_sets, "create_julia_sysimage": create_julia_sysimage}
 
 
 def util(args):

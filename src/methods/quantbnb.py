@@ -8,10 +8,10 @@ from sklearn.base import (
 )
 from .base import BaseMethod, RunParams
 
+# os.environ["PYTHON_JULIACALL_SYSIMAGE"] = "sys_precompiled.so"
 from juliacall import Main as jl
 
-jl.seval('include("Quant-BnB/call.jl")')
-jl.seval('include("Quant-BnB/gen_data.jl")')  # for tree_eval
+jl.seval('using QuantBnBWrapper')
 
 
 class QuantBnBDecisionTreeClassifier(BaseEstimator, ClassifierMixin):
@@ -30,9 +30,9 @@ class QuantBnBDecisionTreeClassifier(BaseEstimator, ClassifierMixin):
         # Quant-BnB can only do depth 2 or 3 trees.
         assert self.max_depth in [2, 3]
         if self.max_depth == 2:
-            _, self.tree_ = jl.optimal_classification_2d(X, y_quant)
+            _, self.tree_, self.time_ = jl.optimal_classification_2d(X, y_quant)
         elif self.max_depth == 3:
-            _, self.tree_ = jl.optimal_classification_3d(X, y_quant, self.timeout)
+            _, self.tree_, self.time_ = jl.optimal_classification_3d(X, y_quant, self.timeout)
 
     def predict(self, X):
         check_is_fitted(self)
@@ -59,9 +59,9 @@ class QuantBnBDecisionTreeRegressor(BaseEstimator, RegressorMixin):
         # Quant-BnB can only do depth 2 or 3 trees.
         assert self.max_depth in [2, 3]
         if self.max_depth == 2:
-            _, self.tree_ = jl.optimal_regression_2d(X, y_quant)
+            _, self.tree_, self.time_ = jl.optimal_regression_2d(X, y_quant)
         elif self.max_depth == 3:
-            _, self.tree_ = jl.optimal_regression_3d(X, y_quant, self.timeout)
+            _, self.tree_, self.time_ = jl.optimal_regression_3d(X, y_quant, self.timeout)
 
     def predict(self, X):
         check_is_fitted(self)
@@ -95,4 +95,4 @@ class QuantBnBMethod(BaseMethod):
         model = self.model(max_depth=params.max_depth, timeout=params.timeout)
         model.fit(X, y)
 
-        return (model, {"tree": self.tree_to_list(model.tree_)})
+        return (model, {"tree": self.tree_to_list(model.tree_), "time": model.time_})

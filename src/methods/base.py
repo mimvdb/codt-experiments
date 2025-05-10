@@ -72,7 +72,8 @@ class RunOutput():
         leaves: The number of leaf nodes in the resulting tree.
         output: Output string, used for debugging.
         tree: The tree, format is a nested list of [feature, threshold, left_child, right_child] for internal nodes and the label for leafs
-        intermediates: Optionally, a list of tuples with the training scores, graph expansions, and time of intermediate solutions.
+        intermediate_lbs: Optionally, a list of tuples with the training scores, graph expansions, and time of intermediate solutions.
+        intermediate_ubs: Optionally, a list of tuples with the lower bounds, graph expansions, and time of intermediate solutions.
         tuning_output: Optionally, the extra information during tuning.
     """
     time: float
@@ -82,12 +83,13 @@ class RunOutput():
     leaves: int
     output: str
     tree: Optional[List | float]
-    intermediates: Optional[List[Tuple[float, int, float]]]
+    intermediate_lbs: Optional[List[Tuple[float, int, float]]]
+    intermediate_ubs: Optional[List[Tuple[float, int, float]]]
     tuning_output: Optional[Dict]
 
     @staticmethod
     def empty_with_output(output: str):
-        return RunOutput(-1.0, 0.0, 0.0, 0, 0, output, None, None, None)
+        return RunOutput(-1.0, 0.0, 0.0, 0, 0, output, None, None, None, None)
 
 
 @dataclass
@@ -141,14 +143,15 @@ class BaseMethod(ABC):
                 tree = extra.get("tree")
 
                 result = RunOutput(
-                    time=duration,
+                    time=extra.get("time", duration),
                     train_score=score_func(y_train, model.predict(X_train)),
                     test_score=0.0 if X_test is None else score_func(y_test, model.predict(X_test)),
                     depth=depth_from_tree(tree),
                     leaves=leaves_from_tree(tree),
                     output="",
                     tree=tree,
-                    intermediates=extra.get("intermediates"),
+                    intermediate_lbs=extra.get("intermediate_lbs") if params.intermediates else None,
+                    intermediate_ubs=extra.get("intermediate_ubs") if params.intermediates else None,
                     tuning_output=extra.get("tuning_output"))
 
                 result.output = append_std(result.output)
