@@ -28,7 +28,7 @@ def leaves_from_tree(tree):
         return 1
 
 
-@dataclass
+@dataclass(frozen=True)
 class RunParams():
     """ All parameters for a single run of a method.
 
