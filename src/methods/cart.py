@@ -10,8 +10,25 @@ def desired_alphas(alpha_thresholds):
     np.append(alpha_thresholds, 1.0)
     alphas = []
     for i in range(len(alpha_thresholds) - 1):
-        alphas.append(np.sqrt(alpha_thresholds[i] * alpha_thresholds[i + 1]))
-    return alphas
+        # max() for rounding errors to below 0
+        a1 = max(0, alpha_thresholds[i])
+        a2 = max(0, alpha_thresholds[i + 1])
+        # Skip if equal due to rounding errors
+        if a1 == a2: continue
+        alphas.append(np.sqrt(a1 * a2))
+    
+    # To prevent very long runtimes in CART, limit to 30 parameters
+    max_alphas = 30
+    if len(alphas) <= max_alphas: return alphas
+    limit_set = []
+    float_i = 0.0
+    float_step = len(alphas) / max_alphas
+
+    while len(limit_set) < 30:
+        limit_set.append(alphas[np.floor(float_i).astype(int)])
+        float_i += float_step
+
+    return limit_set
 
 
 class CartMethod(BaseMethod):
