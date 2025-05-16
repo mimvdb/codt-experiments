@@ -7,7 +7,7 @@ def setup_ablation() -> List[RunParams]:
     runs = []
     strategies = all_search_strategies()
     datasets = ["qsar", "fish", "concrete"]
-    depths = [2]
+    depths = [3]
     for s, d, data in itertools.product(strategies, depths, datasets):
         runs.append(
             RunParams(
@@ -21,7 +21,6 @@ def setup_ablation() -> List[RunParams]:
             )
         )
     datasets = ["bank"]
-    depths = [2]
     for s, d, data in itertools.product(strategies, depths, datasets):
         runs.append(
             RunParams(
