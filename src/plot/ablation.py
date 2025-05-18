@@ -19,7 +19,13 @@ def set_style():
     sns.set_palette("colorblind")
 
 
-def graph_anytime(results: Dict, output_dir: Path):
+def graph_anytime_expansions(results: Dict, output_dir: Path):
+    graph_anytime(results, output_dir, "expansions", "Graph expansions")
+
+def graph_anytime_time(results: Dict, output_dir: Path):
+    graph_anytime(results, output_dir, "time", "Time (s)")
+
+def graph_anytime(results: Dict, output_dir: Path, x_key: str, x_label: str):
     df = pd.json_normalize(results, max_level=1)
     set_style()
 
@@ -41,7 +47,7 @@ def graph_anytime(results: Dict, output_dir: Path):
             i+=1
 
         rel = sns.FacetGrid(combined, hue="type", col="strategy", col_wrap=3)
-        rel.map(sns.lineplot, "expansions", "score", drawstyle="steps-post")
-        rel.set_xlabels("Graph expansions")
+        rel.map(sns.lineplot, x_key, "score", drawstyle="steps-post")
+        rel.set_xlabels(x_label)
         rel.set_ylabels("Objective")
-        plt.savefig(output_dir / f"fig-anytime-{dataset}.pdf", bbox_inches="tight", pad_inches = 0.03)
+        plt.savefig(output_dir / f"fig-anytime-{x_key}-{dataset}.pdf", bbox_inches="tight", pad_inches = 0.03)
