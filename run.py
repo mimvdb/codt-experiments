@@ -28,6 +28,8 @@ def run(args):
             method = get_regression_method(params.method)
         else:
             assert False, "Only classification and regression is supported"
+        if args.v > 0:
+            print("Starting run: ", params)
         output = method.run(params)
         runs.append(Run(params, output).as_dict())
     with open(args.o, "w", newline="") as f:
@@ -42,6 +44,7 @@ def main():
         description="Runs an experiment. The setup json is expected on stdin",
     )
     parser.add_argument("-o", default=str(REPO_DIR / f"results_{timestamp}.json"))
+    parser.add_argument('-v', action='count', default=0)
 
     args = parser.parse_args()
     run(args)

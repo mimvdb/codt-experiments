@@ -25,13 +25,13 @@ def oos_table(results: Dict, output_dir: Path):
             score = cell["o.test_score"]
             count = score.count()
             mean = score.mean()
-            std = score.std()
+            sem = score.sem()
 
             is_best = round(mean, 2) >= round(best_scores_per_dataset[dataset], 2)
             result_str = f"{mean:.2f}"
             if is_best:
                 result_str = "\\textbf{" + result_str + "}"
 
-            end = "&" if method != methods[-1] else "\\\\"
-            print(f"{result_str} ({std:.2f}) {end} % ({method} d={max_depth}) Mean over {count} test sets")
+            end = "&" if (method, max_depth) != methodXdepth[-1] else "\\\\"
+            print(f"{result_str} ({sem:.2f}) {end} % ({method} d={max_depth}) Mean over {count} test sets")
 
