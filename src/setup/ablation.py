@@ -6,8 +6,8 @@ from codt_py import all_search_strategies
 def setup_ablation() -> List[RunParams]:
     runs = []
     strategies = all_search_strategies()
-    datasets = ["qsar", "fish", "concrete"]
-    depths = [3]
+    datasets = ["concrete", "fish", "qsar", "query1"]
+    depths = [2, 3]
     for s, d, data in itertools.product(strategies, depths, datasets):
         runs.append(
             RunParams(
@@ -20,7 +20,7 @@ def setup_ablation() -> List[RunParams]:
                 intermediates=True
             )
         )
-    datasets = ["bank"]
+    datasets = ["bank", "bidding", "eeg", "fault", "page", "raisin", "room"]
     for s, d, data in itertools.product(strategies, depths, datasets):
         runs.append(
             RunParams(

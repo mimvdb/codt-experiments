@@ -16,15 +16,10 @@ class CodtMethod(BaseMethod):
             self.model = OptimalDecisionTreeRegressor
 
     def train_model(self, X, y, params: RunParams):
-        if params.strategy == "":
-            strategy = "dfs-prio"
-        else:
-            strategy = params.strategy
-
         if params.tune:
             model = OptimalDecisionTreeRegressor()
             parameters = {
-                "strategy": [strategy],
+                "strategy": [params.strategy],
                 "max_depth": [params.max_depth],
                 "complexity_cost": np.array(
                     [
@@ -40,6 +35,10 @@ class CodtMethod(BaseMethod):
                         0.0001,
                     ]
                 ),
+                "timeout": [params.timeout],
+                "upperbound": [params.upperbound],
+                "terminal_solver": [params.terminal_solver],
+                "intermediates": [False]
             }
 
             tuning_model = GridSearchCV(
@@ -53,7 +52,7 @@ class CodtMethod(BaseMethod):
             model = OptimalDecisionTreeRegressor(**tuning_model.best_params_)
             tuning_output = tuning_model.cv_results_
         else:
-            model = self.model(max_depth=params.max_depth, strategy=strategy)
+            model = self.model(max_depth=params.max_depth, strategy=params.strategy, complexity_cost=params.cp, timeout=params.timeout, upperbound=params.upperbound, terminal_solver=params.terminal_solver, intermediates=params.intermediates)
             tuning_output = None
 
         model.fit(X, y)

@@ -41,6 +41,8 @@ class RunParams():
         test_set: Index set to use as test set, empty string for none.
         cp: Complexity penalty.
         strategy: Use the specified search strategy
+        upperbound: Use the specified upperbounding strategy
+        terminal_solver: Use the specified terminal solver
         intermediates: If true, keep scores of intermediate solutions.
         tune: If true, tune hyperparameters for out-of-sample performance.
         base_case_solver: The base case of a decision tree. I.e. "leaf" or "d1.5" or "d2"
@@ -52,7 +54,9 @@ class RunParams():
     max_depth: int
     test_set: str = ""
     cp: float = 0.0
-    strategy: str = ""
+    strategy: str = "dfs"
+    upperbound: str = "for-remaining-interval"
+    terminal_solver: str = "left-right"
     intermediates: bool = False
     tune: bool = False
 

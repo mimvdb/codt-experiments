@@ -29,11 +29,21 @@ def graph_anytime(results: Dict, output_dir: Path, x_key: str, x_label: str):
     df = pd.json_normalize(results, max_level=1)
     set_style()
 
-    for dataset in df["p.dataset"].unique():
+    datasets = df["p.dataset"].unique()
+    datasetXdepth = []
+    for dataset in datasets:
+        depths = df[df["p.dataset"] == dataset]["p.max_depth"].unique()
+        datasetXdepth.extend([(dataset, d) for d in depths])
+    strategies = df["p.strategy"].unique()
+
+    for dataset, depth in datasetXdepth:
+        this_df = df[np.logical_and(df["p.dataset"] == dataset, df["p.max_depth"] == depth)]
         combined = None
         i = 0
-        for strategy, ubs, lbs in df[df["p.dataset"] == dataset][["p.strategy", "o.intermediate_ubs", "o.intermediate_lbs"]].itertuples(index=False, name=None):
-            print(strategy)
+        for strategy in strategies:
+            single = this_df[this_df["p.strategy"] == strategy]
+            ubs = single["o.intermediate_ubs"].squeeze()
+            lbs = single["o.intermediate_lbs"].squeeze()
             df_u = pd.DataFrame(ubs, columns=["score", "expansions", "time"])
             df_u["type"] = "Upper bound"
             df_l = pd.DataFrame(lbs, columns=["score", "expansions", "time"])
@@ -48,6 +58,16 @@ def graph_anytime(results: Dict, output_dir: Path, x_key: str, x_label: str):
 
         rel = sns.FacetGrid(combined, hue="type", col="strategy", col_wrap=3)
         rel.map(sns.lineplot, x_key, "score", drawstyle="steps-post")
+        # rel.set(xscale="log")
         rel.set_xlabels(x_label)
         rel.set_ylabels("Objective")
-        plt.savefig(output_dir / f"fig-anytime-{x_key}-{dataset}.pdf", bbox_inches="tight", pad_inches = 0.03)
+        filename = f"fig-anytime-{x_key}-{dataset}-d{depth}.pdf"
+        plt.savefig(output_dir / filename, bbox_inches="tight", pad_inches = 0.03)
+        caption = f"Lower and upper bound over {x_key} for {dataset} dataset (d={depth})"
+        label = f"fig:anytime_{x_key}_{dataset}_d{depth}"
+        print("""\\begin{figure}
+    \\centering
+    \\includegraphics[width=\\textwidth]{figures/""" + filename + """}
+    \\caption{""" + caption + """}
+    \\label{""" + label + """}
+\\end{figure}""")
