@@ -108,9 +108,9 @@ class BaseMethod(ABC):
         self.method_id = method_id
         self.task = task
 
-    def run(self, params: RunParams) -> RunOutput:
-        assert params.method == self.method_id
-        assert params.task in self.task
+    def run(self, params: RunParams, scorer = None) -> RunOutput:
+        assert params.method == self.method_id, f"{params.method} == {self.method_id}"
+        assert params.task in self.task, f"{params.task} == {self.task}"
         assert params.task == "regression" or not params.tune # OOS experiments only for regression
 
         X, y = get_dataset(params.dataset, params.task)
@@ -140,10 +140,18 @@ class BaseMethod(ABC):
                 
                 tree = extra.get("tree")
 
+                if scorer is not None:
+                    score_func = lambda X, y: scorer(y, model.predict(X))
+                else:
+                    score_func = model.score
+
+                train_score=score_func(X_train, y_train)
+                test_score=0.0 if X_test is None else score_func(X_test, y_test)
+
                 result = RunOutput(
                     time=extra.get("time", duration),
-                    train_score=model.score(X_train, y_train),
-                    test_score=0.0 if X_test is None else model.score(X_test, y_test),
+                    train_score=train_score,
+                    test_score=test_score,
                     depth=depth_from_tree(tree),
                     leaves=leaves_from_tree(tree),
                     output="",

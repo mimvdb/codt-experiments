@@ -1,5 +1,13 @@
 from .base import BaseMethod, Run, RunOutput, RunParams
 
+def get_method(method_id: str, task: str) -> BaseMethod:
+    if task == "classification":
+        return get_classification_method(method_id)
+    elif task == "regression":
+        return get_regression_method(method_id)
+    else:
+        assert False, "Only classification and regression is supported"
+
 def get_classification_method(method_id: str) -> BaseMethod:
     if method_id == "cart":
         from .cart import CartMethod

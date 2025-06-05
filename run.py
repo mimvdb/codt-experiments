@@ -3,7 +3,7 @@ import datetime
 import json
 import numpy as np
 import sys
-from src.methods import Run, RunParams, get_classification_method, get_regression_method
+from src.methods import Run, RunParams, get_method
 from src.util import REPO_DIR
 
 
@@ -22,12 +22,7 @@ def run(args):
     runs = []
     for e in experiments:
         params = RunParams(**e)
-        if params.task == "classification":
-            method = get_classification_method(params.method)
-        elif params.task == "regression":
-            method = get_regression_method(params.method)
-        else:
-            assert False, "Only classification and regression is supported"
+        method = get_method(params.method, params.task)
         if args.v > 0:
             print("Starting run: ", params)
         output = method.run(params)
