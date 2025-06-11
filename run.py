@@ -26,6 +26,8 @@ def run(args):
         if args.v > 0:
             print("Starting run: ", params)
         output = method.run(params)
+        if args.v > 0:
+            print("Run finished: ", output.output)
         runs.append(Run(params, output).as_dict())
     with open(args.o, "w", newline="") as f:
         json.dump(runs, f, indent=4, default=encode_numpy)

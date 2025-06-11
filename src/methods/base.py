@@ -42,10 +42,11 @@ class RunParams():
         cp: Complexity penalty.
         strategy: Use the specified search strategy
         upperbound: Use the specified upperbounding strategy
-        terminal_solver: Use the specified terminal solver
+        terminal_solver: Use the specified terminal solver. I.e. "leaf" or "d1.5" or "d2"
         intermediates: If true, keep scores of intermediate solutions.
         tune: If true, tune hyperparameters for out-of-sample performance.
-        base_case_solver: The base case of a decision tree. I.e. "leaf" or "d1.5" or "d2"
+        node_lowerbound: If true, use node-level lower bounding in the solver.
+        memory_limit: Optional memory limit in bytes.
     """
     method: str
     task: str
@@ -59,6 +60,8 @@ class RunParams():
     terminal_solver: str = "left-right"
     intermediates: bool = False
     tune: bool = False
+    node_lowerbound: bool = True
+    memory_limit: Optional[int] = 4 * 1024 * 1024 * 1024  # 4GiB
 
     def as_dict(self):
         return asdict(self)
