@@ -39,16 +39,16 @@ def quant_to_csv():
         X, y = (np.concatenate([Xtrain, Xtest]), np.concatenate([Ytrain, Ytest]))
         df = pd.DataFrame(X)
         df.insert(0, "0", y)
-        path = REPO_DIR / "datasets" / "classification" / "raw" / f"{cdata}.csv"
-        path.parent.mkdir(exist_ok=True)
+        path = REPO_DIR / "datasets" / "classification" / f"{cdata}.csv"
+        path.parent.mkdir(exist_ok=True, parents=True)
         df.to_csv(path, sep=" ", header=False, index=False)
     for rdata in DATASETS_REGRESSION:
         Xtrain, Ytrain, Xtest, Ytest = read_quant_dataset(rdata, regression=True)
         X, y = (np.concatenate([Xtrain, Xtest]), np.concatenate([Ytrain, Ytest]))
         df = pd.DataFrame(X)
         df.insert(0, "y", y)
-        path = REPO_DIR / "datasets" / "regression" / "raw" / f"{rdata}.csv"
-        path.parent.mkdir(exist_ok=True)
+        path = REPO_DIR / "datasets" / "regression" / f"{rdata}.csv"
+        path.parent.mkdir(exist_ok=True, parents=True)
         df.to_csv(path, sep=" ", header=False, index=False)
 
 def generate_index_sets():
