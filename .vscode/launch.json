@@ -1,0 +1,31 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug executable 'codt-cli'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--bin=codt-cli",
+                    "--package=codt-cli"
+                ],
+                "filter": {
+                    "name": "codt-cli",
+                    "kind": "bin"
+                },
+                "cwd": "${workspaceFolder}/codt"
+            },
+            "args": [
+                "-f",
+                "../datasets/classification/bank.csv", "--terminal-solver", "d2", "-d", "3", "-s", "bfs-gosdt", "accuracy"
+            ],
+            "cwd": "${workspaceFolder}/codt",
+            "relativePathBase": "${workspaceFolder}/codt",
+        }
+    ]
+}
