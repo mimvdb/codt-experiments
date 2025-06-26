@@ -18,7 +18,27 @@ def set_style():
     sns.set_palette("colorblind")
 
 
-def compute_mse_splits(X_col, y, left_mask):
+def regular(enabled_ll, enabled_lr, enabled_rl, enabled_rr):
+    # Compute MSE for left and right splits
+    mse_ll = np.mean((enabled_ll - enabled_ll.mean()) ** 2) if len(enabled_ll) > 0 else 0
+    mse_lr = np.mean((enabled_lr - enabled_lr.mean()) ** 2) if len(enabled_lr) > 0 else 0
+    mse_rl = np.mean((enabled_rl - enabled_rl.mean()) ** 2) if len(enabled_rl) > 0 else 0
+    mse_rr = np.mean((enabled_rr - enabled_rr.mean()) ** 2) if len(enabled_rr) > 0 else 0
+
+    # Combine MSEs for left and right splits
+    mse_l = (len(enabled_ll) * mse_ll + len(enabled_lr) * mse_lr) / max(len(enabled_ll) + len(enabled_lr), 1)
+    mse_r = (len(enabled_rl) * mse_rl + len(enabled_rr) * mse_rr) / max(len(enabled_rl) + len(enabled_rr), 1)
+    return mse_l, mse_r
+
+
+def split_sides_left_only(enabled_ll, enabled_lr, enabled_rl, enabled_rr):
+    # Compute SSE for left and right splits
+    sse_ll = np.sum((enabled_ll - enabled_ll.mean()) ** 2) if len(enabled_ll) > 0 else 0
+    sse_lr = np.sum((enabled_lr - enabled_lr.mean()) ** 2) if len(enabled_lr) > 0 else 0
+    return sse_ll, sse_lr
+
+
+def compute_mse_splits(X_col, y, left_mask, func):
     """
     Computes MSE values for all splits of a feature column.
 
@@ -51,15 +71,7 @@ def compute_mse_splits(X_col, y, left_mask):
         enabled_rl = y_left[enabled_r[:i]]
         enabled_rr = y_right[enabled_r[i:]]
 
-        # Compute MSE for left and right splits
-        mse_ll = np.mean((enabled_ll - enabled_ll.mean()) ** 2) if len(enabled_ll) > 0 else 0
-        mse_lr = np.mean((enabled_lr - enabled_lr.mean()) ** 2) if len(enabled_lr) > 0 else 0
-        mse_rl = np.mean((enabled_rl - enabled_rl.mean()) ** 2) if len(enabled_rl) > 0 else 0
-        mse_rr = np.mean((enabled_rr - enabled_rr.mean()) ** 2) if len(enabled_rr) > 0 else 0
-
-        # Combine MSEs for left and right splits
-        mse_l = (len(enabled_ll) * mse_ll + len(enabled_lr) * mse_lr) / max(len(enabled_ll) + len(enabled_lr), 1)
-        mse_r = (len(enabled_rl) * mse_rl + len(enabled_rr) * mse_rr) / max(len(enabled_rl) + len(enabled_rr), 1)
+        mse_l, mse_r = func(enabled_ll, enabled_lr, enabled_rl, enabled_rr)
 
         mses_l.append(mse_l)
         mses_r.append(mse_r)
@@ -116,7 +128,7 @@ def main():
     for i in range(n_features):
         unique_indices = np.unique(np.sort(X[:, i]), return_index=True)[1]
         left_mask = np.zeros(len(X), dtype=bool)  # Set left_mask to all False for the first plot
-        _, mses = compute_mse_splits(X[:, i], y, left_mask)  # Use right MSEs
+        _, mses = compute_mse_splits(X[:, i], y, left_mask, regular)  # Use right MSEs
         mses_per_feature.append(mses)
 
         # Find the minimum MSE and corresponding feature
@@ -136,6 +148,32 @@ def main():
         highlight_min=(min_idx, min_val, min_feat)
     )
 
+    # Compute MSE for left and right splits seperately
+    mses_per_feature_l = []
+    mses_per_feature_r = []
+    for i in range(n_features):
+        unique_indices = np.unique(np.sort(X[:, i]), return_index=True)[1]
+        left_mask = np.ones(len(X), dtype=bool)  # Set left_mask to all True so all go left.
+        mses_l, mses_r = compute_mse_splits(X[:, i], y, left_mask, split_sides_left_only)  # Use right MSEs
+        mses_per_feature_l.append(mses_l)
+        mses_per_feature_r.append(mses_r)
+
+    # Plot the figures
+    plot_mse(
+        mses_per_feature_l,
+        X,
+        "MSE vs Split Index for All Features",
+        "fig-gini-left-side.pdf",
+        highlight_min=(min_idx, min_val, min_feat)
+    )
+    plot_mse(
+        mses_per_feature_r,
+        X,
+        "MSE vs Split Index for All Features",
+        "fig-gini-right-side.pdf",
+        highlight_min=(min_idx, min_val, min_feat)
+    )
+
     # Compute MSE splits after the best split
     mses_per_feature_l = []
     mses_per_feature_r = []
@@ -144,7 +182,7 @@ def main():
     mask[sorted_indices[:min_idx + 1]] = True  # Set the mask for the left split based on min_idx
 
     for i in range(n_features):
-        mses_l, mses_r = compute_mse_splits(X[:, i], y, mask)
+        mses_l, mses_r = compute_mse_splits(X[:, i], y, mask, regular)
         mses_per_feature_l.append(mses_l)
         mses_per_feature_r.append(mses_r)
 
