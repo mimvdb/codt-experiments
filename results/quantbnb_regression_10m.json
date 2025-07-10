@@ -1,0 +1,5872 @@
+[
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "casp",
+            "max_depth": 2,
+            "test_set": "",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": false,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 4.851874113082886,
+            "train_score": 0.16685896780882847,
+            "test_score": 0.0,
+            "depth": 2,
+            "leaves": 4,
+            "output": "",
+            "tree": [
+                3,
+                0.18609041678586113,
+                [
+                    1,
+                    0.1365891135258409,
+                    0.3643989079342475,
+                    0.5898931364072206
+                ],
+                [
+                    2,
+                    0.48988227704610554,
+                    0.2510863427575544,
+                    0.5146284669945168
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "casp",
+            "max_depth": 2,
+            "test_set": "0",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 11.892371892929077,
+            "train_score": 0.16698852612543824,
+            "test_score": 0.1654743529381264,
+            "depth": 2,
+            "leaves": 4,
+            "output": "",
+            "tree": [
+                3,
+                0.18590911949046096,
+                [
+                    1,
+                    0.13657771291545084,
+                    0.36479885764663966,
+                    0.5910442961531177
+                ],
+                [
+                    2,
+                    0.48942893711741786,
+                    0.2506463056763334,
+                    0.5140789578448872
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "casp",
+            "max_depth": 2,
+            "test_set": "1",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 3.8608598709106445,
+            "train_score": 0.16831080377761198,
+            "test_score": 0.16009983747936185,
+            "depth": 2,
+            "leaves": 4,
+            "output": "",
+            "tree": [
+                3,
+                0.18609041678586113,
+                [
+                    1,
+                    0.13631885199718274,
+                    0.3655962079171821,
+                    0.5891627897476748
+                ],
+                [
+                    2,
+                    0.48988227704610554,
+                    0.24974720681418924,
+                    0.5145687038685548
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "casp",
+            "max_depth": 2,
+            "test_set": "2",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 3.952953815460205,
+            "train_score": 0.1675203788752957,
+            "test_score": 0.15995651537721078,
+            "depth": 2,
+            "leaves": 4,
+            "output": "",
+            "tree": [
+                3,
+                0.18685348067126278,
+                [
+                    1,
+                    0.1365891135258409,
+                    0.36287281622666795,
+                    0.5881472104291838
+                ],
+                [
+                    2,
+                    0.49804239576248477,
+                    0.25564132777977766,
+                    0.5271705096022534
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "casp",
+            "max_depth": 2,
+            "test_set": "3",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 3.7900350093841553,
+            "train_score": 0.16704036417290524,
+            "test_score": 0.16514801515497757,
+            "depth": 2,
+            "leaves": 4,
+            "output": "",
+            "tree": [
+                3,
+                0.1863228170823457,
+                [
+                    1,
+                    0.1365891135258409,
+                    0.36442424734343026,
+                    0.5903388190796952
+                ],
+                [
+                    2,
+                    0.4890374162699148,
+                    0.2503110675044983,
+                    0.5124466909666119
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "casp",
+            "max_depth": 2,
+            "test_set": "4",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 4.287484169006348,
+            "train_score": 0.16582629873747956,
+            "test_score": 0.16125781324806854,
+            "depth": 2,
+            "leaves": 4,
+            "output": "",
+            "tree": [
+                2,
+                0.42105703332715017,
+                [
+                    3,
+                    0.19025050741364574,
+                    0.3542703066720862,
+                    0.21418415909528568
+                ],
+                [
+                    2,
+                    0.5517631773119808,
+                    0.3964120638117337,
+                    0.5729773487905557
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "concrete",
+            "max_depth": 2,
+            "test_set": "",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": false,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 0.045794010162353516,
+            "train_score": 0.49084337189279936,
+            "test_score": 0.0,
+            "depth": 2,
+            "leaves": 4,
+            "output": "",
+            "tree": [
+                0,
+                0.5719034246575343,
+                [
+                    7,
+                    0.02619368131868125,
+                    0.16680305032653517,
+                    0.41987603873117924
+                ],
+                [
+                    7,
+                    0.0550340659340659,
+                    0.411648367080253,
+                    0.6779439699655635
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "concrete",
+            "max_depth": 2,
+            "test_set": "0",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 0.1631147861480713,
+            "train_score": 0.4781659610550487,
+            "test_score": 0.5331463157115974,
+            "depth": 2,
+            "leaves": 4,
+            "output": "",
+            "tree": [
+                0,
+                0.5719034246575343,
+                [
+                    7,
+                    0.02619368131868125,
+                    0.1631576928791255,
+                    0.41588734077815287
+                ],
+                [
+                    7,
+                    0.0550340659340659,
+                    0.4132668637578939,
+                    0.6744043269615451
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "concrete",
+            "max_depth": 2,
+            "test_set": "1",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 0.03715205192565918,
+            "train_score": 0.5043057723326251,
+            "test_score": 0.42666013108666145,
+            "depth": 2,
+            "leaves": 4,
+            "output": "",
+            "tree": [
+                0,
+                0.5797785616438356,
+                [
+                    7,
+                    0.02619368131868125,
+                    0.1753349206320753,
+                    0.4218618577217855
+                ],
+                [
+                    7,
+                    0.0550340659340659,
+                    0.414603244083685,
+                    0.6896495188587003
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "concrete",
+            "max_depth": 2,
+            "test_set": "2",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 0.03608512878417969,
+            "train_score": 0.5015627907052143,
+            "test_score": 0.43783446590525676,
+            "depth": 2,
+            "leaves": 4,
+            "output": "",
+            "tree": [
+                0,
+                0.5833166666666667,
+                [
+                    7,
+                    0.02619368131868125,
+                    0.16949608640980574,
+                    0.42391693772155387
+                ],
+                [
+                    7,
+                    0.0550340659340659,
+                    0.40973858245089484,
+                    0.6894436352706439
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "concrete",
+            "max_depth": 2,
+            "test_set": "3",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 0.03960680961608887,
+            "train_score": 0.47951500402253266,
+            "test_score": 0.45699471031598116,
+            "depth": 2,
+            "leaves": 4,
+            "output": "",
+            "tree": [
+                0,
+                0.48208121004566207,
+                [
+                    7,
+                    0.02619368131868125,
+                    0.14671451942913005,
+                    0.40479397080253665
+                ],
+                [
+                    7,
+                    0.0550340659340659,
+                    0.36670911025289643,
+                    0.6234571921449046
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "concrete",
+            "max_depth": 2,
+            "test_set": "4",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 0.03925514221191406,
+            "train_score": 0.4962106569928555,
+            "test_score": 0.4667314018959847,
+            "depth": 2,
+            "leaves": 4,
+            "output": "",
+            "tree": [
+                0,
+                0.5719034246575343,
+                [
+                    7,
+                    0.02619368131868125,
+                    0.16135762778882135,
+                    0.4188554673570963
+                ],
+                [
+                    7,
+                    0.0550340659340659,
+                    0.4175650105190755,
+                    0.6807321980245805
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "energy",
+            "max_depth": 2,
+            "test_set": "",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": false,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 14.133121013641357,
+            "train_score": 0.13361799023117105,
+            "test_score": 0.0,
+            "depth": 2,
+            "leaves": 4,
+            "output": "",
+            "tree": [
+                0,
+                0.7237314685314685,
+                [
+                    0,
+                    0.3182181818181818,
+                    0.04063531767099547,
+                    0.10031442107342302
+                ],
+                [
+                    0,
+                    0.8775468531468532,
+                    0.1382935282153843,
+                    0.060096639152284644
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "energy",
+            "max_depth": 2,
+            "test_set": "0",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 12.21636700630188,
+            "train_score": 0.1327067654582874,
+            "test_score": 0.1357310625147793,
+            "depth": 2,
+            "leaves": 4,
+            "output": "",
+            "tree": [
+                0,
+                0.7237314685314685,
+                [
+                    0,
+                    0.3252097902097902,
+                    0.041255652856001065,
+                    0.10054869176827898
+                ],
+                [
+                    0,
+                    0.8775468531468532,
+                    0.1367275879260165,
+                    0.06019624341371249
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "energy",
+            "max_depth": 2,
+            "test_set": "1",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 11.670292854309082,
+            "train_score": 0.13459777091866088,
+            "test_score": 0.12818290836084623,
+            "depth": 2,
+            "leaves": 4,
+            "output": "",
+            "tree": [
+                0,
+                0.7307230769230769,
+                [
+                    0,
+                    0.3182181818181818,
+                    0.040962765636089866,
+                    0.10030544258512308
+                ],
+                [
+                    0,
+                    0.8076307692307692,
+                    0.16646632753981006,
+                    0.07712278690987616
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "energy",
+            "max_depth": 2,
+            "test_set": "2",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 11.956258058547974,
+            "train_score": 0.13203791707515344,
+            "test_score": 0.13967089991895432,
+            "depth": 2,
+            "leaves": 4,
+            "output": "",
+            "tree": [
+                0,
+                0.7237314685314685,
+                [
+                    0,
+                    0.3182181818181818,
+                    0.040294652757797686,
+                    0.10039872441161875
+                ],
+                [
+                    0,
+                    0.8775468531468532,
+                    0.1373056783676176,
+                    0.06076105086129987
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "energy",
+            "max_depth": 2,
+            "test_set": "3",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 11.744642972946167,
+            "train_score": 0.13317039832219957,
+            "test_score": 0.13329051294223182,
+            "depth": 2,
+            "leaves": 4,
+            "output": "",
+            "tree": [
+                0,
+                0.7307230769230769,
+                [
+                    0,
+                    0.3182181818181818,
+                    0.0405928314060505,
+                    0.10135655227398668
+                ],
+                [
+                    0,
+                    0.8076307692307692,
+                    0.1660673653724184,
+                    0.07818655821682714
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "energy",
+            "max_depth": 2,
+            "test_set": "4",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 11.34675908088684,
+            "train_score": 0.13865847251597385,
+            "test_score": 0.11133890762104792,
+            "depth": 2,
+            "leaves": 4,
+            "output": "",
+            "tree": [
+                0,
+                0.7307230769230769,
+                [
+                    0,
+                    0.3182181818181818,
+                    0.04070681225823843,
+                    0.10080189146283038
+                ],
+                [
+                    0,
+                    0.8076307692307692,
+                    0.16835182556556635,
+                    0.07685150037395196
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "fish",
+            "max_depth": 2,
+            "test_set": "",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": false,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 0.030347108840942383,
+            "train_score": 0.45325748802162136,
+            "test_score": 0.0,
+            "depth": 2,
+            "leaves": 4,
+            "output": "",
+            "tree": [
+                5,
+                0.4763269366215914,
+                [
+                    2,
+                    0.4783926587694623,
+                    0.34977101979923314,
+                    0.2507674025266118
+                ],
+                [
+                    5,
+                    0.6797631698779671,
+                    0.4407124510181517,
+                    0.5985431150279026
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "fish",
+            "max_depth": 2,
+            "test_set": "0",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 0.02731490135192871,
+            "train_score": 0.4552379645381053,
+            "test_score": 0.39967830225138257,
+            "depth": 2,
+            "leaves": 4,
+            "output": "",
+            "tree": [
+                5,
+                0.4773374695449565,
+                [
+                    1,
+                    0.5976037999170927,
+                    0.2986547835267515,
+                    0.5359560594965235
+                ],
+                [
+                    5,
+                    0.6847094626081222,
+                    0.4439571729432352,
+                    0.6049736808573406
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "fish",
+            "max_depth": 2,
+            "test_set": "1",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 0.03449606895446777,
+            "train_score": 0.4569532043276534,
+            "test_score": 0.4374032647475693,
+            "depth": 2,
+            "leaves": 4,
+            "output": "",
+            "tree": [
+                5,
+                0.4763269366215914,
+                [
+                    2,
+                    0.4783926587694623,
+                    0.35477748304244,
+                    0.24948121814208443
+                ],
+                [
+                    5,
+                    0.6797631698779671,
+                    0.4397425648461028,
+                    0.5910943811147228
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "fish",
+            "max_depth": 2,
+            "test_set": "2",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 0.03570294380187988,
+            "train_score": 0.4557845149806924,
+            "test_score": 0.42465868718768507,
+            "depth": 2,
+            "leaves": 4,
+            "output": "",
+            "tree": [
+                5,
+                0.49058076943537154,
+                [
+                    2,
+                    0.5176067152648467,
+                    0.35270703514798524,
+                    0.24225882491969986
+                ],
+                [
+                    5,
+                    0.6811991903480121,
+                    0.44180271180622327,
+                    0.607604340730566
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "fish",
+            "max_depth": 2,
+            "test_set": "3",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 0.03356003761291504,
+            "train_score": 0.4653107740554582,
+            "test_score": 0.3860184155928622,
+            "depth": 2,
+            "leaves": 4,
+            "output": "",
+            "tree": [
+                5,
+                0.47669923822493643,
+                [
+                    2,
+                    0.4783926587694623,
+                    0.35012234419477917,
+                    0.23967017805999258
+                ],
+                [
+                    5,
+                    0.6797631698779671,
+                    0.4418484573325095,
+                    0.6028854310821511
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "fish",
+            "max_depth": 2,
+            "test_set": "4",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 0.14949703216552734,
+            "train_score": 0.4539786670532837,
+            "test_score": 0.4277585644549262,
+            "depth": 2,
+            "leaves": 4,
+            "output": "",
+            "tree": [
+                5,
+                0.47691198199827645,
+                [
+                    1,
+                    0.3070258440421906,
+                    0.2686730736179816,
+                    0.3741129282301893
+                ],
+                [
+                    5,
+                    0.6797631698779671,
+                    0.4410500632382448,
+                    0.5902216047879558
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "gas",
+            "max_depth": 2,
+            "test_set": "",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": false,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 1.492539882659912,
+            "train_score": 0.9362571058721441,
+            "test_score": 0.0,
+            "depth": 2,
+            "leaves": 4,
+            "output": "",
+            "tree": [
+                7,
+                0.5139000880724712,
+                [
+                    5,
+                    0.6697962037962035,
+                    0.14331449588461942,
+                    0.3934515042952163
+                ],
+                [
+                    7,
+                    0.6873681555108204,
+                    0.6333706379909462,
+                    0.7742187349944528
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "gas",
+            "max_depth": 2,
+            "test_set": "0",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 1.5988619327545166,
+            "train_score": 0.9348983287097167,
+            "test_score": 0.9413149039691914,
+            "depth": 2,
+            "leaves": 4,
+            "output": "",
+            "tree": [
+                7,
+                0.5199381353799698,
+                [
+                    5,
+                    0.6697962037962035,
+                    0.1441141720400455,
+                    0.3939501843011311
+                ],
+                [
+                    7,
+                    0.6873681555108204,
+                    0.6357435073472697,
+                    0.7740152842486187
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "gas",
+            "max_depth": 2,
+            "test_set": "1",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 1.3079640865325928,
+            "train_score": 0.9373435786401321,
+            "test_score": 0.9317684101205108,
+            "depth": 2,
+            "leaves": 4,
+            "output": "",
+            "tree": [
+                7,
+                0.5189317941620534,
+                [
+                    5,
+                    0.6697962037962035,
+                    0.14344908909794216,
+                    0.3939660066897712
+                ],
+                [
+                    7,
+                    0.6873681555108204,
+                    0.6356740316574758,
+                    0.7745731432278997
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "gas",
+            "max_depth": 2,
+            "test_set": "2",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 1.3171360492706299,
+            "train_score": 0.9365586434587965,
+            "test_score": 0.9346925107162987,
+            "depth": 2,
+            "leaves": 4,
+            "output": "",
+            "tree": [
+                7,
+                0.5146548439859084,
+                [
+                    5,
+                    0.675789010989011,
+                    0.14451587726644494,
+                    0.394339713833738
+                ],
+                [
+                    7,
+                    0.6873052591847004,
+                    0.6336728609130322,
+                    0.7743533981604206
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "gas",
+            "max_depth": 2,
+            "test_set": "3",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 1.3002369403839111,
+            "train_score": 0.9361784059242574,
+            "test_score": 0.9365039805569431,
+            "depth": 2,
+            "leaves": 4,
+            "output": "",
+            "tree": [
+                7,
+                0.5146548439859084,
+                [
+                    5,
+                    0.6697962037962035,
+                    0.14301565202035632,
+                    0.39338619536060226
+                ],
+                [
+                    7,
+                    0.6873681555108204,
+                    0.6337145634354837,
+                    0.7741548776360461
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "gas",
+            "max_depth": 2,
+            "test_set": "4",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 1.2070260047912598,
+            "train_score": 0.9365407885261349,
+            "test_score": 0.9348819295184182,
+            "depth": 2,
+            "leaves": 4,
+            "output": "",
+            "tree": [
+                7,
+                0.5096231378963262,
+                [
+                    5,
+                    0.6697962037962035,
+                    0.14302174642448137,
+                    0.3932272645447469
+                ],
+                [
+                    7,
+                    0.6797577000503272,
+                    0.6282303135680851,
+                    0.7704688258323371
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "grid",
+            "max_depth": 2,
+            "test_set": "",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": false,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 1.350782871246338,
+            "train_score": 0.23045486568729223,
+            "test_score": 0.0,
+            "depth": 2,
+            "leaves": 4,
+            "output": "",
+            "tree": [
+                10,
+                0.5218810050203421,
+                [
+                    1,
+                    0.3441097598854763,
+                    0.36751169129274475,
+                    0.5067402913939405
+                ],
+                [
+                    2,
+                    0.2604523244663576,
+                    0.4132546758534008,
+                    0.6136992678116961
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "grid",
+            "max_depth": 2,
+            "test_set": "0",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 1.1681878566741943,
+            "train_score": 0.23342934378062052,
+            "test_score": 0.21699562728154842,
+            "depth": 2,
+            "leaves": 4,
+            "output": "",
+            "tree": [
+                10,
+                0.5218810050203421,
+                [
+                    1,
+                    0.34442900879434823,
+                    0.36656468792528313,
+                    0.5084825769513686
+                ],
+                [
+                    2,
+                    0.2604523244663576,
+                    0.41495952867155156,
+                    0.614961537185079
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "grid",
+            "max_depth": 2,
+            "test_set": "1",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 1.2139298915863037,
+            "train_score": 0.23392193559866192,
+            "test_score": 0.21384716570582285,
+            "depth": 2,
+            "leaves": 4,
+            "output": "",
+            "tree": [
+                10,
+                0.5220460962063408,
+                [
+                    1,
+                    0.33832869010744815,
+                    0.3651492715299732,
+                    0.5041625769178086
+                ],
+                [
+                    2,
+                    0.2604523244663576,
+                    0.41358427169260065,
+                    0.613771567332938
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "grid",
+            "max_depth": 2,
+            "test_set": "2",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 1.10355806350708,
+            "train_score": 0.23444410791791082,
+            "test_score": 0.2074218901754381,
+            "depth": 2,
+            "leaves": 4,
+            "output": "",
+            "tree": [
+                10,
+                0.47956391622379224,
+                [
+                    1,
+                    0.3449631347845929,
+                    0.3652059728239591,
+                    0.5030716243031224
+                ],
+                [
+                    2,
+                    0.25918902914354575,
+                    0.4085289942459217,
+                    0.6110510344270735
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "grid",
+            "max_depth": 2,
+            "test_set": "3",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 1.1341521739959717,
+            "train_score": 0.22877804544940428,
+            "test_score": 0.22136757166150955,
+            "depth": 2,
+            "leaves": 4,
+            "output": "",
+            "tree": [
+                8,
+                0.5749235907009229,
+                [
+                    1,
+                    0.3418475143431283,
+                    0.374867220704399,
+                    0.5122286980787832
+                ],
+                [
+                    0,
+                    0.29617906865144933,
+                    0.41562268296583255,
+                    0.6243758089272162
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "grid",
+            "max_depth": 2,
+            "test_set": "4",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 1.1454570293426514,
+            "train_score": 0.2268980661412212,
+            "test_score": 0.23880056125725346,
+            "depth": 2,
+            "leaves": 4,
+            "output": "",
+            "tree": [
+                10,
+                0.515815855871726,
+                [
+                    1,
+                    0.3449631347845929,
+                    0.36766907428155826,
+                    0.5064528325007269
+                ],
+                [
+                    2,
+                    0.24386376161307685,
+                    0.40509725875883484,
+                    0.6089373123875652
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "news",
+            "max_depth": 2,
+            "test_set": "",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": false,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 195.03426694869995,
+            "train_score": 0.15081764444500845,
+            "test_score": 0.0,
+            "depth": 2,
+            "leaves": 4,
+            "output": "",
+            "tree": [
+                26,
+                0.0862285004782757,
+                [
+                    26,
+                    0.08622705495946695,
+                    0.0033717126454923057,
+                    0.9998999999999967
+                ],
+                [
+                    27,
+                    0.31534584370923746,
+                    0.00661433411292148,
+                    0.08589182927569344
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "news",
+            "max_depth": 2,
+            "test_set": "0",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 160.79801416397095,
+            "train_score": 0.20457330942649465,
+            "test_score": 0.007763836184730422,
+            "depth": 2,
+            "leaves": 4,
+            "output": "",
+            "tree": [
+                26,
+                0.0862285004782757,
+                [
+                    26,
+                    0.08622705495946695,
+                    0.003353415536318258,
+                    0.9998999999999967
+                ],
+                [
+                    27,
+                    0.31534584370923746,
+                    0.00653897568983406,
+                    0.08589182927569344
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "news",
+            "max_depth": 2,
+            "test_set": "1",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 156.78571200370789,
+            "train_score": 0.1571975034191141,
+            "test_score": 0.0057454736806956674,
+            "depth": 2,
+            "leaves": 4,
+            "output": "",
+            "tree": [
+                26,
+                0.11676734042814935,
+                [
+                    26,
+                    0.11675270545445621,
+                    0.003815882386654722,
+                    0.8186245330541055
+                ],
+                [
+                    27,
+                    0.3016523894225068,
+                    0.008527032349602566,
+                    0.26294231358035525
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "news",
+            "max_depth": 2,
+            "test_set": "2",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 279.0284888744354,
+            "train_score": 0.17197127104174526,
+            "test_score": 0.014962253521752844,
+            "depth": 2,
+            "leaves": 4,
+            "output": "",
+            "tree": [
+                26,
+                0.08622705495946695,
+                [
+                    29,
+                    0.0063784636102217004,
+                    0.002941880466028285,
+                    0.005182048376819876
+                ],
+                [
+                    26,
+                    0.0862285004782757,
+                    0.9999,
+                    0.006655337797202901
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "news",
+            "max_depth": 2,
+            "test_set": "3",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 172.10954093933105,
+            "train_score": 0.19401050666981545,
+            "test_score": -0.7698590325968004,
+            "depth": 2,
+            "leaves": 4,
+            "output": "",
+            "tree": [
+                26,
+                0.0862285004782757,
+                [
+                    26,
+                    0.0862242491313231,
+                    0.0033414243148057045,
+                    0.9998999999999967
+                ],
+                [
+                    27,
+                    0.3016523894225068,
+                    0.006608980225489606,
+                    0.1546196506419039
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "news",
+            "max_depth": 2,
+            "test_set": "4",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 221.1723370552063,
+            "train_score": 0.17245474175265507,
+            "test_score": -0.0031680828865447985,
+            "depth": 2,
+            "leaves": 4,
+            "output": "",
+            "tree": [
+                26,
+                0.0862285004782757,
+                [
+                    26,
+                    0.08622705495946695,
+                    0.0033634148859472118,
+                    0.9998999999999967
+                ],
+                [
+                    27,
+                    0.31534584370923746,
+                    0.006615395606910234,
+                    0.1028360694658043
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "qsar",
+            "max_depth": 2,
+            "test_set": "",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": false,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 0.04226279258728027,
+            "train_score": 0.3697356728589165,
+            "test_score": 0.0,
+            "depth": 2,
+            "leaves": 4,
+            "output": "",
+            "tree": [
+                4,
+                0.27739330759330755,
+                [
+                    4,
+                    0.16535467916896485,
+                    0.3082056962734527,
+                    0.4452694827791348
+                ],
+                [
+                    2,
+                    0.0278722222222222,
+                    0.6160040300692694,
+                    0.4386592659229941
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "qsar",
+            "max_depth": 2,
+            "test_set": "0",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 0.03894400596618652,
+            "train_score": 0.3951100433509681,
+            "test_score": 0.2028898454573146,
+            "depth": 2,
+            "leaves": 4,
+            "output": "",
+            "tree": [
+                4,
+                0.27739330759330755,
+                [
+                    5,
+                    0.5662328075709779,
+                    0.4296187008032883,
+                    0.23388194962216538
+                ],
+                [
+                    2,
+                    0.0278722222222222,
+                    0.6143931578921116,
+                    0.4383476254128186
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "qsar",
+            "max_depth": 2,
+            "test_set": "1",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 0.03875899314880371,
+            "train_score": 0.38346890083637686,
+            "test_score": 0.280022147572732,
+            "depth": 2,
+            "leaves": 4,
+            "output": "",
+            "tree": [
+                4,
+                0.27417644787644785,
+                [
+                    4,
+                    0.1529467916896488,
+                    0.29897951720092464,
+                    0.4379446324708038
+                ],
+                [
+                    2,
+                    0.0278722222222222,
+                    0.623329271658652,
+                    0.4429706813460503
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "qsar",
+            "max_depth": 2,
+            "test_set": "2",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 0.0407559871673584,
+            "train_score": 0.36607796224006783,
+            "test_score": 0.28121149587612226,
+            "depth": 2,
+            "leaves": 4,
+            "output": "",
+            "tree": [
+                0,
+                0.15406263676148796,
+                [
+                    3,
+                    0.4652179363857894,
+                    0.21763569667241145,
+                    0.47304527447523065
+                ],
+                [
+                    2,
+                    0.0278722222222222,
+                    0.6383016219830547,
+                    0.40299847800813837
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "qsar",
+            "max_depth": 2,
+            "test_set": "3",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 0.0420989990234375,
+            "train_score": 0.36597454657418993,
+            "test_score": 0.38126220828259394,
+            "depth": 2,
+            "leaves": 4,
+            "output": "",
+            "tree": [
+                4,
+                0.27739330759330755,
+                [
+                    4,
+                    0.16434366611509466,
+                    0.30643894385670295,
+                    0.4456859279596973
+                ],
+                [
+                    2,
+                    0.0278722222222222,
+                    0.614652789354502,
+                    0.4477171222807419
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "qsar",
+            "max_depth": 2,
+            "test_set": "4",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 0.027643918991088867,
+            "train_score": 0.3845254445646429,
+            "test_score": 0.1852952306087018,
+            "depth": 2,
+            "leaves": 4,
+            "output": "",
+            "tree": [
+                0,
+                0.15406263676148796,
+                [
+                    3,
+                    0.5859453571886624,
+                    0.3426546927943831,
+                    0.5323810233508063
+                ],
+                [
+                    2,
+                    0.0278722222222222,
+                    0.6433466397984887,
+                    0.4039634991850648
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "query1",
+            "max_depth": 2,
+            "test_set": "",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": false,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 0.08056497573852539,
+            "train_score": 0.8276778349927901,
+            "test_score": 0.0,
+            "depth": 2,
+            "leaves": 4,
+            "output": "",
+            "tree": [
+                1,
+                0.4899014503569324,
+                [
+                    1,
+                    0.3500891529401532,
+                    0.5289280260806614,
+                    0.39334622191213536
+                ],
+                [
+                    0,
+                    0.44787440066469464,
+                    0.07293503527870761,
+                    0.3746654512617981
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "query1",
+            "max_depth": 2,
+            "test_set": "0",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 0.06769084930419922,
+            "train_score": 0.8252077656736623,
+            "test_score": 0.8368434158128979,
+            "depth": 2,
+            "leaves": 4,
+            "output": "",
+            "tree": [
+                1,
+                0.477694857236981,
+                [
+                    1,
+                    0.34956452942174304,
+                    0.5289892399150536,
+                    0.39577458357342493
+                ],
+                [
+                    0,
+                    0.44111529406453187,
+                    0.07339837450383424,
+                    0.3748876775619892
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "query1",
+            "max_depth": 2,
+            "test_set": "1",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 0.0654151439666748,
+            "train_score": 0.8304708510736526,
+            "test_score": 0.8162024079750467,
+            "depth": 2,
+            "leaves": 4,
+            "output": "",
+            "tree": [
+                1,
+                0.4899014503569324,
+                [
+                    1,
+                    0.3500891529401532,
+                    0.5282920105591339,
+                    0.393469426047202
+                ],
+                [
+                    0,
+                    0.44787440066469464,
+                    0.07301926478949362,
+                    0.37422308660745485
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "query1",
+            "max_depth": 2,
+            "test_set": "2",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 0.06609916687011719,
+            "train_score": 0.8243998622347088,
+            "test_score": 0.8402594301273316,
+            "depth": 2,
+            "leaves": 4,
+            "output": "",
+            "tree": [
+                1,
+                0.4871084851266167,
+                [
+                    1,
+                    0.35026698221676306,
+                    0.5286689365975092,
+                    0.3916848200697522
+                ],
+                [
+                    0,
+                    0.44787440066469464,
+                    0.07332112823380749,
+                    0.3743617188837529
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "query1",
+            "max_depth": 2,
+            "test_set": "3",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 0.07834982872009277,
+            "train_score": 0.8317096090073154,
+            "test_score": 0.8108522764952807,
+            "depth": 2,
+            "leaves": 4,
+            "output": "",
+            "tree": [
+                1,
+                0.4899014503569324,
+                [
+                    1,
+                    0.3500891529401532,
+                    0.5296592113316145,
+                    0.39386860405031276
+                ],
+                [
+                    0,
+                    0.44599325710398785,
+                    0.0730267254518571,
+                    0.374931622834785
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "query1",
+            "max_depth": 2,
+            "test_set": "4",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 0.061614036560058594,
+            "train_score": 0.826831765302991,
+            "test_score": 0.829759202707671,
+            "depth": 2,
+            "leaves": 4,
+            "output": "",
+            "tree": [
+                1,
+                0.4899014503569324,
+                [
+                    1,
+                    0.35301896917476905,
+                    0.5278270738372818,
+                    0.3893464765562756
+                ],
+                [
+                    0,
+                    0.44787440066469464,
+                    0.07235221613812123,
+                    0.3748682739739223
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "casp",
+            "max_depth": 3,
+            "test_set": "",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": false,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 605.8355231285095,
+            "train_score": 0.22535982375491315,
+            "test_score": 0.0,
+            "depth": 3,
+            "leaves": 8,
+            "output": "",
+            "tree": [
+                1,
+                0.158420276486568,
+                [
+                    1,
+                    0.08344382694436056,
+                    [
+                        7,
+                        0.061516285714285704,
+                        0.20232061635324544,
+                        0.39767128954513414
+                    ],
+                    [
+                        3,
+                        0.18521651369374786,
+                        0.4245644501614681,
+                        0.21284811414522703
+                    ]
+                ],
+                [
+                    3,
+                    0.3002470019657003,
+                    [
+                        1,
+                        0.21240317261964645,
+                        0.4941970002934729,
+                        0.6769913230373092
+                    ],
+                    [
+                        2,
+                        0.5582747871967684,
+                        0.2678928983742197,
+                        0.571626805512099
+                    ]
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "casp",
+            "max_depth": 3,
+            "test_set": "0",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 605.5740170478821,
+            "train_score": 0.22546858126549152,
+            "test_score": 0.21948996368732765,
+            "depth": 3,
+            "leaves": 8,
+            "output": "",
+            "tree": [
+                1,
+                0.1575779725659858,
+                [
+                    1,
+                    0.0835444205654492,
+                    [
+                        7,
+                        0.05865971428571425,
+                        0.19654629564605094,
+                        0.3968512214810347
+                    ],
+                    [
+                        3,
+                        0.18526190764021522,
+                        0.42342228530523174,
+                        0.21342284380490958
+                    ]
+                ],
+                [
+                    3,
+                    0.300040919018548,
+                    [
+                        1,
+                        0.2123253802193379,
+                        0.49380644852667427,
+                        0.6777600029730225
+                    ],
+                    [
+                        2,
+                        0.5546995836682537,
+                        0.2642129069823402,
+                        0.5632904930598416
+                    ]
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "casp",
+            "max_depth": 3,
+            "test_set": "1",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 605.7883079051971,
+            "train_score": 0.22478397026395502,
+            "test_score": 0.21244503919436986,
+            "depth": 3,
+            "leaves": 8,
+            "output": "",
+            "tree": [
+                3,
+                0.1845421490227624,
+                [
+                    1,
+                    0.1283491547104001,
+                    [
+                        7,
+                        0.0729425714285714,
+                        0.27166371880912055,
+                        0.40972764984906473
+                    ],
+                    [
+                        1,
+                        0.1661170297481302,
+                        0.5068775406187014,
+                        0.674136863735971
+                    ]
+                ],
+                [
+                    2,
+                    0.48957318164018215,
+                    [
+                        2,
+                        0.39942035491250844,
+                        0.20458490708985366,
+                        0.31829317355896025
+                    ],
+                    [
+                        2,
+                        0.5893697850326676,
+                        0.4413284421423319,
+                        0.6421168814288758
+                    ]
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "casp",
+            "max_depth": 3,
+            "test_set": "2",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 603.8345990180969,
+            "train_score": 0.22605463652233093,
+            "test_score": 0.2180835814360027,
+            "depth": 3,
+            "leaves": 8,
+            "output": "",
+            "tree": [
+                1,
+                0.15799007110037894,
+                [
+                    1,
+                    0.0829821022235637,
+                    [
+                        7,
+                        0.061516285714285704,
+                        0.2007221698048886,
+                        0.3985114997539569
+                    ],
+                    [
+                        3,
+                        0.18520426011310642,
+                        0.4242971012741086,
+                        0.2124603626474131
+                    ]
+                ],
+                [
+                    3,
+                    0.29997547375830375,
+                    [
+                        1,
+                        0.21240317261964645,
+                        0.4922392098791818,
+                        0.6773997477328844
+                    ],
+                    [
+                        2,
+                        0.5206269667552916,
+                        0.252597789108555,
+                        0.5094281790005426
+                    ]
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "casp",
+            "max_depth": 3,
+            "test_set": "3",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 605.9922890663147,
+            "train_score": 0.22420342478139277,
+            "test_score": 0.22618293147523627,
+            "depth": 3,
+            "leaves": 8,
+            "output": "",
+            "tree": [
+                1,
+                0.15788612435858734,
+                [
+                    1,
+                    0.08324498688667535,
+                    [
+                        7,
+                        0.061516285714285704,
+                        0.20333738549645064,
+                        0.3979478935410295
+                    ],
+                    [
+                        3,
+                        0.18542649550746787,
+                        0.4228498049915882,
+                        0.21081953301803266
+                    ]
+                ],
+                [
+                    3,
+                    0.30191655232810277,
+                    [
+                        1,
+                        0.21240317261964645,
+                        0.49039497136322635,
+                        0.6757346625619255
+                    ],
+                    [
+                        2,
+                        0.5582747871967684,
+                        0.26709843984633297,
+                        0.5674800566873378
+                    ]
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "casp",
+            "max_depth": 3,
+            "test_set": "4",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 603.3444240093231,
+            "train_score": 0.22487532440242486,
+            "test_score": 0.22507773914838158,
+            "depth": 3,
+            "leaves": 8,
+            "output": "",
+            "tree": [
+                1,
+                0.15851282261796956,
+                [
+                    1,
+                    0.0839068929134386,
+                    [
+                        7,
+                        0.061516285714285704,
+                        0.20382775303607906,
+                        0.3938077186530332
+                    ],
+                    [
+                        3,
+                        0.18521651369374786,
+                        0.4258457280292527,
+                        0.21362351182238093
+                    ]
+                ],
+                [
+                    3,
+                    0.3026169558579514,
+                    [
+                        1,
+                        0.21240317261964645,
+                        0.49471685538171967,
+                        0.6713635970886225
+                    ],
+                    [
+                        2,
+                        0.5573062882582082,
+                        0.2673619478342764,
+                        0.5731032515922787
+                    ]
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "concrete",
+            "max_depth": 3,
+            "test_set": "",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": false,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 75.9408631324768,
+            "train_score": 0.6581684610773748,
+            "test_score": 0.0,
+            "depth": 3,
+            "leaves": 8,
+            "output": "",
+            "tree": [
+                0,
+                0.3555083561643836,
+                [
+                    7,
+                    0.11271483516483516,
+                    [
+                        7,
+                        0.02619368131868125,
+                        0.13440436406592032,
+                        0.318156348549137
+                    ],
+                    [
+                        4,
+                        0.2003704968944099,
+                        0.436062860129671,
+                        0.5680649524521405
+                    ]
+                ],
+                [
+                    7,
+                    0.0550340659340659,
+                    [
+                        3,
+                        0.4960071884984026,
+                        0.43350358548933504,
+                        0.24694776439756777
+                    ],
+                    [
+                        3,
+                        0.4349171725239616,
+                        0.7167638129529622,
+                        0.4906409652423073
+                    ]
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "concrete",
+            "max_depth": 3,
+            "test_set": "0",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 60.18444299697876,
+            "train_score": 0.6531348141047587,
+            "test_score": 0.6593199206601763,
+            "depth": 3,
+            "leaves": 8,
+            "output": "",
+            "tree": [
+                0,
+                0.4851627853881278,
+                [
+                    7,
+                    0.11271483516483516,
+                    [
+                        7,
+                        0.02619368131868125,
+                        0.14835033381901297,
+                        0.35272153003647555
+                    ],
+                    [
+                        4,
+                        0.2003704968944099,
+                        0.4380455446420961,
+                        0.596340780668814
+                    ]
+                ],
+                [
+                    3,
+                    0.4960071884984026,
+                    [
+                        7,
+                        0.02619368131868125,
+                        0.4525596332378223,
+                        0.7583538166247054
+                    ],
+                    [
+                        7,
+                        0.0550340659340659,
+                        0.29293540401146134,
+                        0.5066804395741296
+                    ]
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "concrete",
+            "max_depth": 3,
+            "test_set": "1",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 51.47343397140503,
+            "train_score": 0.6664110847728647,
+            "test_score": 0.6155899636054927,
+            "depth": 3,
+            "leaves": 8,
+            "output": "",
+            "tree": [
+                0,
+                0.3555083561643836,
+                [
+                    7,
+                    0.11271483516483516,
+                    [
+                        7,
+                        0.02619368131868125,
+                        0.14272373906669636,
+                        0.3192762670935092
+                    ],
+                    [
+                        4,
+                        0.19416055900621115,
+                        0.43548070262862837,
+                        0.5796857297945963
+                    ]
+                ],
+                [
+                    7,
+                    0.0550340659340659,
+                    [
+                        3,
+                        0.4960071884984026,
+                        0.44261511846048995,
+                        0.23933207424940797
+                    ],
+                    [
+                        3,
+                        0.4349171725239616,
+                        0.7160533843937867,
+                        0.49006152031836375
+                    ]
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "concrete",
+            "max_depth": 3,
+            "test_set": "2",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 52.082072019577026,
+            "train_score": 0.6754823897927715,
+            "test_score": 0.5829668990897605,
+            "depth": 3,
+            "leaves": 8,
+            "output": "",
+            "tree": [
+                0,
+                0.3555083561643836,
+                [
+                    7,
+                    0.11271483516483516,
+                    [
+                        7,
+                        0.02619368131868125,
+                        0.13275067895851497,
+                        0.3182010228938872
+                    ],
+                    [
+                        4,
+                        0.2003704968944099,
+                        0.4354935875901591,
+                        0.5604214501058925
+                    ]
+                ],
+                [
+                    7,
+                    0.0550340659340659,
+                    [
+                        3,
+                        0.4960071884984026,
+                        0.4243706004222053,
+                        0.23890680916193535
+                    ],
+                    [
+                        3,
+                        0.4349171725239616,
+                        0.7281705401877361,
+                        0.49009858769004366
+                    ]
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "concrete",
+            "max_depth": 3,
+            "test_set": "3",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 57.40584111213684,
+            "train_score": 0.661254447262533,
+            "test_score": 0.6247136735862426,
+            "depth": 3,
+            "leaves": 8,
+            "output": "",
+            "tree": [
+                0,
+                0.48208121004566207,
+                [
+                    7,
+                    0.11271483516483516,
+                    [
+                        7,
+                        0.02619368131868125,
+                        0.14671451942913005,
+                        0.35067783920549317
+                    ],
+                    [
+                        4,
+                        0.2438400621118012,
+                        0.47209618414288546,
+                        0.6126015356505129
+                    ]
+                ],
+                [
+                    3,
+                    0.4960071884984026,
+                    [
+                        7,
+                        0.02619368131868125,
+                        0.44793616544163445,
+                        0.739623228783706
+                    ],
+                    [
+                        7,
+                        0.0550340659340659,
+                        0.2694215572973131,
+                        0.5151807180764919
+                    ]
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "concrete",
+            "max_depth": 3,
+            "test_set": "4",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 63.52090311050415,
+            "train_score": 0.6572735702203583,
+            "test_score": 0.6579514255404382,
+            "depth": 3,
+            "leaves": 8,
+            "output": "",
+            "tree": [
+                0,
+                0.3555083561643836,
+                [
+                    7,
+                    0.11271483516483516,
+                    [
+                        7,
+                        0.02619368131868125,
+                        0.13051155897695849,
+                        0.32181243865906095
+                    ],
+                    [
+                        4,
+                        0.2003704968944099,
+                        0.4394575539696382,
+                        0.5662431864266609
+                    ]
+                ],
+                [
+                    7,
+                    0.0550340659340659,
+                    [
+                        3,
+                        0.481233785942492,
+                        0.4412222691963013,
+                        0.24228113071282956
+                    ],
+                    [
+                        3,
+                        0.4365142971246006,
+                        0.7211742985785805,
+                        0.4882046767160833
+                    ]
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "energy",
+            "max_depth": 3,
+            "test_set": "",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": false,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 606.8184399604797,
+            "train_score": 0.15530497552513367,
+            "test_score": 0.0,
+            "depth": 3,
+            "leaves": 8,
+            "output": "",
+            "tree": [
+                16,
+                0.39941997762180714,
+                [
+                    9,
+                    0.371995303030303,
+                    [
+                        7,
+                        0.4484446486991732,
+                        0.08456278483671074,
+                        0.2045984779706273
+                    ],
+                    [
+                        1,
+                        0.0715142857142857,
+                        0.05100853661235124,
+                        0.15273555386510135
+                    ]
+                ],
+                [
+                    0,
+                    0.6677986013986015,
+                    [
+                        0,
+                        0.3182181818181818,
+                        0.042074446918446126,
+                        0.09915914939726131
+                    ],
+                    [
+                        0,
+                        0.8775468531468532,
+                        0.13184736794508464,
+                        0.05721441459590653
+                    ]
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "energy",
+            "max_depth": 3,
+            "test_set": "0",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 604.5749092102051,
+            "train_score": 0.1535957722882212,
+            "test_score": 0.1553642199171431,
+            "depth": 3,
+            "leaves": 8,
+            "output": "",
+            "tree": [
+                0,
+                0.6677986013986015,
+                [
+                    0,
+                    0.3322013986013986,
+                    [
+                        0,
+                        0.2972433566433566,
+                        0.03920186399326024,
+                        0.06674562927248155
+                    ],
+                    [
+                        1,
+                        0.0715142857142857,
+                        0.09190389411907075,
+                        0.13081936324306104
+                    ]
+                ],
+                [
+                    16,
+                    0.3978944969992881,
+                    [
+                        1,
+                        0.0715142857142857,
+                        0.06496197440906762,
+                        0.16231877912515152
+                    ],
+                    [
+                        0,
+                        0.8775468531468532,
+                        0.13097782828194668,
+                        0.056912174491802074
+                    ]
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "energy",
+            "max_depth": 3,
+            "test_set": "1",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 604.4567201137543,
+            "train_score": 0.1574635704432803,
+            "test_score": 0.14479221889633498,
+            "depth": 3,
+            "leaves": 8,
+            "output": "",
+            "tree": [
+                16,
+                0.39941997762180714,
+                [
+                    9,
+                    0.3712592146820315,
+                    [
+                        11,
+                        0.11990946688719545,
+                        0.9064607476635514,
+                        0.09432475169736933
+                    ],
+                    [
+                        1,
+                        0.0715142857142857,
+                        0.051583375869855716,
+                        0.15172486734449392
+                    ]
+                ],
+                [
+                    0,
+                    0.6677986013986015,
+                    [
+                        0,
+                        0.3182181818181818,
+                        0.04229978468248709,
+                        0.09906820217884052
+                    ],
+                    [
+                        0,
+                        0.8635636363636363,
+                        0.13556201407808566,
+                        0.06041520744941631
+                    ]
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "energy",
+            "max_depth": 3,
+            "test_set": "2",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 603.1318979263306,
+            "train_score": 0.158709143405938,
+            "test_score": 0.14261305607352592,
+            "depth": 3,
+            "leaves": 8,
+            "output": "",
+            "tree": [
+                0,
+                0.44406713286713284,
+                [
+                    19,
+                    0.8000365590507712,
+                    [
+                        0,
+                        0.3112265734265734,
+                        0.040209789066515615,
+                        0.09311363898810888
+                    ],
+                    [
+                        14,
+                        0.025307021677662453,
+                        0.532703738317757,
+                        0.04436419127017822
+                    ]
+                ],
+                [
+                    18,
+                    0.25226698875179365,
+                    [
+                        1,
+                        0.0715142857142857,
+                        0.058027333008044614,
+                        0.17131630618602606
+                    ],
+                    [
+                        0,
+                        0.8845384615384616,
+                        0.11671468696277108,
+                        0.0552834977610261
+                    ]
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "energy",
+            "max_depth": 3,
+            "test_set": "3",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 606.6392850875854,
+            "train_score": 0.15711170484132408,
+            "test_score": 0.14766864957716108,
+            "depth": 3,
+            "leaves": 8,
+            "output": "",
+            "tree": [
+                16,
+                0.39860638795646186,
+                [
+                    9,
+                    0.3715985569985555,
+                    [
+                        11,
+                        0.11990946688719545,
+                        0.9064607476635514,
+                        0.0984984497942044
+                    ],
+                    [
+                        1,
+                        0.0715142857142857,
+                        0.05034045812535091,
+                        0.1549913250387022
+                    ]
+                ],
+                [
+                    0,
+                    0.6677986013986015,
+                    [
+                        0,
+                        0.3182181818181818,
+                        0.04200729411874795,
+                        0.09943315080791994
+                    ],
+                    [
+                        0,
+                        0.8775468531468532,
+                        0.13214524256885674,
+                        0.0573665611762153
+                    ]
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "energy",
+            "max_depth": 3,
+            "test_set": "4",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 602.4540410041809,
+            "train_score": 0.1600539073450229,
+            "test_score": 0.1312238548902116,
+            "depth": 3,
+            "leaves": 8,
+            "output": "",
+            "tree": [
+                16,
+                0.39860638795646186,
+                [
+                    9,
+                    0.3712592146820315,
+                    [
+                        11,
+                        0.13715992548783695,
+                        0.6868785046728971,
+                        0.09726701253464769
+                    ],
+                    [
+                        1,
+                        0.0715142857142857,
+                        0.051278595444734884,
+                        0.15443626629745047
+                    ]
+                ],
+                [
+                    0,
+                    0.6677986013986015,
+                    [
+                        0,
+                        0.3182181818181818,
+                        0.04205753289285972,
+                        0.09843189810425186
+                    ],
+                    [
+                        0,
+                        0.8565720279720279,
+                        0.1368196858556515,
+                        0.062713206972063
+                    ]
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "fish",
+            "max_depth": 3,
+            "test_set": "",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": false,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 19.955464839935303,
+            "train_score": 0.5507900765610246,
+            "test_score": 0.0,
+            "depth": 3,
+            "leaves": 8,
+            "output": "",
+            "tree": [
+                1,
+                0.44149298051678865,
+                [
+                    5,
+                    0.49058076943537154,
+                    [
+                        2,
+                        0.5176067152648467,
+                        0.332428160716423,
+                        0.21343265309680756
+                    ],
+                    [
+                        5,
+                        0.6846562766647871,
+                        0.42918046053867115,
+                        0.5711020023014963
+                    ]
+                ],
+                [
+                    5,
+                    0.5936019416752668,
+                    [
+                        1,
+                        0.6088861452719818,
+                        0.4116731689913233,
+                        0.5513193710639182
+                    ],
+                    [
+                        4,
+                        0.250045834236096,
+                        0.5808594772856465,
+                        0.7717697450918853
+                    ]
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "fish",
+            "max_depth": 3,
+            "test_set": "0",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 13.29783296585083,
+            "train_score": 0.5601113312364292,
+            "test_score": 0.48616421512724595,
+            "depth": 3,
+            "leaves": 8,
+            "output": "",
+            "tree": [
+                1,
+                0.4739585049053475,
+                [
+                    5,
+                    0.4763269366215914,
+                    [
+                        2,
+                        0.5176067152648467,
+                        0.32464790576094055,
+                        0.22591830523173376
+                    ],
+                    [
+                        5,
+                        0.6849222063814621,
+                        0.42653139189068506,
+                        0.574382721344632
+                    ]
+                ],
+                [
+                    5,
+                    0.5936019416752668,
+                    [
+                        1,
+                        0.6088861452719818,
+                        0.4180716746621234,
+                        0.5508433386246515
+                    ],
+                    [
+                        4,
+                        0.250045834236096,
+                        0.587594471622271,
+                        0.8078855459078707
+                    ]
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "fish",
+            "max_depth": 3,
+            "test_set": "1",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 18.664062023162842,
+            "train_score": 0.5571852401298831,
+            "test_score": 0.4572612208361646,
+            "depth": 3,
+            "leaves": 8,
+            "output": "",
+            "tree": [
+                5,
+                0.49058076943537154,
+                [
+                    1,
+                    0.26488973792086956,
+                    [
+                        3,
+                        0.12507187570310743,
+                        0.24465149192156027,
+                        0.3916740971277789
+                    ],
+                    [
+                        1,
+                        0.5976037999170927,
+                        0.35854153486512197,
+                        0.5666777382571399
+                    ]
+                ],
+                [
+                    5,
+                    0.6596588832973371,
+                    [
+                        1,
+                        0.18292004513840904,
+                        0.39164608518693234,
+                        0.4668820559105534
+                    ],
+                    [
+                        1,
+                        0.4617551517663857,
+                        0.5494386479458401,
+                        0.6324322462922578
+                    ]
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "fish",
+            "max_depth": 3,
+            "test_set": "2",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 18.001080989837646,
+            "train_score": 0.5566264572689437,
+            "test_score": 0.49857243311202926,
+            "depth": 3,
+            "leaves": 8,
+            "output": "",
+            "tree": [
+                1,
+                0.42629635207959093,
+                [
+                    5,
+                    0.49191041801874646,
+                    [
+                        2,
+                        0.5176067152648467,
+                        0.33581169757921975,
+                        0.21511917103068884
+                    ],
+                    [
+                        0,
+                        0.6259374246544085,
+                        0.4292161614286827,
+                        0.5921559806514944
+                    ]
+                ],
+                [
+                    5,
+                    0.5936019416752668,
+                    [
+                        1,
+                        0.6109584127861452,
+                        0.4237462344968673,
+                        0.5630634852553149
+                    ],
+                    [
+                        4,
+                        0.250045834236096,
+                        0.5847072290723614,
+                        0.776039802200101
+                    ]
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "fish",
+            "max_depth": 3,
+            "test_set": "3",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 11.806358814239502,
+            "train_score": 0.5718272193548098,
+            "test_score": 0.41208889531195814,
+            "depth": 3,
+            "leaves": 8,
+            "output": "",
+            "tree": [
+                1,
+                0.4739585049053475,
+                [
+                    5,
+                    0.48350703897181646,
+                    [
+                        3,
+                        0.12507187570310743,
+                        0.26782425789184205,
+                        0.4209690358315209
+                    ],
+                    [
+                        5,
+                        0.6846562766647871,
+                        0.4252835786767894,
+                        0.5766216078329697
+                    ]
+                ],
+                [
+                    5,
+                    0.5936019416752668,
+                    [
+                        0,
+                        0.2437241372097887,
+                        0.3743808843323918,
+                        0.505144956386153
+                    ],
+                    [
+                        4,
+                        0.250045834236096,
+                        0.5902605013837507,
+                        0.7764581723224987
+                    ]
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "fish",
+            "max_depth": 3,
+            "test_set": "4",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 15.10148000717163,
+            "train_score": 0.5634200502945971,
+            "test_score": 0.4837168080401876,
+            "depth": 3,
+            "leaves": 8,
+            "output": "",
+            "tree": [
+                5,
+                0.49058076943537154,
+                [
+                    1,
+                    0.26488973792086956,
+                    [
+                        3,
+                        0.12507187570310743,
+                        0.23875258780434191,
+                        0.3961605356208808
+                    ],
+                    [
+                        1,
+                        0.6095769011100364,
+                        0.3569212215047219,
+                        0.5630867280398925
+                    ]
+                ],
+                [
+                    1,
+                    0.5580004652019714,
+                    [
+                        5,
+                        0.6789121947846071,
+                        0.4303943705016653,
+                        0.5656872595938734
+                    ],
+                    [
+                        4,
+                        0.250045834236096,
+                        0.5894266136625169,
+                        0.7747820099731489
+                    ]
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "gas",
+            "max_depth": 3,
+            "test_set": "",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": false,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 291.61300802230835,
+            "train_score": 0.9749120972014438,
+            "test_score": 0.0,
+            "depth": 3,
+            "leaves": 8,
+            "output": "",
+            "tree": [
+                7,
+                0.49792442123804725,
+                [
+                    7,
+                    0.33212970558631105,
+                    [
+                        7,
+                        0.19740577503774534,
+                        0.11975683003071207,
+                        0.258939875769023
+                    ],
+                    [
+                        5,
+                        0.8755492507492504,
+                        0.3800371086861064,
+                        0.43749758420817514
+                    ]
+                ],
+                [
+                    7,
+                    0.6501335304479114,
+                    [
+                        4,
+                        0.479454974367886,
+                        0.5237357633165125,
+                        0.6312978577668306
+                    ],
+                    [
+                        7,
+                        0.7500128963261197,
+                        0.7156857868062585,
+                        0.8029571056259689
+                    ]
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "gas",
+            "max_depth": 3,
+            "test_set": "0",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 231.6713728904724,
+            "train_score": 0.9745724770025656,
+            "test_score": 0.9760618972252868,
+            "depth": 3,
+            "leaves": 8,
+            "output": "",
+            "tree": [
+                7,
+                0.49792442123804725,
+                [
+                    7,
+                    0.3361550704579769,
+                    [
+                        7,
+                        0.19916687216909915,
+                        0.119989018187033,
+                        0.26205766467772335
+                    ],
+                    [
+                        5,
+                        0.8755492507492504,
+                        0.3806407737960715,
+                        0.43745736295567733
+                    ]
+                ],
+                [
+                    7,
+                    0.6501335304479114,
+                    [
+                        4,
+                        0.479454974367886,
+                        0.5233309471143176,
+                        0.6315688380281128
+                    ],
+                    [
+                        7,
+                        0.750264481630599,
+                        0.7156400322790668,
+                        0.8032486124741801
+                    ]
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "gas",
+            "max_depth": 3,
+            "test_set": "1",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 234.9601469039917,
+            "train_score": 0.9752020135719103,
+            "test_score": 0.9736970280054448,
+            "depth": 3,
+            "leaves": 8,
+            "output": "",
+            "tree": [
+                7,
+                0.49735835430296926,
+                [
+                    7,
+                    0.33212970558631105,
+                    [
+                        7,
+                        0.19740577503774534,
+                        0.119736969978343,
+                        0.25891255371498717
+                    ],
+                    [
+                        5,
+                        0.874550449550449,
+                        0.38013779608844656,
+                        0.43689581544481043
+                    ]
+                ],
+                [
+                    7,
+                    0.650259323100151,
+                    [
+                        4,
+                        0.4796069988704492,
+                        0.5243186346060295,
+                        0.6317745075565919
+                    ],
+                    [
+                        7,
+                        0.7500128963261197,
+                        0.715556679865039,
+                        0.8028453144703253
+                    ]
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "gas",
+            "max_depth": 3,
+            "test_set": "2",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 222.30993914604187,
+            "train_score": 0.9751134729731169,
+            "test_score": 0.9738864628859059,
+            "depth": 3,
+            "leaves": 8,
+            "output": "",
+            "tree": [
+                7,
+                0.4923895445395068,
+                [
+                    7,
+                    0.33212970558631105,
+                    [
+                        7,
+                        0.19916687216909915,
+                        0.12004106126417355,
+                        0.25974526309125257
+                    ],
+                    [
+                        5,
+                        0.8755492507492504,
+                        0.37998184395249374,
+                        0.4369708768366762
+                    ]
+                ],
+                [
+                    7,
+                    0.6486240186210368,
+                    [
+                        4,
+                        0.4802585324528629,
+                        0.5214121265410624,
+                        0.6306113133031702
+                    ],
+                    [
+                        7,
+                        0.7508934448917967,
+                        0.7152099948144727,
+                        0.8038909911361721
+                    ]
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "gas",
+            "max_depth": 3,
+            "test_set": "3",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 231.16944694519043,
+            "train_score": 0.9748496278416384,
+            "test_score": 0.9749887929477308,
+            "depth": 3,
+            "leaves": 8,
+            "output": "",
+            "tree": [
+                7,
+                0.49792442123804725,
+                [
+                    7,
+                    0.33212970558631105,
+                    [
+                        7,
+                        0.19916687216909915,
+                        0.1200798983220953,
+                        0.2596605568322259
+                    ],
+                    [
+                        5,
+                        0.8775468531468522,
+                        0.3800554915476341,
+                        0.43865910726727325
+                    ]
+                ],
+                [
+                    7,
+                    0.6492529818822346,
+                    [
+                        4,
+                        0.4792160787210009,
+                        0.522870548796244,
+                        0.6307402450040525
+                    ],
+                    [
+                        7,
+                        0.7508934448917967,
+                        0.7154101421129212,
+                        0.8032798650268362
+                    ]
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "gas",
+            "max_depth": 3,
+            "test_set": "4",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 234.73128199577332,
+            "train_score": 0.9749447525725442,
+            "test_score": 0.9745489632765069,
+            "depth": 3,
+            "leaves": 8,
+            "output": "",
+            "tree": [
+                7,
+                0.4980502138902869,
+                [
+                    7,
+                    0.3360292778057373,
+                    [
+                        7,
+                        0.19740577503774534,
+                        0.11982260006857515,
+                        0.2604465206689461
+                    ],
+                    [
+                        5,
+                        0.874550449550449,
+                        0.38041997461174804,
+                        0.437302251874754
+                    ]
+                ],
+                [
+                    7,
+                    0.6507624937091092,
+                    [
+                        4,
+                        0.4796069988704492,
+                        0.5250675442384164,
+                        0.6310416016329748
+                    ],
+                    [
+                        7,
+                        0.7500757926522397,
+                        0.716804436928092,
+                        0.8027760131972933
+                    ]
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "grid",
+            "max_depth": 3,
+            "test_set": "",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": false,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 600.4553589820862,
+            "train_score": 0.35491509529185183,
+            "test_score": 0.0,
+            "depth": 3,
+            "leaves": 8,
+            "output": "",
+            "tree": [
+                10,
+                0.5184813815127789,
+                [
+                    8,
+                    0.5926462793020428,
+                    [
+                        1,
+                        0.34368705930241283,
+                        0.32028190435899023,
+                        0.46718342005091446
+                    ],
+                    [
+                        0,
+                        0.31350928646935283,
+                        0.3723392934533936,
+                        0.5872130866433197
+                    ]
+                ],
+                [
+                    2,
+                    0.2591949450227761,
+                    [
+                        9,
+                        0.5377676922233015,
+                        0.3591180703828376,
+                        0.4820787246108893
+                    ],
+                    [
+                        3,
+                        0.2180623731909277,
+                        0.4877656490197966,
+                        0.647471652031124
+                    ]
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "grid",
+            "max_depth": 3,
+            "test_set": "0",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 600.763445854187,
+            "train_score": 0.3562467086939455,
+            "test_score": 0.3374765173298141,
+            "depth": 3,
+            "leaves": 8,
+            "output": "",
+            "tree": [
+                8,
+                0.5914020175080372,
+                [
+                    10,
+                    0.4813272200595937,
+                    [
+                        1,
+                        0.3728133800380125,
+                        0.3225874183568625,
+                        0.46859996786069286
+                    ],
+                    [
+                        2,
+                        0.2604099297790369,
+                        0.3667960829477892,
+                        0.5719930485466974
+                    ]
+                ],
+                [
+                    0,
+                    0.29651097166615037,
+                    [
+                        0,
+                        0.1690705316877981,
+                        0.36748781383968926,
+                        0.49165307924817764
+                    ],
+                    [
+                        3,
+                        0.2574016091711711,
+                        0.5178481669342344,
+                        0.6682656336064182
+                    ]
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "grid",
+            "max_depth": 3,
+            "test_set": "1",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 601.7396218776703,
+            "train_score": 0.3553066482951751,
+            "test_score": 0.34557419145751367,
+            "depth": 3,
+            "leaves": 8,
+            "output": "",
+            "tree": [
+                10,
+                0.5165721031981411,
+                [
+                    8,
+                    0.5939344864109524,
+                    [
+                        1,
+                        0.3473181867566961,
+                        0.32279377364606826,
+                        0.4668982510807023
+                    ],
+                    [
+                        0,
+                        0.31350928646935283,
+                        0.3683705804129403,
+                        0.581849994299075
+                    ]
+                ],
+                [
+                    2,
+                    0.2953932312044316,
+                    [
+                        2,
+                        0.12823608013179105,
+                        0.35391031799179323,
+                        0.4868989522278687
+                    ],
+                    [
+                        0,
+                        0.24707299687652967,
+                        0.5002640863837207,
+                        0.6554964904436494
+                    ]
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "grid",
+            "max_depth": 3,
+            "test_set": "2",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 600.8463830947876,
+            "train_score": 0.3630353163299802,
+            "test_score": 0.3054293404489372,
+            "depth": 3,
+            "leaves": 8,
+            "output": "",
+            "tree": [
+                8,
+                0.5928974219900878,
+                [
+                    10,
+                    0.4804448689437901,
+                    [
+                        1,
+                        0.34368705930241283,
+                        0.31758560977150757,
+                        0.4603614669272059
+                    ],
+                    [
+                        2,
+                        0.26028219301957706,
+                        0.3625464524944393,
+                        0.5744728768730251
+                    ]
+                ],
+                [
+                    0,
+                    0.30062593369349017,
+                    [
+                        0,
+                        0.1716854689499065,
+                        0.3689009121302652,
+                        0.49175687186465034
+                    ],
+                    [
+                        3,
+                        0.26086685609285687,
+                        0.5167734755112636,
+                        0.669332235402168
+                    ]
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "grid",
+            "max_depth": 3,
+            "test_set": "3",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 600.2765369415283,
+            "train_score": 0.3557026193939057,
+            "test_score": 0.35055761574948885,
+            "depth": 3,
+            "leaves": 8,
+            "output": "",
+            "tree": [
+                10,
+                0.517107437318066,
+                [
+                    8,
+                    0.5930460649177289,
+                    [
+                        1,
+                        0.3436851107092722,
+                        0.31645759714660004,
+                        0.4670646315668318
+                    ],
+                    [
+                        0,
+                        0.31381364984872645,
+                        0.3726641769843291,
+                        0.5870972864802037
+                    ]
+                ],
+                [
+                    2,
+                    0.2958120704164844,
+                    [
+                        2,
+                        0.14359815258304215,
+                        0.3580517157325581,
+                        0.49634542238915236
+                    ],
+                    [
+                        0,
+                        0.2491218964897231,
+                        0.5023829483947903,
+                        0.6533315886009688
+                    ]
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "grid",
+            "max_depth": 3,
+            "test_set": "4",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 600.5177760124207,
+            "train_score": 0.35446572581183877,
+            "test_score": 0.3556052977552113,
+            "depth": 3,
+            "leaves": 8,
+            "output": "",
+            "tree": [
+                10,
+                0.521590561510247,
+                [
+                    8,
+                    0.5905940445650282,
+                    [
+                        1,
+                        0.34207474571173135,
+                        0.3202449214376564,
+                        0.469608874325213
+                    ],
+                    [
+                        0,
+                        0.31350928646935283,
+                        0.3700622754165818,
+                        0.5880534364057336
+                    ]
+                ],
+                [
+                    2,
+                    0.25878918737516476,
+                    [
+                        2,
+                        0.1407742513691198,
+                        0.35709661846808144,
+                        0.47751241203998246
+                    ],
+                    [
+                        3,
+                        0.2180623731909277,
+                        0.4821824690348341,
+                        0.6469310313208907
+                    ]
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "news",
+            "max_depth": 3,
+            "test_set": "",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": false,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": -1.0,
+            "train_score": 0.0,
+            "test_score": 0.0,
+            "depth": 0,
+            "leaves": 0,
+            "output": "Traceback (most recent call last):\n  File \"/home/mim/src/codt-experiments/src/methods/base.py\", line 141, in run\n    (model, extra) = self.train_model(X_train, y_train, params)\n  File \"/home/mim/src/codt-experiments/src/methods/quantbnb.py\", line 98, in train_model\n    return (model, {\"tree\": self.tree_to_list(model.tree_), \"time\": model.time_})\n  File \"/home/mim/src/codt-experiments/src/methods/quantbnb.py\", line 81, in tree_to_list\n    if len(tree) == 4:\nTypeError: object of type 'int' has no len()\n",
+            "tree": null,
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "news",
+            "max_depth": 3,
+            "test_set": "0",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": -1.0,
+            "train_score": 0.0,
+            "test_score": 0.0,
+            "depth": 0,
+            "leaves": 0,
+            "output": "Traceback (most recent call last):\n  File \"/home/mim/src/codt-experiments/src/methods/base.py\", line 141, in run\n    (model, extra) = self.train_model(X_train, y_train, params)\n  File \"/home/mim/src/codt-experiments/src/methods/quantbnb.py\", line 98, in train_model\n    return (model, {\"tree\": self.tree_to_list(model.tree_), \"time\": model.time_})\n  File \"/home/mim/src/codt-experiments/src/methods/quantbnb.py\", line 81, in tree_to_list\n    if len(tree) == 4:\nTypeError: object of type 'int' has no len()\n",
+            "tree": null,
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "news",
+            "max_depth": 3,
+            "test_set": "1",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 613.244546175003,
+            "train_score": 0.16685809690918685,
+            "test_score": -0.40943105036006244,
+            "depth": 3,
+            "leaves": 8,
+            "output": "",
+            "tree": [
+                16,
+                0.5,
+                [
+                    30,
+                    0.5,
+                    [
+                        26,
+                        0.08118611073104645,
+                        0.0031620118521653077,
+                        0.006226984000278218
+                    ],
+                    [
+                        27,
+                        0.2618168860429265,
+                        0.004600051261246869,
+                        0.38962173570702596
+                    ]
+                ],
+                [
+                    28,
+                    0.02387088817739825,
+                    [
+                        26,
+                        0.07121193109466635,
+                        0.0031856492815407166,
+                        0.004842415311074288
+                    ],
+                    [
+                        2,
+                        0.2990135355204153,
+                        0.004586424974393654,
+                        0.786850939109379
+                    ]
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "news",
+            "max_depth": 3,
+            "test_set": "2",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 612.2844099998474,
+            "train_score": 0.07603078637523975,
+            "test_score": 0.018373107003607725,
+            "depth": 3,
+            "leaves": 8,
+            "output": "",
+            "tree": [
+                29,
+                0.0059739847240311995,
+                [
+                    2,
+                    0.1853945362284635,
+                    [
+                        26,
+                        0.0906170049579582,
+                        0.0029555385430866925,
+                        0.005920226956490603
+                    ],
+                    [
+                        39,
+                        0.9873163285827975,
+                        0.00358701722953814,
+                        0.12514331915489052
+                    ]
+                ],
+                [
+                    41,
+                    0.03103647882741875,
+                    [
+                        3,
+                        0.00044049201568054997,
+                        0.4144003966564646,
+                        0.004246456421851641
+                    ],
+                    [
+                        25,
+                        0.0170227728718645,
+                        0.004442362137148409,
+                        0.00856420438356562
+                    ]
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "news",
+            "max_depth": 3,
+            "test_set": "3",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 610.6894021034241,
+            "train_score": 0.17966947447799986,
+            "test_score": 0.00310759660261406,
+            "depth": 3,
+            "leaves": 8,
+            "output": "",
+            "tree": [
+                30,
+                0.5,
+                [
+                    44,
+                    0.4917113838067855,
+                    [
+                        26,
+                        0.09260482140542545,
+                        0.0033387514098029572,
+                        0.0071761823769579056
+                    ],
+                    [
+                        44,
+                        0.4917170261292402,
+                        0.5229404162699114,
+                        0.004137393610683729
+                    ]
+                ],
+                [
+                    41,
+                    0.21113684746796454,
+                    [
+                        27,
+                        0.24373678406261112,
+                        0.0032859601147314102,
+                        0.7741652131687573
+                    ],
+                    [
+                        38,
+                        0.7562260257816106,
+                        0.005941707346471701,
+                        0.22272144885740408
+                    ]
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "news",
+            "max_depth": 3,
+            "test_set": "4",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 611.9782869815826,
+            "train_score": 0.1462487171144754,
+            "test_score": -0.06999354201370789,
+            "depth": 3,
+            "leaves": 8,
+            "output": "",
+            "tree": [
+                30,
+                0.5,
+                [
+                    28,
+                    0.023515214040080598,
+                    [
+                        25,
+                        0.01701884661947045,
+                        0.002919891098429864,
+                        0.005160379603994298
+                    ],
+                    [
+                        3,
+                        0.00044049201568054997,
+                        0.07853744941538578,
+                        0.006851066537000594
+                    ]
+                ],
+                [
+                    41,
+                    0.2077785341155473,
+                    [
+                        27,
+                        0.2386980671172773,
+                        0.0033189015718160246,
+                        0.7741652131687573
+                    ],
+                    [
+                        38,
+                        0.7562260257816106,
+                        0.005721893821790778,
+                        0.29420215538419175
+                    ]
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "qsar",
+            "max_depth": 3,
+            "test_set": "",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": false,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 10.17330002784729,
+            "train_score": 0.5459772212261803,
+            "test_score": 0.0,
+            "depth": 3,
+            "leaves": 8,
+            "output": "",
+            "tree": [
+                0,
+                0.18138067776114242,
+                [
+                    3,
+                    0.6373330511735282,
+                    [
+                        3,
+                        0.4652179363857894,
+                        0.22442680212706403,
+                        0.4256917461680088
+                    ],
+                    [
+                        0,
+                        0.16924732235402506,
+                        0.5807958912948025,
+                        0.9187407523089833
+                    ]
+                ],
+                [
+                    1,
+                    0.1611346244090413,
+                    [
+                        2,
+                        0.0278722222222222,
+                        0.6880511731738034,
+                        0.4640805930190721
+                    ],
+                    [
+                        3,
+                        0.5430528215980506,
+                        0.3647922945038608,
+                        0.49797765819403095
+                    ]
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "qsar",
+            "max_depth": 3,
+            "test_set": "0",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 6.1013100147247314,
+            "train_score": 0.5727523429151119,
+            "test_score": 0.2373965043546603,
+            "depth": 3,
+            "leaves": 8,
+            "output": "",
+            "tree": [
+                0,
+                0.1800709086721179,
+                [
+                    3,
+                    0.6037371040143644,
+                    [
+                        3,
+                        0.4652179363857894,
+                        0.20424169527268463,
+                        0.3972616923875631
+                    ],
+                    [
+                        3,
+                        0.6813155316147237,
+                        0.5015475059497957,
+                        0.6405709184337067
+                    ]
+                ],
+                [
+                    1,
+                    0.15082026253951375,
+                    [
+                        4,
+                        0.2527613531899246,
+                        0.47553326184478834,
+                        0.6923584979345085
+                    ],
+                    [
+                        3,
+                        0.5430528215980506,
+                        0.37000295942976563,
+                        0.5101537669558726
+                    ]
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "qsar",
+            "max_depth": 3,
+            "test_set": "1",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 9.332072019577026,
+            "train_score": 0.5604690339413982,
+            "test_score": 0.44048269510264504,
+            "depth": 3,
+            "leaves": 8,
+            "output": "",
+            "tree": [
+                0,
+                0.18231622711044565,
+                [
+                    3,
+                    0.6373330511735282,
+                    [
+                        3,
+                        0.46611553802744643,
+                        0.23524187909319896,
+                        0.4289732488226916
+                    ],
+                    [
+                        0,
+                        0.16924732235402506,
+                        0.5865446933395815,
+                        0.9187407523089833
+                    ]
+                ],
+                [
+                    1,
+                    0.1611346244090413,
+                    [
+                        2,
+                        0.0278722222222222,
+                        0.6794099546599496,
+                        0.4606215708724522
+                    ],
+                    [
+                        3,
+                        0.5430528215980506,
+                        0.35357681529841145,
+                        0.5016346626975039
+                    ]
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "qsar",
+            "max_depth": 3,
+            "test_set": "2",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 8.633836030960083,
+            "train_score": 0.5401292491003093,
+            "test_score": 0.4434415211013524,
+            "depth": 3,
+            "leaves": 8,
+            "output": "",
+            "tree": [
+                0,
+                0.18138067776114242,
+                [
+                    3,
+                    0.6373330511735282,
+                    [
+                        3,
+                        0.4652179363857894,
+                        0.2260818154339363,
+                        0.43021318158919153
+                    ],
+                    [
+                        0,
+                        0.16924732235402506,
+                        0.5691584056284198,
+                        0.9152066146095716
+                    ]
+                ],
+                [
+                    1,
+                    0.14150840664950898,
+                    [
+                        3,
+                        0.486183346158779,
+                        0.48536816624685136,
+                        0.7245466613889885
+                    ],
+                    [
+                        3,
+                        0.5338524047710658,
+                        0.36210986733837114,
+                        0.4878317421840271
+                    ]
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "qsar",
+            "max_depth": 3,
+            "test_set": "3",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 10.498641014099121,
+            "train_score": 0.5372038073125316,
+            "test_score": 0.4409327854184619,
+            "depth": 3,
+            "leaves": 8,
+            "output": "",
+            "tree": [
+                0,
+                0.18138067776114242,
+                [
+                    3,
+                    0.6373330511735282,
+                    [
+                        3,
+                        0.4652179363857894,
+                        0.22775778986845785,
+                        0.42484011195074145
+                    ],
+                    [
+                        0,
+                        0.1631014827824484,
+                        0.5822063237697362,
+                        0.9066189118387896
+                    ]
+                ],
+                [
+                    1,
+                    0.1508788221738887,
+                    [
+                        4,
+                        0.2527613531899246,
+                        0.44242435052366436,
+                        0.688018966866886
+                    ],
+                    [
+                        3,
+                        0.5707181864819802,
+                        0.3868018213266161,
+                        0.5320993722921912
+                    ]
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "qsar",
+            "max_depth": 3,
+            "test_set": "4",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 8.500946998596191,
+            "train_score": 0.5557361410045893,
+            "test_score": 0.45320154792612255,
+            "depth": 3,
+            "leaves": 8,
+            "output": "",
+            "tree": [
+                0,
+                0.18138067776114242,
+                [
+                    3,
+                    0.6385512248300629,
+                    [
+                        3,
+                        0.4652179363857894,
+                        0.22866133148614604,
+                        0.42536459009041805
+                    ],
+                    [
+                        0,
+                        0.16924732235402506,
+                        0.5828807057374752,
+                        0.9187407523089833
+                    ]
+                ],
+                [
+                    1,
+                    0.1611346244090413,
+                    [
+                        2,
+                        0.0278722222222222,
+                        0.6987269226606957,
+                        0.46878710025188913
+                    ],
+                    [
+                        3,
+                        0.5430528215980506,
+                        0.36343750978492534,
+                        0.49200889464084047
+                    ]
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "query1",
+            "max_depth": 3,
+            "test_set": "",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": false,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 34.03980898857117,
+            "train_score": 0.9160336686948577,
+            "test_score": 0.0,
+            "depth": 3,
+            "leaves": 8,
+            "output": "",
+            "tree": [
+                1,
+                0.3378892235419198,
+                [
+                    0,
+                    0.6777682622311964,
+                    [
+                        1,
+                        0.29527877248632595,
+                        0.6516343979868375,
+                        0.5442574864529444
+                    ],
+                    [
+                        1,
+                        0.19617439046586094,
+                        0.413721489644212,
+                        0.5196741988871808
+                    ]
+                ],
+                [
+                    1,
+                    0.504853854637628,
+                    [
+                        1,
+                        0.39078470606367544,
+                        0.4398090995298717,
+                        0.3427799101227848
+                    ],
+                    [
+                        0,
+                        0.5152652544707269,
+                        0.07265442770342638,
+                        0.37476287701616884
+                    ]
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "query1",
+            "max_depth": 3,
+            "test_set": "0",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 21.32688808441162,
+            "train_score": 0.9165100136056191,
+            "test_score": 0.9111423482380715,
+            "depth": 3,
+            "leaves": 8,
+            "output": "",
+            "tree": [
+                1,
+                0.33558092663611383,
+                [
+                    0,
+                    0.6679205932831809,
+                    [
+                        1,
+                        0.29118664240165043,
+                        0.6651184848484855,
+                        0.5506667782155443
+                    ],
+                    [
+                        1,
+                        0.19088110464284164,
+                        0.4119481022403276,
+                        0.5172741119208203
+                    ]
+                ],
+                [
+                    1,
+                    0.504853854637628,
+                    [
+                        1,
+                        0.3832187259306413,
+                        0.4483779310966807,
+                        0.35240257661006624
+                    ],
+                    [
+                        0,
+                        0.5224439744638306,
+                        0.07259201631039319,
+                        0.374969620274738
+                    ]
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "query1",
+            "max_depth": 3,
+            "test_set": "1",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 29.57337498664856,
+            "train_score": 0.9166709358925472,
+            "test_score": 0.9125497936098635,
+            "depth": 3,
+            "leaves": 8,
+            "output": "",
+            "tree": [
+                1,
+                0.3323765095450157,
+                [
+                    0,
+                    0.6795259236582117,
+                    [
+                        1,
+                        0.29409846542479257,
+                        0.6498587714937396,
+                        0.5551118139096584
+                    ],
+                    [
+                        1,
+                        0.19617439046586094,
+                        0.41249984179593563,
+                        0.5161205801328799
+                    ]
+                ],
+                [
+                    1,
+                    0.4937222681542601,
+                    [
+                        1,
+                        0.3727146726595135,
+                        0.4632511885696338,
+                        0.36791443033018256
+                    ],
+                    [
+                        0,
+                        0.5152652544707269,
+                        0.07301926478949362,
+                        0.3743446243707535
+                    ]
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "query1",
+            "max_depth": 3,
+            "test_set": "2",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 21.061737060546875,
+            "train_score": 0.9152190954465619,
+            "test_score": 0.918030899646343,
+            "depth": 3,
+            "leaves": 8,
+            "output": "",
+            "tree": [
+                1,
+                0.33473857419709596,
+                [
+                    0,
+                    0.6777682622311964,
+                    [
+                        1,
+                        0.29409846542479257,
+                        0.6548226502311251,
+                        0.5503165682327356
+                    ],
+                    [
+                        1,
+                        0.19617439046586094,
+                        0.4127158730158731,
+                        0.5200977570361784
+                    ]
+                ],
+                [
+                    1,
+                    0.504853854637628,
+                    [
+                        1,
+                        0.39049110674775905,
+                        0.4434439322076768,
+                        0.34131276149744083
+                    ],
+                    [
+                        0,
+                        0.5152652544707269,
+                        0.0729691076575967,
+                        0.37445622010807933
+                    ]
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "query1",
+            "max_depth": 3,
+            "test_set": "3",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 24.900240898132324,
+            "train_score": 0.917051048006089,
+            "test_score": 0.9111995408654976,
+            "depth": 3,
+            "leaves": 8,
+            "output": "",
+            "tree": [
+                1,
+                0.3378892235419198,
+                [
+                    0,
+                    0.6787830913425326,
+                    [
+                        1,
+                        0.29527877248632595,
+                        0.6484163920656467,
+                        0.5441591804447248
+                    ],
+                    [
+                        1,
+                        0.19617439046586094,
+                        0.4142562695406445,
+                        0.520997320697321
+                    ]
+                ],
+                [
+                    1,
+                    0.504853854637628,
+                    [
+                        1,
+                        0.3959433297500937,
+                        0.4379891523832985,
+                        0.3378077377069524
+                    ],
+                    [
+                        0,
+                        0.5133841109100201,
+                        0.0726812480988052,
+                        0.375054977212761
+                    ]
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    },
+    {
+        "p": {
+            "method": "quantbnb",
+            "task": "regression",
+            "timeout": 600,
+            "dataset": "query1",
+            "max_depth": 3,
+            "test_set": "4",
+            "cp": 0.0,
+            "strategy": "dfs",
+            "upperbound": "for-remaining-interval",
+            "terminal_solver": "left-right",
+            "intermediates": false,
+            "tune": true,
+            "node_lowerbound": true,
+            "memory_limit": 4294967296
+        },
+        "o": {
+            "time": 25.26807403564453,
+            "train_score": 0.9166293205966551,
+            "test_score": 0.9118811605776111,
+            "depth": 3,
+            "leaves": 8,
+            "output": "",
+            "tree": [
+                1,
+                0.33237872775049193,
+                [
+                    0,
+                    0.6809855153346476,
+                    [
+                        1,
+                        0.28941001714559744,
+                        0.6543202208675677,
+                        0.557991813123703
+                    ],
+                    [
+                        1,
+                        0.1955005440048121,
+                        0.41191103061077045,
+                        0.5177448423869189
+                    ]
+                ],
+                [
+                    1,
+                    0.5090156718196374,
+                    [
+                        1,
+                        0.3740823281757164,
+                        0.4612607820750672,
+                        0.3640275493564709
+                    ],
+                    [
+                        0,
+                        0.5152652544707269,
+                        0.07225932192090234,
+                        0.37498837586292605
+                    ]
+                ]
+            ],
+            "intermediate_lbs": null,
+            "intermediate_ubs": null,
+            "tuning_output": null
+        }
+    }
+]
