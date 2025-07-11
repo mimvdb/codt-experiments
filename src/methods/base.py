@@ -55,7 +55,7 @@ class RunParams():
     max_depth: int
     test_set: str = ""
     cp: float = 0.0
-    strategy: str = "dfs"
+    strategy: str = "bfs-gosdt"
     upperbound: str = "for-remaining-interval"
     terminal_solver: str = "left-right"
     intermediates: bool = False

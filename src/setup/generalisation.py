@@ -5,9 +5,8 @@ from src.methods import RunParams
 
 def setup_generalisation() -> List[RunParams]:
     runs = []
-    methods = ["codt", "cart", "quantbnb"]
-    # datasets = ["casp", "concrete", "energy", "fish", "gas", "grid", "news", "qsar", "query1"]
-    datasets = ["concrete", "fish", "qsar", "query1"]
+    methods = ["codt", "cart"]
+    datasets = ["casp", "concrete", "energy", "fish", "gas", "grid", "news", "qsar", "query1"]
     depths = [2, 3]
     test_sets = ["0", "1", "2", "3", "4"]
     for m, d, data, test_set in itertools.product(methods, depths, datasets, test_sets):
@@ -15,7 +14,7 @@ def setup_generalisation() -> List[RunParams]:
             RunParams(
                 method=m,
                 task="regression",
-                timeout=120,
+                timeout=10*60,
                 dataset=data,
                 max_depth=d,
                 test_set=test_set,
@@ -29,7 +28,7 @@ def setup_generalisation() -> List[RunParams]:
             RunParams(
                 method=m,
                 task="regression",
-                timeout=120,
+                timeout=10*60,
                 dataset=data,
                 max_depth=d,
                 test_set=test_set,
