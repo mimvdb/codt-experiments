@@ -5,7 +5,7 @@ from src.methods import RunParams
 
 def setup_debug() -> List[RunParams]:
     runs = []
-    methods = ["codt", "cart", "quantbnb"]
+    methods = ["codt", "cart"]
     datasets = ["qsar", "fish", "concrete"]
     depths = [2]
     for m, d, data in itertools.product(methods, depths, datasets):

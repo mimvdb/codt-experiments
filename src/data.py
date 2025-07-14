@@ -2,7 +2,8 @@ import json
 import numpy as np
 import pandas as pd
 from functools import cache
-from sklearn.model_selection import KFold, train_test_split
+from sklearn.model_selection import StratifiedKFold
+from sklearn.preprocessing import KBinsDiscretizer
 from src.util import REPO_DIR
 
 DATASETS_CLASSIFICATION = ["avila", "bank", "bean", "bidding", "eeg", "fault", "htru", "magic", "occupancy", "page", "raisin", "rice", "room", "segment", "skin", "wilt"]
@@ -54,8 +55,13 @@ def quant_to_csv():
 def generate_index_sets():
     for rdata in DATASETS_REGRESSION:
         X, y = get_dataset(rdata, "regression")
-        kf = KFold(n_splits=5, shuffle=True, random_state=42)
-        for i, (_, test_indices) in enumerate(kf.split(X, y)):
+
+        # stratify based on discretization
+        disc = KBinsDiscretizer(n_bins=10, encode="ordinal", strategy="quantile", subsample=20000, random_state=42)
+        ydisc = disc.fit_transform(y.reshape(-1, 1))
+
+        kf = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
+        for i, (_, test_indices) in enumerate(kf.split(X, ydisc)):
             path = REPO_DIR / "datasets" / "regression" / rdata / f"{i}.csv"
             path.parent.mkdir(exist_ok=True)
             pd.Series(test_indices).to_csv(path, header=False, index=False)
