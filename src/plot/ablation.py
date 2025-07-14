@@ -185,7 +185,7 @@ def anytime_table(results: Dict, output_dir: Path, x_max_key: str, x_key: int, x
             single = this_df[this_df["strategy"] == strategy]
             end = "&" if strategy != strategies[-1] else "\\\\"
             integral = single["objective_integral"].squeeze()
-            print(f"{integral:.4f} {end} % ({dataset} d={depth}) {strategy}")
+            print(f"{integral:.2f} {end} % ({dataset} d={depth}) {strategy}")
     
     print(f"%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
     print(f"% Gap integral table for x={x_label}")
@@ -198,7 +198,7 @@ def anytime_table(results: Dict, output_dir: Path, x_max_key: str, x_key: int, x
             single = this_df[this_df["strategy"] == strategy]
             end = "&" if strategy != strategies[-1] else "\\\\"
             integral = single["gap_integral"].squeeze()
-            print(f"{integral:.4f} {end} % ({dataset} d={depth}) {strategy}")
+            print(f"{integral:.2f} {end} % ({dataset} d={depth}) {strategy}")
 
     set_style()
     rel = sns.jointplot(data=result_df, x="objective_integral", y="gap_integral", hue="strategy", xlim=(0.0,1.0), ylim=(0.0,1.0), marginal_kws={"bw_adjust": .2})
@@ -216,7 +216,8 @@ def anytime_table(results: Dict, output_dir: Path, x_max_key: str, x_key: int, x
     
     plt.close()
     
-    rel = sns.boxplot(data=result_df, x="objective_integral", y="strategy")
+    # Remove showfliers = false for now as they are not informative.
+    rel = sns.boxplot(data=result_df, x="objective_integral", y="strategy", showfliers=False)
     rel.set_xlabel("Objective integral")
     rel.set_ylabel("Strategy")
     filename = f"fig-anytime-objective-integral-box-{x_key}.pdf"
