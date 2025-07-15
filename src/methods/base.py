@@ -45,7 +45,7 @@ class RunParams():
         terminal_solver: Use the specified terminal solver. I.e. "leaf" or "d1.5" or "d2"
         intermediates: If true, keep scores of intermediate solutions.
         tune: If true, tune hyperparameters for out-of-sample performance.
-        node_lowerbound: If true, use node-level lower bounding in the solver.
+        branch_relaxation: If enabled, use branch relaxation in the solver.
         memory_limit: Optional memory limit in bytes.
     """
     method: str
@@ -60,7 +60,7 @@ class RunParams():
     terminal_solver: str = "left-right"
     intermediates: bool = False
     tune: bool = False
-    node_lowerbound: bool = True
+    branch_relaxation: str = "lowerbound"
     memory_limit: Optional[int] = 4 * 1024 * 1024 * 1024  # 4GiB
 
     def as_dict(self):

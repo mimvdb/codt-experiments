@@ -57,7 +57,7 @@ class CodtMethod(BaseMethod):
                 upperbound=params.upperbound,
                 terminal_solver=params.terminal_solver,
                 intermediates=params.intermediates,
-                node_lowerbound=params.node_lowerbound,
+                branch_relaxation=params.branch_relaxation,
                 memory_limit=params.memory_limit,
             )
             tuning_output = None
