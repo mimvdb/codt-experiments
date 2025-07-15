@@ -70,5 +70,6 @@ class CodtMethod(BaseMethod):
                 "tree": model.get_tree(),
                 "intermediate_lbs": model.intermediate_lbs(),
                 "intermediate_ubs": model.intermediate_ubs(),
+                "memory_usage_bytes": model.memory_usage_bytes(),
             },
         )

@@ -91,11 +91,12 @@ class RunOutput():
     tree: Optional[List | float]
     intermediate_lbs: Optional[List[Tuple[float, int, float]]]
     intermediate_ubs: Optional[List[Tuple[float, int, float]]]
+    memory_usage_bytes: Optional[int]
     tuning_output: Optional[Dict]
 
     @staticmethod
     def empty_with_output(output: str):
-        return RunOutput(-1.0, 0.0, 0.0, 0, 0, output, None, None, None, None)
+        return RunOutput(-1.0, 0.0, 0.0, 0, 0, output, None, None, None, None, None)
 
 
 @dataclass
@@ -161,6 +162,7 @@ class BaseMethod(ABC):
                     tree=tree,
                     intermediate_lbs=extra.get("intermediate_lbs") if params.intermediates else None,
                     intermediate_ubs=extra.get("intermediate_ubs") if params.intermediates else None,
+                    memory_usage_bytes=extra.get("memory_usage_bytes"),
                     tuning_output=extra.get("tuning_output"))
 
                 result.output = append_std(result.output)
