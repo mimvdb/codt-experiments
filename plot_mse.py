@@ -1,6 +1,7 @@
 from src.data import get_dataset
 import numpy as np
 import matplotlib.pyplot as plt
+import pandas as pd
 import seaborn as sns
 
 
@@ -94,23 +95,22 @@ def plot_mse(mses_per_feature, X, title, filename, highlight_min=None):
     set_style()
     n_features = X.shape[1]
 
+    rows = []
     for i in range(n_features):
         mses = mses_per_feature[i]
-        sns.lineplot(x=range(len(mses)), y=mses, label=f"Feature {i}")
-        
-        # Add markers on the line at unique_indices
+        # Get the x values at which we can actually split, ignore others
         unique_indices = np.unique(np.sort(X[:, i]), return_index=True)[1]
-        plt.scatter(unique_indices, mses[unique_indices], color='black', s=1, zorder=20)
+        for idx in unique_indices:
+            rows.append({"Feature": f"Feature {i}", "Split index": idx, "MSE after split": mses[idx]})
+    df = pd.DataFrame(rows)
+    sns.lineplot(data=df, x="Split index", y="MSE after split", hue="Feature", marker="o", markersize="3", markeredgewidth=0)
 
     # Highlight the minimum MSE if provided
     if highlight_min:
         min_idx, min_val, min_feat = highlight_min
         plt.scatter(min_idx, min_val, color='red', label=f"Min Feature {min_feat} (idx={min_idx})", zorder=20)
 
-    plt.xlabel("Split index")
-    plt.ylabel("MSE after split")
     plt.title(title)
-    plt.legend()
     plt.tight_layout()
     plt.savefig(filename, bbox_inches="tight", pad_inches=0.03)
     plt.show()
