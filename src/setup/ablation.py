@@ -4,10 +4,13 @@ from src.data import DATASETS_REGRESSION, DATASETS_CLASSIFICATION
 from src.methods import RunParams
 from codt_py import all_search_strategies, all_terminal_solvers, all_branch_relaxations
 
-TIMEOUT = 15 * 60  # 15 minutes
+TIMEOUT = 15 * 60 # timeout in seconds
 main_ss = "bfs-gosdt"
 main_terminal_solver = "left-right"
 main_branch_relaxation = "lowerbound"
+
+def setup_ablation() -> List[RunParams]:
+    return setup_ablation_ss() + setup_ablation_terminal() + setup_ablation_branch_relaxation()
 
 def setup_ablation_ss() -> List[RunParams]:
     runs = []
