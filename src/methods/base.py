@@ -80,6 +80,8 @@ class RunOutput():
         tree: The tree, format is a nested list of [feature, threshold, left_child, right_child] for internal nodes and the label for leafs
         intermediate_lbs: Optionally, a list of tuples with the training scores, graph expansions, and time of intermediate solutions.
         intermediate_ubs: Optionally, a list of tuples with the lower bounds, graph expansions, and time of intermediate solutions.
+        memory_usage_bytes: Optionally, the memory in bytes used during training.
+        expansions: Optionally, the total number of graph expansions done during training.
         tuning_output: Optionally, the extra information during tuning.
     """
     time: float
@@ -92,11 +94,12 @@ class RunOutput():
     intermediate_lbs: Optional[List[Tuple[float, int, float]]]
     intermediate_ubs: Optional[List[Tuple[float, int, float]]]
     memory_usage_bytes: Optional[int]
+    expansions: Optional[int]
     tuning_output: Optional[Dict]
 
     @staticmethod
     def empty_with_output(output: str):
-        return RunOutput(-1.0, 0.0, 0.0, 0, 0, output, None, None, None, None, None)
+        return RunOutput(-1.0, 0.0, 0.0, 0, 0, output, None, None, None, None, None, None)
 
 
 @dataclass
@@ -163,6 +166,7 @@ class BaseMethod(ABC):
                     intermediate_lbs=extra.get("intermediate_lbs") if params.intermediates else None,
                     intermediate_ubs=extra.get("intermediate_ubs") if params.intermediates else None,
                     memory_usage_bytes=extra.get("memory_usage_bytes"),
+                    expansions=extra.get("expansions"),
                     tuning_output=extra.get("tuning_output"))
 
                 result.output = append_std(result.output)

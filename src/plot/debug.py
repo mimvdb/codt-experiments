@@ -1,11 +1,8 @@
 from pathlib import Path
-from typing import Dict
 import numpy as np
 import pandas as pd
 
-def all_strats_equal(results: Dict, output_dir: Path):
-    df = pd.json_normalize(results, max_level=1)
-
+def all_strats_equal(df: pd.DataFrame, output_dir: Path):
     datasets = df["p.dataset"].unique()
     datasetXdepth = []
     for dataset in datasets:
@@ -27,7 +24,8 @@ def all_strats_equal(results: Dict, output_dir: Path):
                     single_s = single[single["p.strategy"] == strategy]
                     score = single_s["o.train_score"].squeeze().round(decimals=6)
                     time = single_s["o.time"].squeeze()
-                    print(f"{score == best_score}: {dataset}-{test_set} d{depth} {method}-{strategy} Time: {time:.2f}")
+                    mem = single_s["o.memory_usage_bytes"].squeeze() / 1024 / 1024
+                    print(f"{score == best_score}: {dataset}-{test_set} d{depth} {method}-{strategy} Time: {time:.2f} Mem: {mem:.2f}MB")
             elif method in ["cart"]:
                 # Skip non-optimal
                 continue
