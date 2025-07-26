@@ -110,6 +110,13 @@ def graph_anytime(df: pd.DataFrame, output_dir: Path, x_key: str, x_label: str):
         rel.map(sns.lineplot, x_key, "score", drawstyle="steps-post")
         rel.refline(y=baseline_ub, linestyle="--")
         rel.refline(y=baseline_lb, linestyle="--")
+
+        max_x_across_all = max([
+            np.max(np.concatenate([line.get_xdata() for line in subplot_ax.get_lines()]))
+            for subplot_ax in rel.axes.flat
+            if len(subplot_ax.get_lines()) > 0
+        ])
+
         def objective_integral(data=None, color=None, label=None, **kwargs):
             ax = plt.gca()
             lines = ax.get_lines()
@@ -120,7 +127,7 @@ def graph_anytime(df: pd.DataFrame, output_dir: Path, x_key: str, x_label: str):
             y = list(map(lambda y: min(y, baseline_ub), y))
 
             # Extend to end
-            x.append(ax.get_xbound()[1])
+            x.append(max_x_across_all)
             y.append(y[-1])
             return ax.fill_between(x, y, baseline_lb, step="post", color="C0", alpha=0.3, **kwargs)
         rel.map(objective_integral)
