@@ -56,7 +56,7 @@ class RunParams():
     test_set: str = ""
     cp: float = 0.0
     strategy: str = "bfs-gosdt"
-    upperbound: str = "for-remaining-interval"
+    upperbound: str = "solutions-only"
     terminal_solver: str = "left-right"
     intermediates: bool = False
     tune: bool = False
