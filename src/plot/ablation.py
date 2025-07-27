@@ -1,5 +1,7 @@
+from contextlib import redirect_stdout
+from io import StringIO
 from pathlib import Path
-from typing import Dict
+from autorank import autorank, latex_report
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -147,13 +149,13 @@ def graph_anytime(df: pd.DataFrame, output_dir: Path, x_key: str, x_label: str):
     \\label{""" + label + """}
 \\end{figure}""", file=f)
 
-def anytime_table_expansions(df: Dict, output_dir: Path):
+def anytime_table_expansions(df: pd.DataFrame, output_dir: Path):
     anytime_table(df, output_dir, "o.expansions", 1, "Graph expansions")
 
-def anytime_table_time(df: Dict, output_dir: Path):
+def anytime_table_time(df: pd.DataFrame, output_dir: Path):
     anytime_table(df, output_dir, "o.time", 2, "Time (s)")
 
-def anytime_table(df: Dict, output_dir: Path, x_max_key: str, x_key: int, x_label: str):
+def anytime_table(df: pd.DataFrame, output_dir: Path, x_max_key: str, x_key: int, x_label: str):
     datasets = df["p.dataset"].unique()
     datasetXdepth = []
     for dataset in datasets:
@@ -212,6 +214,7 @@ def anytime_table(df: Dict, output_dir: Path, x_max_key: str, x_key: int, x_labe
 
     result_df = pd.DataFrame(integrals, columns=["dataset", "depth", facet_name, "objective_integral", "gap_integral"])
 
+    x_name = x_max_key[2:]
     with open(output_dir / "objective_integral_table.tex", "w") as f:
         print(f"%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%", file=f)
         print(f"% Objective integral table for x={x_label}", file=f)
@@ -242,20 +245,6 @@ def anytime_table(df: Dict, output_dir: Path, x_max_key: str, x_key: int, x_labe
 
     with open(output_dir / "fig.tex", "w") as f:
         set_style()
-        rel = sns.jointplot(data=result_df, x="objective_integral", y="gap_integral", hue=facet_name, xlim=(0.0,1.0), ylim=(0.0,1.0), marginal_kws={"bw_adjust": .2})
-        rel.set_axis_labels("Objective integral", "Gap integral")
-        filename = f"fig-anytime-{x_key}.pdf"
-        plt.savefig(output_dir / filename, bbox_inches="tight", pad_inches = 0.03)
-        plt.close()
-        caption = f"Anytime performance. The x axis is the integral over {x_key} of the found objective, the y axis is the integral over {x_key} of the gap between lower and upper bound. Values greater than one are excluded from this graph."
-        label = f"fig:anytime_{x_key}"
-        print("""\\begin{figure}
-    \\centering
-    \\includegraphics[width=\\textwidth]{figures/""" + filename + """}
-    \\caption{""" + caption + """}
-    \\label{""" + label + """}
-\\end{figure}""", file=f)
-        
         
         # Remove showfliers = false for now as they are not informative.
         rel = sns.boxplot(data=result_df, x="objective_integral", y=facet_name, showfliers=False)
@@ -287,3 +276,72 @@ def anytime_table(df: Dict, output_dir: Path, x_max_key: str, x_key: int, x_labe
     \\caption{""" + caption + """}
     \\label{""" + label + """}
 \\end{figure}""", file=f)
+        
+
+def tto_table(df: pd.DataFrame, output_dir: Path):
+    datasets = df["p.dataset"].unique()
+    datasetXdepth = []
+    for dataset in datasets:
+        depths = df[df["p.dataset"] == dataset]["p.max_depth"].unique()
+        datasetXdepth.extend([(dataset, d) for d in depths])
+    datasetXdepth.sort(key=lambda x: (x[1], x[0]))
+
+    facet_dim, facet_name = get_facet_dim(df)
+    facets = df[facet_dim].unique()
+
+    names = []
+    ttop_datasets = []
+    ttos_datasets = []
+
+    for dataset, depth in datasetXdepth:
+        this_df = df[np.logical_and(df["p.dataset"] == dataset, df["p.max_depth"] == depth)]
+
+        ttop_facets = []
+        ttos_facets = []
+        for facet in facets:
+            single = this_df[this_df[facet_dim] == facet]
+            timeout = single["p.timeout"].squeeze()
+            mem_limit = single["p.memory_limit"].squeeze()
+            mem_used = single["o.memory_usage_bytes"].squeeze()
+            ttop = single["o.time"].squeeze()
+            invalid = ttop >= timeout or mem_used >= mem_limit
+            if invalid:
+                ttop = timeout
+            last_ub = single["o.intermediate_ubs"].squeeze()[-1]
+            last_ub_t = last_ub[2]
+            ttos = last_ub_t if not invalid else timeout
+            ttop_facets.append(ttop)
+            ttos_facets.append(ttos)
+        names.append(f"{dataset} (d={depth})")
+        ttop_datasets.append(ttop_facets)
+        ttos_datasets.append(ttos_facets)
+
+    ttop_df = pd.DataFrame(ttop_datasets, columns=facets)
+    ttop_path = output_dir / "ttop"
+    ttop_path.mkdir(parents=True, exist_ok=True)
+    stdout_io = StringIO()
+    with redirect_stdout(stdout_io):
+        result = autorank(ttop_df, order="ascending", approach="frequentist", force_mode="nonparametric")
+        latex_report(result, figure_path=str(ttop_path), complete_document=False)
+        
+    stdout_str = stdout_io.getvalue()
+    with open(output_dir / "ttop_report.tex", "w") as f:
+        f.write(stdout_str)
+
+    ttos_df = pd.DataFrame(ttos_datasets, columns=facets)
+    ttos_path = output_dir / "ttos"
+    ttos_path.mkdir(parents=True, exist_ok=True)
+    stdout_io = StringIO()
+    with redirect_stdout(stdout_io):
+        result = autorank(ttos_df, order="ascending", approach="frequentist", force_mode="nonparametric")
+        latex_report(result, figure_path=str(ttos_path), complete_document=False)
+        
+    stdout_str = stdout_io.getvalue()
+    with open(output_dir / "ttos_report.tex", "w") as f:
+        f.write(stdout_str)
+
+    with open(output_dir / "table.tex", "w") as f:
+        for i in range(len(names)):
+            print(f"{names[i]}\\", file=f)
+            for j in range(len(ttop_datasets[i])):
+                print(f"{ttop_datasets[i][j]} ({ttos_datasets[i][j]})\\% {facets[j]}", file=f)
