@@ -12,18 +12,18 @@ PLOT_FUNCS = {
     "anytime_table_time": anytime_table_time,
 }
 
-def get_task_filter(include_all = True):
-    def task_filter(df):
+def split_by_attr(attribute, include_all = True):
+    def attr_filter(df):
         dfs = []
-        task = df["p.task"]
-        tasks = task.unique()
-        for t in tasks:
-            dfs.append((t, df[task == t]))
+        attr = df[attribute]
+        attrs = attr.unique()
+        for t in attrs:
+            dfs.append((t, df[attr == t]))
         if include_all:
             dfs.append(("all", df))
         return dfs
 
-    return task_filter
+    return attr_filter
 
 def ablation_split(df):
     df_s = df[np.logical_and(df["p.terminal_solver"] == "left-right", df["p.branch_relaxation"] == "lowerbound")]
@@ -33,7 +33,9 @@ def ablation_split(df):
     return dfs
 
 FILTER_FUNCS = {
-    "split_tasks": get_task_filter(),
-    "split_tasks_no_all": get_task_filter(False),
+    "split_tasks": split_by_attr("p.task"),
+    "split_tasks_no_all": split_by_attr("p.task", False),
+    "split_depths": split_by_attr("p.max_depth"),
+    "split_depths_no_all": split_by_attr("p.max_depth", False),
     "ablation_split": ablation_split,
 }
