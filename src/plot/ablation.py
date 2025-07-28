@@ -206,9 +206,9 @@ def anytime_table(df: pd.DataFrame, output_dir: Path, x_max_key: str, x_key: int
             # Scale the area under the curve so a constant CART solution would be one.
             gap_integral /= baseline_ub
 
-            integrals.append((dataset, depth, facet, objective_integral, gap_integral))
+            integrals.append((dataset, depth, facet, objective_integral, gap_integral, single["p.task"].squeeze()))
 
-    result_df = pd.DataFrame(integrals, columns=["dataset", "depth", facet_name, "objective_integral", "gap_integral"])
+    result_df = pd.DataFrame(integrals, columns=["dataset", "depth", facet_name, "objective_integral", "gap_integral", "task"])
 
     x_name = x_max_key[2:]
     with open(output_dir / "objective_integral_table.tex", "w") as f:
@@ -241,16 +241,15 @@ def anytime_table(df: pd.DataFrame, output_dir: Path, x_max_key: str, x_key: int
 
     with open(output_dir / "fig.tex", "w") as f:
         set_style()
-        
-        # Remove showfliers = false for now as they are not informative.
-        rel = sns.boxplot(data=result_df, x="objective_integral", y=facet_name, showfliers=False)
-        rel.set_xlabel("Objective integral")
-        rel.set_ylabel(facet_name)
-        filename = f"fig-anytime-objective-integral-box-{x_key}.pdf"
+        rel = sns.FacetGrid(data=result_df, col="task", row="depth", height=0.8 + 0.25*len(facets), aspect=np.sqrt(8)/np.sqrt(len(facets)))
+        rel.map(sns.boxplot, "objective_integral", facet_name, order=facets)
+        rel.set_xlabels("Objective integral")
+        rel.set_ylabels(facet_name)
+        filename = f"fig-anytime-objective-integral-box-{x_name}.pdf"
         plt.savefig(output_dir / filename, bbox_inches="tight", pad_inches = 0.03)
         plt.close()
-        caption = f"Integral of the found objective over {x_key} per {facet_name.lower()}."
-        label = f"fig:anytime_objective_integral_box_{x_key}"
+        caption = f"Integral of the found objective over {x_name} per {facet_name.lower()}."
+        label = f"fig:anytime_objective_integral_box_{x_name}"
         print("""\\begin{figure}
     \\centering
     \\includegraphics[width=\\textwidth]{figures/""" + filename + """}
@@ -258,14 +257,16 @@ def anytime_table(df: pd.DataFrame, output_dir: Path, x_max_key: str, x_key: int
     \\label{""" + label + """}
 \\end{figure}""", file=f)
         
-        rel = sns.boxplot(data=result_df, x="gap_integral", y=facet_name)
-        rel.set_xlabel("Gap integral")
-        rel.set_ylabel(facet_name)
-        filename = f"fig-anytime-gap-integral-box-{x_key}.pdf"
+
+        rel = sns.FacetGrid(data=result_df, col="task", row="depth", height=0.8 + 0.25*len(facets), aspect=np.sqrt(8)/np.sqrt(len(facets)))
+        rel.map(sns.boxplot, "gap_integral", facet_name, order=facets)
+        rel.set_xlabels("Gap integral")
+        rel.set_ylabels(facet_name)
+        filename = f"fig-anytime-gap-integral-box-{x_name}.pdf"
         plt.savefig(output_dir / filename, bbox_inches="tight", pad_inches = 0.03)
         plt.close()
-        caption = f"Integral of the gap between upper and lower bounds over {x_key} per {facet_name.lower()}."
-        label = f"fig:anytime_gap_integral_box_{x_key}"
+        caption = f"Integral of the gap between upper and lower bounds over {x_name} per {facet_name.lower()}."
+        label = f"fig:anytime_gap_integral_box_{x_name}"
         print("""\\begin{figure}
     \\centering
     \\includegraphics[width=\\textwidth]{figures/""" + filename + """}
