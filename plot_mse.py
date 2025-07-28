@@ -91,8 +91,9 @@ def plot_mse(mses_per_feature, X, title, filename, highlight_min=None):
         filename: Name of the file to save the plot.
         highlight_min: Tuple (min_idx, min_val, min_feat) to highlight the minimum MSE, or None.
     """
-    plt.figure()
+    plt.rc('figure', figsize=(6, 1.5))
     set_style()
+    plt.figure()
     n_features = X.shape[1]
 
     rows = []
@@ -103,7 +104,7 @@ def plot_mse(mses_per_feature, X, title, filename, highlight_min=None):
         for idx in unique_indices:
             rows.append({"Feature": f"Feature {i}", "Split index": idx, "MSE after split": mses[idx]})
     df = pd.DataFrame(rows)
-    sns.lineplot(data=df, x="Split index", y="MSE after split", hue="Feature", marker="o", markersize="3", markeredgewidth=0)
+    sns.lineplot(data=df, x="Split index", y="MSE after split", hue="Feature", marker="o", markersize="3", markeredgewidth=0, legend=False)
 
     # Highlight the minimum MSE if provided
     if highlight_min:
@@ -113,7 +114,7 @@ def plot_mse(mses_per_feature, X, title, filename, highlight_min=None):
     plt.title(title)
     plt.tight_layout()
     plt.savefig(filename, bbox_inches="tight", pad_inches=0.03)
-    plt.show()
+    # plt.show()
 
 
 def main():
@@ -143,7 +144,7 @@ def main():
     plot_mse(
         mses_per_feature,
         X,
-        "MSE vs Split Index for All Features",
+        "MSE after splitting at each feature test",
         "fig-gini.pdf",
         highlight_min=(min_idx, min_val, min_feat)
     )

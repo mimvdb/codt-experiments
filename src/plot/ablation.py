@@ -309,7 +309,7 @@ def tto_table(df: pd.DataFrame, output_dir: Path):
             ttos = last_ub_t if not invalid else timeout
             ttop_facets.append(ttop)
             ttos_facets.append(ttos)
-        names.append(f"{dataset} (d={depth})")
+        names.append(f"{dataset}")
         ttop_datasets.append(ttop_facets)
         ttos_datasets.append(ttos_facets)
 
@@ -339,6 +339,7 @@ def tto_table(df: pd.DataFrame, output_dir: Path):
 
     with open(output_dir / "table.tex", "w") as f:
         for i in range(len(names)):
-            print(f"{names[i]}\\", file=f)
+            print(f"{names[i]}&", file=f)
             for j in range(len(ttop_datasets[i])):
-                print(f"{ttop_datasets[i][j]} ({ttos_datasets[i][j]})\\% {facets[j]}", file=f)
+                end = "&" if j != len(ttop_datasets[i]) - 1 else "\\\\"
+                print(f"{ttop_datasets[i][j]:.0f} {end}% TTOS: ({ttos_datasets[i][j]:.0f}), {facets[j]}", file=f)

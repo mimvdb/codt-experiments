@@ -2,6 +2,7 @@ from codt_py import OptimalDecisionTreeRegressor
 from matplotlib import pyplot as plt
 import numpy as np
 import seaborn as sns
+import pandas as pd
 
 from src.data import get_dataset
 
@@ -27,7 +28,10 @@ def compute_optimal_mse_splits(X_col, y, X_full):
     y_sorted = y[order]
     X_sorted = X_full[order]
     mses = []
+    unique_indices = np.unique(X_col[order], return_index=True)[1]
     for i in range(1, len(y)):
+        if i != 1 and i not in unique_indices:
+            continue
         n_left = i
         n_right = len(y) - i
         # Left partition
@@ -48,37 +52,35 @@ def compute_optimal_mse_splits(X_col, y, X_full):
             mse_right = 0
         # Weighted sum by partition sizes
         weighted_mse = (n_left * mse_left + n_right * mse_right) / (n_left + n_right)
-        mses.append(weighted_mse)
+        mses.append((i, weighted_mse))
     return np.array(mses)
 
-def plot_optimal_mse(mses_per_feature, X, title, filename):
-    plt.figure()
+def plot_optimal_mse(X, y, title, filename):
     set_style()
+    plt.rc('figure', figsize=(6, 1.5))
+    plt.figure()
     n_features = X.shape[1]
+    rows = []
     for i in range(n_features):
-        mses = mses_per_feature[i]
-        sns.lineplot(x=range(1, len(mses)+1), y=mses, label=f"Feature {i}")
+        mses = compute_optimal_mse_splits(X[:, i], y, X)
+        for idx, mse in mses:
+            rows.append({"Feature": f"Feature {i}", "Split index": idx, "MSE after split": mse})
+    df = pd.DataFrame(rows)
+    sns.lineplot(data=df, x="Split index", y="MSE after split", hue="Feature", marker="o", markersize="3", markeredgewidth=0, legend=False)
     plt.xlabel("Split index")
     plt.ylabel("Sum of optimal MSEs after split")
     plt.title(title)
-    plt.legend()
+    # plt.legend()
     plt.tight_layout()
     plt.savefig(filename, bbox_inches="tight", pad_inches=0.03)
-    plt.show()
+    # plt.show()
 
 def main():
     X, y = get_dataset("concrete", "regression")
-    n_features = X.shape[1]
-
-    # Compute actual optimal MSE for each split using OptimalDecisionTreeRegressor
-    optimal_mses_per_feature = []
-    for i in range(n_features):
-        mses = compute_optimal_mse_splits(X[:, i], y, X)
-        optimal_mses_per_feature.append(mses)
 
     plot_optimal_mse(
-        optimal_mses_per_feature,
         X,
+        y,
         "Sum of Optimal MSEs after Split for All Features",
         "fig-optimal-mse.pdf"
     )
