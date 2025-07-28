@@ -108,16 +108,12 @@ def graph_anytime(df: pd.DataFrame, output_dir: Path, x_key: str, x_label: str):
             else:
                 combined = both
 
-        rel = sns.FacetGrid(combined, hue="type", col=facet_name, col_wrap=3)
+        max_x = combined[x_key].max()
+
+        rel = sns.FacetGrid(combined, hue="type", col=facet_name, col_wrap=4, height=2, aspect=0.8, xlim=(0, max_x * 1.05), ylim=(0,baseline_ub * 1.1))
         rel.map(sns.lineplot, x_key, "score", drawstyle="steps-post")
         rel.refline(y=baseline_ub, linestyle="--")
         rel.refline(y=baseline_lb, linestyle="--")
-
-        max_x_across_all = max([
-            np.max(np.concatenate([line.get_xdata() for line in subplot_ax.get_lines()]))
-            for subplot_ax in rel.axes.flat
-            if len(subplot_ax.get_lines()) > 0
-        ])
 
         def objective_integral(data=None, color=None, label=None, **kwargs):
             ax = plt.gca()
@@ -128,8 +124,8 @@ def graph_anytime(df: pd.DataFrame, output_dir: Path, x_key: str, x_label: str):
             x = list(x)
             y = list(map(lambda y: min(y, baseline_ub), y))
 
-            # Extend to end
-            x.append(max_x_across_all)
+            # Extend to beyond graph
+            x.append(max_x * 1.1)
             y.append(y[-1])
             return ax.fill_between(x, y, baseline_lb, step="post", color="C0", alpha=0.3, **kwargs)
         rel.map(objective_integral)
