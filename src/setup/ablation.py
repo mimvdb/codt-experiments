@@ -4,7 +4,7 @@ from src.data import DATASETS_REGRESSION, DATASETS_CLASSIFICATION
 from src.methods import RunParams
 from codt_py import all_search_strategies, all_terminal_solvers, all_branch_relaxations
 
-TIMEOUT = 15 * 60 # timeout in seconds
+TIMEOUT = 5 * 60 # timeout in seconds
 main_ss = "bfs-gosdt"
 main_terminal_solver = "left-right"
 main_branch_relaxation = "lowerbound"
