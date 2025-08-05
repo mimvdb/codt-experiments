@@ -1,6 +1,6 @@
 import numpy as np
 from src.plot.ablation import anytime_table_expansions, anytime_table_time, graph_anytime_expansions, graph_anytime_time, tto_table
-from src.plot.debug import all_strats_equal
+from src.plot.debug import all_strats_equal, time_expansion_ratio_analysis
 from src.plot.generalisation import oos_table
 
 PLOT_FUNCS = {
@@ -11,6 +11,7 @@ PLOT_FUNCS = {
     "anytime_table_expansions": anytime_table_expansions,
     "anytime_table_time": anytime_table_time,
     "tto_table": tto_table,
+    "time_expansion_ratio": time_expansion_ratio_analysis,
 }
 
 def split_by_attr(attribute, include_all = True):

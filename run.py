@@ -19,6 +19,8 @@ def encode_numpy(obj):
 
 def run(args):
     experiments = json.load(sys.stdin)
+    if args.chunk_size > 0:
+        experiments = experiments[args.chunk_size*args.chunk_offset:args.chunk_size*(args.chunk_offset + 1)]
     runs = []
     for e in experiments:
         params = RunParams(**e)
@@ -43,6 +45,8 @@ def main():
     )
     parser.add_argument("-o", default=str(REPO_DIR / f"results_{timestamp}.json"))
     parser.add_argument('-v', action='count', default=0)
+    parser.add_argument('--chunk-size', type=int, default=0)
+    parser.add_argument('--chunk-offset', type=int, default=0)
 
     args = parser.parse_args()
     run(args)

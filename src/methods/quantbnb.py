@@ -3,9 +3,9 @@ from sklearn.base import (
     BaseEstimator,
     ClassifierMixin,
     RegressorMixin,
-    check_is_fitted,
-    validate_data,
 )
+from sklearn.utils.validation import check_is_fitted, validate_data
+
 from .base import BaseMethod, RunParams
 
 # os.environ["PYTHON_JULIACALL_SYSIMAGE"] = "sys_precompiled.so"
