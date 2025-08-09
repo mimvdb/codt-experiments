@@ -55,7 +55,7 @@ class RunParams():
     max_depth: int
     test_set: str = ""
     cp: float = 0.0
-    strategy: str = "bfs-gosdt"
+    strategy: str = "bfs-balance-small-lb"
     upperbound: str = "solutions-only"
     terminal_solver: str = "left-right"
     intermediates: bool = False

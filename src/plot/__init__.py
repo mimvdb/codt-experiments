@@ -29,14 +29,14 @@ def split_by_attr(attribute, include_all = True):
 
 def ablation_split(df):
     df_s = df[np.logical_and(df["p.terminal_solver"] == "left-right", df["p.branch_relaxation"] == "lowerbound")]
-    df_t = df[np.logical_and(df["p.strategy"] == "bfs-gosdt", df["p.branch_relaxation"] == "lowerbound")]
-    df_b = df[np.logical_and(df["p.strategy"] == "bfs-gosdt", df["p.terminal_solver"] == "left-right")]
+    df_t = df[np.logical_and(df["p.strategy"] == "bfs-balance-small-lb", df["p.branch_relaxation"] == "lowerbound")]
+    df_b = df[np.logical_and(df["p.strategy"] == "bfs-balance-small-lb", df["p.terminal_solver"] == "left-right")]
     dfs = [("strategies", df_s), ("terminal_solvers", df_t), ("branch_relaxations", df_b)]
     return dfs
 
 def filter_best(df):
     not_codt = ~(df["method"] == "codt")
-    all_best = np.logical_and(df["p.terminal_solver"] == "left-right", np.logical_and(df["p.strategy"] == "bfs-gosdt", df["p.branch_relaxation"] == "lowerbound"))
+    all_best = np.logical_and(df["p.terminal_solver"] == "left-right", np.logical_and(df["p.strategy"] == "bfs-balance-small-lb", df["p.branch_relaxation"] == "lowerbound"))
     df = df[np.logical_or(not_codt, np.logical_and(all_best, ~df["p.tune"]))]
     assert not df.duplicated(subset=["p.max_depth", "p.dataset"]).any()
     return [df]

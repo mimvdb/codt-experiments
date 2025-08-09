@@ -5,7 +5,7 @@ from src.methods import RunParams
 from codt_py import all_search_strategies, all_terminal_solvers, all_branch_relaxations
 
 TIMEOUT = 5 * 60 # timeout in seconds
-main_ss = "bfs-gosdt"
+main_ss = "bfs-balance-small-lb"
 main_terminal_solver = "left-right"
 main_branch_relaxation = "lowerbound"
 
