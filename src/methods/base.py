@@ -56,7 +56,7 @@ class RunParams():
     test_set: str = ""
     cp: float = 0.0
     strategy: str = "bfs-balance-small-lb"
-    upperbound: str = "solutions-only"
+    upperbound: str = "for-remaining-interval"
     terminal_solver: str = "left-right"
     intermediates: bool = False
     tune: bool = False
