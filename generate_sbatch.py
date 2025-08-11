@@ -31,7 +31,7 @@ def run(args):
     srun_lines = []
     for i in range(tpj):
         output = str(output_path / f"results_{timestamp}_{array_id}_{i}.json")
-        srun_lines.append(f"srun -c1 -n1 --exact python run.py -o {output} --chunk-size {c} --chunk-offset $((({array_id} - 1) * {tpj} + {i})) < {args.i}")
+        srun_lines.append(f"srun -c1 -n1 --exact python run.py -o {output} --chunk-size {c} --chunk-offset $((({array_id} - 1) * {tpj} + {i})) < {args.i} &")
     newline = "\n" # f-string cannot contain backslash
 
     script = f"""#!/bin/bash
@@ -52,6 +52,7 @@ module load python/3.10.12
 # Cannot use `uv run` in sbatch script as it deletes the venv. Manually activate the venv
 source .venv/bin/activate
 {newline.join(srun_lines)}
+wait
 """
 
     output_path = Path(args.o) / f"sbatch_{timestamp}.sh"
@@ -60,7 +61,6 @@ source .venv/bin/activate
 
 
 def main():
-
     parser = argparse.ArgumentParser(
         prog="SBatch generator",
         description="Generate the sbatch script for running an experiment on SLURM",
