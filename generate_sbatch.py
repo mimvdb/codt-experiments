@@ -30,7 +30,7 @@ def run(args):
     srun_lines = []
     for i in range(tpj):
         output = str(output_path / f"results_{timestamp}_{array_id}_{i}.json")
-        srun_lines.append(f"srun -c1 -n1 --exact uv run run.py -o {output} --chunk-size {c} --chunk-offset $((({array_id} - 1) * {tpj} + {i})) < {args.i}")
+        srun_lines.append(f"srun -c1 -n1 --exact python run.py -o {output} --chunk-size {c} --chunk-offset $((({array_id} - 1) * {tpj} + {i})) < {args.i}")
     newline = "\n" # f-string cannot contain backslash
 
     script = f"""#!/bin/bash
@@ -44,8 +44,12 @@ def run(args):
 #SBATCH --array=1-{total_jobs} # Submit {total_jobs} jobs with ID 1,2,...,{total_jobs}. Education share has max 100 jobs queued
 set -x
 
+# Submit this script with `sbatch <script_name>`
+
 module load 2024r1
 module load python/3.10.12
+# Cannot use `uv run` in sbatch script as it deletes the venv. Manually activate the venv
+source .venv/bin/activate
 {newline.join(srun_lines)}
 """
 
