@@ -4,3 +4,4 @@ datasets/*/*.csv
 experiments.json
 results_*.json
 fig-*.pdf
+sbatch_*.sh
