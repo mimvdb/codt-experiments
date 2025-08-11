@@ -17,6 +17,7 @@ def setup_debug() -> List[RunParams]:
                 dataset=data,
                 max_depth=d,
                 intermediates=True,
+                memory_limit=3900 * 1024 * 1024 # 3900 MB
             )
         )
     datasets = ["bank"]
@@ -29,6 +30,7 @@ def setup_debug() -> List[RunParams]:
                 dataset=data,
                 max_depth=d,
                 intermediates=True,
+                memory_limit=3900 * 1024 * 1024 # 3900 MB
             )
         )
     return runs

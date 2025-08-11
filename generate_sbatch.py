@@ -9,6 +9,7 @@ from src.util import REPO_DIR
 
 def run(args):
     experiments = json.loads(Path(args.i).read_bytes())
+    max_mem_mb = int(max([e["memory_limit"] for e in experiments]) / 1024 / 1024) + 100 # 100 MB buffer.
     c = args.chunk_size
     total_tasks = int(np.ceil(len(experiments) / c))
     tpj = args.tasks_per_job
@@ -39,7 +40,7 @@ def run(args):
 #SBATCH --time=01:00:00      # HH:MM:SS
 #SBATCH --ntasks={tpj} # compute has 48 cores, compute-p2 has 64 cores.
 #SBATCH --cpus-per-task=1
-#SBATCH --mem-per-cpu=9G
+#SBATCH --mem-per-cpu={max_mem_mb}M
 #SBATCH --account=education-eemcs-msc-cese
 #SBATCH --array=1-{total_jobs} # Submit {total_jobs} jobs with ID 1,2,...,{total_jobs}. Education share has max 100 jobs queued
 set -x
