@@ -31,7 +31,7 @@ def run(args):
     srun_lines = []
     for i in range(tpj):
         output = str(output_path / f"results_{timestamp}_{array_id}_{i}.json")
-        srun_lines.append(f"srun -c1 -n1 --exact python run.py -o {output} --chunk-size {c} --chunk-offset $((({array_id} - 1) * {tpj} + {i})) < {args.i} &")
+        srun_lines.append(f"srun -c1 -n1 --exact uv run run.py -o {output} --chunk-size {c} --chunk-offset $((({array_id} - 1) * {tpj} + {i})) < {args.i} &")
     newline = "\n" # f-string cannot contain backslash
 
     script = f"""#!/bin/bash
@@ -47,10 +47,10 @@ set -x
 
 # Submit this script with `sbatch <script_name>`
 
-module load 2024r1
-module load python/3.10.12
-# Cannot use `uv run` in sbatch script as it deletes the venv. Manually activate the venv
-source .venv/bin/activate
+# Make sure to not have any (python) modules loaded, so that uv uses its own python download.
+# Otherwise the symlink from the venv is broken for different nodes.
+# The login node cannot create the environment due to mismatch of python version on compute node, and 
+# the compute nodes cannot download packages.
 {newline.join(srun_lines)}
 wait
 """
