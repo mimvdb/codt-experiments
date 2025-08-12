@@ -17,6 +17,8 @@ class CodtMethod(BaseMethod):
 
     def train_model(self, X, y, params: RunParams):
         if params.tune:
+            time_per_cp = int(params.timeout / 11) # 10 CP + 1 Final
+            time_per_tune = int(time_per_cp / 5) # 5 fold cross validation per parameter.
             model = OptimalDecisionTreeRegressor()
             parameters = {
                 "max_depth": [params.max_depth],
@@ -34,7 +36,7 @@ class CodtMethod(BaseMethod):
                         0.0001,
                     ]
                 ),
-                "timeout": [params.timeout],
+                "timeout": [time_per_tune],
                 "memory_limit": [params.memory_limit],
             }
 
@@ -46,6 +48,7 @@ class CodtMethod(BaseMethod):
                 verbose=0,
             )
             tuning_model.fit(X, y)
+            tuning_model.best_params_["timeout"] = time_per_cp  # Use larger timeout for the final model.
             model = OptimalDecisionTreeRegressor(**tuning_model.best_params_)
             tuning_output = tuning_model.cv_results_
         else:

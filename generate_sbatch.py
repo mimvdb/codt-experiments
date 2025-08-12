@@ -10,19 +10,25 @@ from src.util import REPO_DIR
 def run(args):
     experiments = json.loads(Path(args.i).read_bytes())
     max_mem_mb = int(max([e["memory_limit"] for e in experiments]) / 1024 / 1024) + 100 # 100 MB buffer.
+    max_timeout = int(max([e["timeout"] for e in experiments]))
+
+
     c = args.chunk_size
+    seconds_per_chunk = max_timeout * args.chunk_size + 60
+    hhmmss = f"{seconds_per_chunk // 3600:02}:{(seconds_per_chunk % 3600) // 60:02}:{seconds_per_chunk % 60:02}"
     total_tasks = int(np.ceil(len(experiments) / c))
     tpj = args.tasks_per_job
     total_jobs = int(np.ceil(total_tasks / tpj))
     if total_jobs == 1:
         tpj = total_tasks
+    cpus_per_task = int(np.ceil(max_mem_mb / 4000))
 
     timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
 
     if total_jobs > 100:
         print("WARNING: jobs is greater than 100 and might not be schedulable. Use more tasks per jobs or higher chunk size.", file=sys.stderr)
-    if args.tasks_per_job > 48:
-        print("WARNING: tasks_per_job is greater than 48 and might not be schedulable.", file=sys.stderr)
+    if args.tasks_per_job * cpus_per_task > 48:
+        print("WARNING: tasks_per_job * cpus_per_task is greater than 48 and might not be schedulable.", file=sys.stderr)
 
     output_path = Path(args.o)
     output_path.mkdir(parents=True, exist_ok=True)
@@ -31,16 +37,16 @@ def run(args):
     srun_lines = []
     for i in range(tpj):
         output = str(output_path / f"results_{timestamp}_{array_id}_{i}.json")
-        srun_lines.append(f"srun -c1 -n1 --exact uv run run.py -o {output} --chunk-size {c} --chunk-offset $((({array_id} - 1) * {tpj} + {i})) < {args.i} &")
+        srun_lines.append(f"srun -c{cpus_per_task} -n1 --exact uv run run.py -o {output} --chunk-size {c} --chunk-offset $((({array_id} - 1) * {tpj} + {i})) < {args.i} &")
     newline = "\n" # f-string cannot contain backslash
 
     script = f"""#!/bin/bash
 #SBATCH --job-name="CODTree"
 #SBATCH --partition=compute-p2
-#SBATCH --time=01:00:00      # HH:MM:SS
+#SBATCH --time={hhmmss} # HH:MM:SS
 #SBATCH --ntasks={tpj} # compute has 48 cores, compute-p2 has 64 cores.
-#SBATCH --cpus-per-task=1
-#SBATCH --mem-per-cpu={max_mem_mb}M
+#SBATCH --cpus-per-task={cpus_per_task}
+#SBATCH --mem-per-cpu={max_mem_mb//cpus_per_task}M
 #SBATCH --account=education-eemcs-msc-cese
 #SBATCH --array=1-{total_jobs} # Submit {total_jobs} jobs with ID 1,2,...,{total_jobs}. Education share has max 100 jobs queued
 set -x

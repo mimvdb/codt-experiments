@@ -61,7 +61,7 @@ class RunParams():
     intermediates: bool = False
     tune: bool = False
     branch_relaxation: str = "lowerbound"
-    memory_limit: Optional[int] = 8 * 1024 * 1024 * 1024  # 8GiB
+    memory_limit: Optional[int] = 4000 * 1024 * 1024  # 4GB
 
     def as_dict(self):
         return asdict(self)
