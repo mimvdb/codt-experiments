@@ -37,7 +37,7 @@ def run(args):
     srun_lines = []
     for i in range(tpj):
         output = str(output_path / f"results_{timestamp}_{array_id}_{i}.json")
-        srun_lines.append(f"srun -c{cpus_per_task} -n1 --exact uv run run.py -o {output} --chunk-size {c} --chunk-offset $((({array_id} - 1) * {tpj} + {i})) < {args.i} &")
+        srun_lines.append(f"srun -c{cpus_per_task} -N1 -n1 --exact uv run run.py -o {output} --chunk-size {c} --chunk-offset $((({array_id} - 1) * {tpj} + {i})) < {args.i} &")
     newline = "\n" # f-string cannot contain backslash
 
     script = f"""#!/bin/bash
