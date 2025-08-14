@@ -10,7 +10,7 @@ def oos_table(df: pd.DataFrame, output_dir: Path):
     best_scores_per_dataset = means.unstack(["p.dataset", "p.max_depth"]).max(axis=0)
 
     methodXdepths = [
-        ("cart", 2), ("quantbnb", 2), ("codt", 2), ("cart", 3), ("quantbnb", 3), ("cart", "Unlimited")
+        ("cart", 2), ("quantbnb", 2), ("codt", 2), ("cart", 3), ("quantbnb", 3), ("codt", 3), ("codt", 4), ("cart", "Unlimited")
     ]
     datasets = sorted(df["p.dataset"].unique())
 
