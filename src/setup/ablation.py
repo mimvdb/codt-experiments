@@ -25,7 +25,8 @@ def setup_ablation_ss() -> List[RunParams]:
                 dataset=data,
                 max_depth=d,
                 strategy=s,
-                intermediates=True
+                intermediates=True,
+                memory_limit=7900 * 1024 * 1024
             )
         )
     for s, d, data in itertools.product(strategies, depths, DATASETS_CLASSIFICATION):
@@ -37,7 +38,8 @@ def setup_ablation_ss() -> List[RunParams]:
                 dataset=data,
                 max_depth=d,
                 strategy=s,
-                intermediates=True
+                intermediates=True,
+                memory_limit=7900 * 1024 * 1024
             )
         )
     return runs
@@ -57,7 +59,8 @@ def setup_ablation_terminal() -> List[RunParams]:
                 dataset=data,
                 max_depth=d,
                 terminal_solver=t,
-                intermediates=True
+                intermediates=True,
+                memory_limit=7900 * 1024 * 1024
             )
         )
     for t, d, data in itertools.product(terminal_solvers, depths, DATASETS_CLASSIFICATION):
@@ -69,7 +72,8 @@ def setup_ablation_terminal() -> List[RunParams]:
                 dataset=data,
                 max_depth=d,
                 terminal_solver=t,
-                intermediates=True
+                intermediates=True,
+                memory_limit=7900 * 1024 * 1024
             )
         )
     return runs
@@ -89,7 +93,8 @@ def setup_ablation_branch_relaxation() -> List[RunParams]:
                 dataset=data,
                 max_depth=d,
                 branch_relaxation=r,
-                intermediates=True
+                intermediates=True,
+                memory_limit=7900 * 1024 * 1024
             )
         )
     for r, d, data in itertools.product(relaxations, depths, DATASETS_CLASSIFICATION):
@@ -101,7 +106,8 @@ def setup_ablation_branch_relaxation() -> List[RunParams]:
                 dataset=data,
                 max_depth=d,
                 branch_relaxation=r,
-                intermediates=True
+                intermediates=True,
+                memory_limit=7900 * 1024 * 1024
             )
         )
     return runs
