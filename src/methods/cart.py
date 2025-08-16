@@ -31,6 +31,26 @@ def desired_alphas(alpha_thresholds):
     return limit_set
 
 
+def complexity_path_alphas(model, X, y):
+    ccp_path = model.cost_complexity_pruning_path(X, y)
+    return desired_alphas(ccp_path.ccp_alphas)
+
+
+def constant_alphas():
+    return [
+        0.1,
+        0.05,
+        0.025,
+        0.01,
+        0.0075,
+        0.005,
+        0.0025,
+        0.001,
+        0.0005,
+        0.0001,
+    ]
+
+
 class CartMethod(BaseMethod):
     def __init__(self, task):
         super().__init__("cart", task)
@@ -61,8 +81,8 @@ class CartMethod(BaseMethod):
 
         if params.tune:
             model = DecisionTreeRegressor(max_depth=params.max_depth)
-            ccp_path = model.cost_complexity_pruning_path(X, y)
-            ccp_alphas = desired_alphas(ccp_path.ccp_alphas)
+            ccp_alphas = complexity_path_alphas(model, X, y)
+            # ccp_alphas = constant_alphas()
             parameters = {"max_depth": [params.max_depth], "ccp_alpha": ccp_alphas}
 
             tuning_model = GridSearchCV(

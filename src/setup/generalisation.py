@@ -8,7 +8,7 @@ timeout = 4 * 60 * 60 - 5 * 60 # 4h - 5mins
 
 def setup_cart() -> List[RunParams]:
     runs = []
-    depths = [2, 3, None]  # None means no max depth.
+    depths = [2, 3, 4, 20]
     for d, data, test_set in itertools.product(depths, DATASETS_REGRESSION, test_sets):
         runs.append(
             RunParams(
@@ -43,6 +43,6 @@ def setup_codt() -> List[RunParams]:
 
 def setup_generalisation() -> List[RunParams]:
     runs = []
-    # runs.extend(setup_cart())
-    runs.extend(setup_codt())
+    runs.extend(setup_cart())
+    # runs.extend(setup_codt())
     return runs

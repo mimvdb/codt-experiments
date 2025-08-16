@@ -27,7 +27,9 @@ def plot(args):
                 print("!--------------------------------------------------!")
             all_results.extend(results)
     
-    dfs = [("", pd.json_normalize(all_results, max_level=1))]
+    df = pd.json_normalize(all_results, max_level=1)
+    df["p.max_depth"] = df["p.max_depth"].fillna("Unlimited")
+    dfs = [("", df)]
     if args.s is not None:
         for s in sorted(args.s):
             assert s in FILTER_FUNCS, "The selected filter does not exist."
