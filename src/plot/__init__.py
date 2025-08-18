@@ -35,11 +35,11 @@ def ablation_split(df):
     return dfs
 
 def filter_best(df):
-    not_codt = ~(df["method"] == "codt")
+    not_codt = ~(df["p.method"] == "codt")
     all_best = np.logical_and(df["p.terminal_solver"] == "left-right", np.logical_and(df["p.strategy"] == "bfs-balance-small-lb", df["p.branch_relaxation"] == "lowerbound"))
     df = df[np.logical_or(not_codt, np.logical_and(all_best, ~df["p.tune"]))]
     assert not df.duplicated(subset=["p.max_depth", "p.dataset"]).any()
-    return [df]
+    return [("best", df)]
 
 FILTER_FUNCS = {
     "split_tasks": split_by_attr("p.task"),

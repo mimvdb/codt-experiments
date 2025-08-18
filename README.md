@@ -9,3 +9,10 @@ This repository hosts the experiment setup for CODTree, including comparisons ag
 Start with running `uv run util.py quant_to_csv` to generate the required datasets, then `uv run setup.py` to setup an experiment, then `uv run run.py < experiments.json` to run it.
 
 To combine multiple runs of experiments, `jq -s 'flatten(1)' results_*.json > results_aggregated.json` may be useful.
+And to find any runs that failed to complete:
+```bash
+jq -n \
+  --slurpfile runs experiments.json \
+  --slurpfile results results_aggregated.json \
+  '$runs[0] - ($results[0] | map(.p))'
+```
