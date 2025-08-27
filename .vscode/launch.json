@@ -22,7 +22,7 @@
             },
             "args": [
                 "-f",
-                "../datasets/classification/bidding.csv", "--terminal-solver", "d2", "-d", "2", "-s", "bfs-balance-small-lb", "accuracy"
+                "../datasets/classification/bank.csv", "-d", "2", "-s", "bfs-lds", "accuracy"
             ],
             "cwd": "${workspaceFolder}/codt",
             "relativePathBase": "${workspaceFolder}/codt",
