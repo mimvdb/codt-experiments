@@ -102,14 +102,18 @@ def plot_mse(mses_per_feature, X, title, filename, highlight_min=None):
         # Get the x values at which we can actually split, ignore others
         unique_indices = np.unique(np.sort(X[:, i]), return_index=True)[1]
         for idx in unique_indices:
-            rows.append({"Feature": f"Feature {i}", "Split index": idx, "MSE after split": mses[idx]})
+            rows.append({"Feature": f"Feature {i}", "Split index": idx, "MSE": mses[idx]})
     df = pd.DataFrame(rows)
-    sns.lineplot(data=df, x="Split index", y="MSE after split", hue="Feature", marker="o", markersize="3", markeredgewidth=0, legend=False)
+    sns.lineplot(data=df, x="Split index", y="MSE", hue="Feature", marker="o", markersize="3", markeredgewidth=0, legend=False)
 
     # Highlight the minimum MSE if provided
     if highlight_min:
         min_idx, min_val, min_feat = highlight_min
         plt.scatter(min_idx, min_val, color='red', label=f"Min Feature {min_feat} (idx={min_idx})", zorder=20)
+
+    # Hide x-axis stuff because the optimal one will be shown below
+    plt.xlabel('')
+    plt.tick_params(axis='x', labelbottom=False)
 
     plt.title(title)
     plt.tight_layout()
@@ -144,7 +148,7 @@ def main():
     plot_mse(
         mses_per_feature,
         X,
-        "MSE after splitting at each feature test",
+        "Depth-1 MSE",
         "fig-gini.pdf",
         highlight_min=(min_idx, min_val, min_feat)
     )
@@ -163,14 +167,14 @@ def main():
     plot_mse(
         mses_per_feature_l,
         X,
-        "MSE vs Split Index for All Features",
+        "Depth-1 Left MSE",
         "fig-gini-left-side.pdf",
         highlight_min=(min_idx, min_val, min_feat)
     )
     plot_mse(
         mses_per_feature_r,
         X,
-        "MSE vs Split Index for All Features",
+        "Depth-1 Right MSE",
         "fig-gini-right-side.pdf",
         highlight_min=(min_idx, min_val, min_feat)
     )
@@ -191,13 +195,13 @@ def main():
     plot_mse(
         mses_per_feature_l,
         X,
-        "MSE vs Split Index for All Features, after the best split point left",
+        "Depth-2 Left MSE with greedy root split",
         "fig-gini-after-split-l.pdf"
     )
     plot_mse(
         mses_per_feature_r,
         X,
-        "MSE vs Split Index for All Features, after the best split point right",
+        "Depth-2 Right MSE with greedy root split",
         "fig-gini-after-split-r.pdf"
     )
 

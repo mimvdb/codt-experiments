@@ -57,19 +57,39 @@ def compute_optimal_mse_splits(X_col, y, X_full):
 
 def plot_optimal_mse(X, y, title, filename):
     set_style()
-    plt.rc('figure', figsize=(6, 1.5))
+    plt.rc('figure', figsize=(6, 1.8)) # Slightly bigger than non-optimal, for the x-axis labels.
     plt.figure()
     n_features = X.shape[1]
     rows = []
+    
+    # Track minimum values
+    min_mse = float('inf')
+    min_idx = -1
+    min_feat = -1
+    
     for i in range(n_features):
         mses = compute_optimal_mse_splits(X[:, i], y, X)
         for idx, mse in mses:
-            rows.append({"Feature": f"Feature {i}", "Split index": idx, "MSE after split": mse})
+            rows.append({"Feature": f"Feature {i}", "Split index": idx, "MSE": mse})
+            # Track the minimum MSE
+            if mse < min_mse:
+                min_mse = mse
+                min_idx = idx
+                min_feat = i
+    
     df = pd.DataFrame(rows)
-    sns.lineplot(data=df, x="Split index", y="MSE after split", hue="Feature", marker="o", markersize="3", markeredgewidth=0, legend=False)
+    sns.lineplot(data=df, x="Split index", y="MSE", hue="Feature", marker="o", markersize="3", markeredgewidth=0, legend=False)
+    
+    # Add red dot at minimum MSE
+    plt.scatter(min_idx, min_mse, color='red', label=f"Min Feature {min_feat} (idx={min_idx})", zorder=20)
+    
     plt.xlabel("Split index")
-    plt.ylabel("Sum of optimal MSEs after split")
+    plt.ylabel("MSE")
     plt.title(title)
+
+    # Set exactly 2 y tick marks (to be consistent with the other one)
+    plt.locator_params(axis='y', nbins=2)
+
     # plt.legend()
     plt.tight_layout()
     plt.savefig(filename, bbox_inches="tight", pad_inches=0.03)
@@ -81,7 +101,7 @@ def main():
     plot_optimal_mse(
         X,
         y,
-        "Sum of Optimal MSEs after Split for All Features",
+        "Depth-2 MSE",
         "fig-optimal-mse.pdf"
     )
 

@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 from src.plot.ablation import anytime_table_expansions, anytime_table_time, graph_anytime_expansions, graph_anytime_time, tto_table
 from src.plot.debug import all_strats_equal, time_expansion_ratio_analysis
 from src.plot.generalisation import oos_table
@@ -41,11 +42,21 @@ def filter_best(df):
     assert not df.duplicated(subset=["p.max_depth", "p.dataset"]).any()
     return [("best", df)]
 
+def split_by_strategy_category(df: pd.DataFrame):
+    # NOTE: This is not valid for plots that measure relative performance like the objective/gap integral
+    # since the best upper/lower bound needs to be in the df to compare against.
+    df_dfs = df[df["p.strategy"].str.startswith("dfs")]
+    df_other = df[np.logical_or(df["p.strategy"] == "and-or", df["p.strategy"] == "bfs-lds")]
+    df_bfs = df[np.logical_and(df["p.strategy"] != "bfs-lds", df["p.strategy"].str.startswith("bfs"))]
+    dfs = [("dfs", df_dfs), ("other", df_other), ("bfs", df_bfs)]
+    return dfs
+
 FILTER_FUNCS = {
     "split_tasks": split_by_attr("p.task"),
     "split_tasks_no_all": split_by_attr("p.task", False),
     "split_depths": split_by_attr("p.max_depth"),
     "split_depths_no_all": split_by_attr("p.max_depth", False),
+    "split_strategy_type": split_by_strategy_category,
     "ablation_split": ablation_split,
     "filter_best": filter_best,
 }
