@@ -25,7 +25,7 @@ def setup_cart() -> List[RunParams]:
 
 def setup_codt() -> List[RunParams]:
     runs = []
-    depths = [3, 4]
+    depths = [2, 3, 4]
     for d, data, test_set in itertools.product(depths, DATASETS_REGRESSION, test_sets):
         runs.append(
             RunParams(
@@ -36,6 +36,25 @@ def setup_codt() -> List[RunParams]:
                 max_depth=d,
                 test_set=test_set,
                 tune=True,
+                memory_limit=7900 * 1024 * 1024
+            )
+        )
+    return runs
+
+def setup_codt_notune() -> List[RunParams]:
+    runs = []
+    depths = [2, 3, 4]
+    for d, data, test_set in itertools.product(depths, DATASETS_REGRESSION, test_sets):
+        runs.append(
+            RunParams(
+                method="codt",
+                task="regression",
+                timeout=timeout,
+                dataset=data,
+                max_depth=d,
+                test_set=test_set,
+                tune=False,
+                cp=0.0001,
                 memory_limit=7900 * 1024 * 1024
             )
         )
