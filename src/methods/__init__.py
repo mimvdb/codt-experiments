@@ -19,6 +19,10 @@ def get_classification_method(method_id: str) -> BaseMethod:
         # Import lazily because julia is heavy to import.
         from .quantbnb import QuantBnBMethod
         return QuantBnBMethod("classification")
+    elif method_id == "contree":
+        # Import lazily because julia is heavy to import.
+        from .contree import ConTreeMethod
+        return ConTreeMethod("classification")
     else:
         assert False, f"Invalid classification method id '{method_id}' requested"
 

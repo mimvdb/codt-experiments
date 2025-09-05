@@ -2,6 +2,7 @@ from src.setup.ablation import setup_ablation, setup_ablation_branch_relaxation,
 from src.setup.all_quantbnb import setup_quantbnb_regression, setup_quantbnb_classification
 from src.setup.debug import setup_debug
 from src.setup.generalisation import setup_generalisation
+from src.setup.others import setup_others
 from src.setup.scalability import setup_scalability
 
 SETUP_FUNCS = {
@@ -14,4 +15,5 @@ SETUP_FUNCS = {
     "ablation_branch_relaxation": setup_ablation_branch_relaxation,
     "quantbnb_regression": setup_quantbnb_regression,
     "quantbnb_classification": setup_quantbnb_classification,
+    "others": setup_others,
 }

@@ -69,7 +69,7 @@ requires-dist = [
     { name = "autorank", specifier = ">=1.3.0" },
     { name = "codt", directory = "codt" },
     { name = "juliacall", specifier = ">=0.9.24" },
-    { name = "pycontree", directory = "contree" },
+    { name = "pycontree", specifier = ">=1.0.4" },
     { name = "seaborn", specifier = ">=0.13.2" },
 ]
 
@@ -652,23 +652,41 @@ wheels = [
 
 [[package]]
 name = "pycontree"
-version = "1.0"
-source = { directory = "contree" }
+version = "1.0.4"
+source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "numpy" },
     { name = "pandas" },
     { name = "scikit-learn" },
     { name = "typing-extensions" },
 ]
-
-[package.metadata]
-requires-dist = [
-    { name = "numpy", specifier = ">=1.18.0" },
-    { name = "pandas", specifier = ">=1.0.0" },
-    { name = "scikit-learn", specifier = ">=1.2.0" },
-    { name = "typing-extensions", specifier = ">=4.0.0" },
+sdist = { url = "https://files.pythonhosted.org/packages/32/f6/7e3cce79d1aabcaecc2b5582d45beadf1d8c0d463ef01e58c739b9a15764/pycontree-1.0.4.tar.gz", hash = "sha256:68c07c4ede44c03c977f2711f9e55f2d6e6ccbbf5563832f90df491cefdc1ebc", size = 33473 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/47/b4/698bd5ff7615d5db0d4725314b9876a01a99c785057292f141b6070287eb/pycontree-1.0.4-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:2d71fb7fb2cf471c8f713cafa29459738f3356f3d263b2655587d9c3f7c3bba0", size = 361594 },
+    { url = "https://files.pythonhosted.org/packages/d5/63/0d86a6d0afe7c0c5720a2e0913f98aed3d90371b846404cb8606cce3441f/pycontree-1.0.4-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:9109cb9ff81f1ee11382df026e2c2563656e85fd3613b77b34c1e3e4e2924d4c", size = 194371 },
+    { url = "https://files.pythonhosted.org/packages/f3/23/53b16bccd94440af0455bae9b23cef433bfaa35d0451f2038a035bc4dcea/pycontree-1.0.4-cp310-cp310-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:f7f4c176a7b9d6d06dc42259cef1c542804743feda8a69e8109b622f9dc30edb", size = 261219 },
+    { url = "https://files.pythonhosted.org/packages/02/4a/26aab26b9c740138fbfb3436f198b5cfce2276ce8a13263f0bb11f42a029/pycontree-1.0.4-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:e8fcee0f78e6925f89cad2107d2b881923f235c811318b796852c81bc62dbaab", size = 249587 },
+    { url = "https://files.pythonhosted.org/packages/0d/43/8ed4aa58ae23ca20a43004d52b5095bd19cbc040dc83c008bc4eb91bf8cc/pycontree-1.0.4-cp310-cp310-musllinux_1_1_i686.whl", hash = "sha256:3c7db58d1758b7d70f7577b08ede673372a960121caeafdb54cdee34bef98ef2", size = 822473 },
+    { url = "https://files.pythonhosted.org/packages/82/51/368ec3927790432d831da6e3f0dbc2a3674b8acab6cd1db7ea74863ca5a0/pycontree-1.0.4-cp310-cp310-musllinux_1_1_x86_64.whl", hash = "sha256:b46ac58c182de869bc254ca0c593fc5730f1b8f71656f97faac0459e28c74d9a", size = 758791 },
+    { url = "https://files.pythonhosted.org/packages/3c/13/7e62a61472698524e0b3593253e3877bac27f9f8f1df9b60eb6aeccccfa4/pycontree-1.0.4-cp310-cp310-win32.whl", hash = "sha256:d5a112c415c713591a3eda7160407cfa5ec33d347948d85e6d4167d47654ab3e", size = 145568 },
+    { url = "https://files.pythonhosted.org/packages/ea/bf/5bccdc6253bea0615666b4f7ff26a195c1ae6d810285c8737609b16e0631/pycontree-1.0.4-cp310-cp310-win_amd64.whl", hash = "sha256:ee9a5e3b8225cfdcfa512a41bdfd74452f8983d3b90c52d4106119bce160d7ac", size = 154695 },
+    { url = "https://files.pythonhosted.org/packages/dc/79/614095c7973a9412bc44f26e838e6ecb9c8c7b0f835e52949aea77c8f2a4/pycontree-1.0.4-cp311-cp311-macosx_10_9_universal2.whl", hash = "sha256:575fcb1dbb78c736050ff8bed11d7626c9dc62bdbe76be230c2fc202b0c0a3fb", size = 364596 },
+    { url = "https://files.pythonhosted.org/packages/0e/56/3c68521571c43ce5532932f0316f3de0c2fd996d004714084beb07020f57/pycontree-1.0.4-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:cd20d5b1473b745955e8044b14f955d713a92e61c9adde6768354cfafe392f09", size = 195572 },
+    { url = "https://files.pythonhosted.org/packages/5a/d6/a6b3b2bfd693396175eaa4a76062e235a3d1ec057dcf9880cd6c062ef7f2/pycontree-1.0.4-cp311-cp311-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:7aae85e23bcba11a1806fa5dce46f392d384896fb72b9d2def793d355ea5cfed", size = 261877 },
+    { url = "https://files.pythonhosted.org/packages/6e/70/06877b7fea6e189d1a31951acd297a0b40f37bd85804ad7d6e8381709e01/pycontree-1.0.4-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:87ca139fbdd027a68ae6ecd1508848d656c1393fee27d708c64f18bf43e066f5", size = 250663 },
+    { url = "https://files.pythonhosted.org/packages/8e/89/6f47f8b31db2da3c0ad73a1b5d92e8c6aef95ff1cfde7eda782c675be157/pycontree-1.0.4-cp311-cp311-musllinux_1_1_i686.whl", hash = "sha256:4c772258224f8f01725fb439cfa69829ba09c809599c7f14ad39e1c1da48c6a6", size = 823709 },
+    { url = "https://files.pythonhosted.org/packages/25/f7/ecd52d4211917dbfdf94f57929fc81a236dec0cdb3aca13d83ac2cccfa38/pycontree-1.0.4-cp311-cp311-musllinux_1_1_x86_64.whl", hash = "sha256:9e0a72f30a542475e1fe7f6c117c6d0036ff8c9493adcf8ebd16d8fc44a979e1", size = 759972 },
+    { url = "https://files.pythonhosted.org/packages/e0/4b/872c24d82eb7a3b52697ca301a91c63dc23d870ff093c52e39176bf210e4/pycontree-1.0.4-cp311-cp311-win32.whl", hash = "sha256:bbd48f559ac45d7822aea03f8a848a96d18fc01285225087be27b391d82327ab", size = 146215 },
+    { url = "https://files.pythonhosted.org/packages/29/82/bf593e39c5fa48b06eeb084d53ec2fd374d80d99b9ef9ce8a51283f308d7/pycontree-1.0.4-cp311-cp311-win_amd64.whl", hash = "sha256:075b35a7a02200ae60bb6f75a9684f940ee65733d079078ef24712a086d4685c", size = 155229 },
+    { url = "https://files.pythonhosted.org/packages/b9/9a/fea0ff1faa4c6c0eb7536a0c2d4a59156fc06dab1a3550c772f03834956e/pycontree-1.0.4-cp312-cp312-macosx_10_9_universal2.whl", hash = "sha256:144696e7a0f6bd8b9d1cba03a24ba15bd8fbd6a48924c3bf2c7bf610796f8889", size = 367077 },
+    { url = "https://files.pythonhosted.org/packages/a5/9c/3bbb0ba82c5835e55c1aeed08c9a9d71f14205e66fb04f59d5806e27b61c/pycontree-1.0.4-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:5c9dbc38b2ae1286b93152d5cf93bd0f8a5eedc4bdbe3f4aa0eacb445e9045cf", size = 196639 },
+    { url = "https://files.pythonhosted.org/packages/64/a3/f67219ee08483d065dc773dc80adac9cd569926c8475693afc72df55eea3/pycontree-1.0.4-cp312-cp312-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:6494845092adf974dfc85a7fd67fc83e648946831c7fae02b644a63767b6974f", size = 262358 },
+    { url = "https://files.pythonhosted.org/packages/7c/13/2060e6abc9762824f37e39e9412f6b5d71406d21e3fd5daeb729f4d97368/pycontree-1.0.4-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:c5180274aed530887636784e281552e13bcd2272c4a4e4be788e17d27fc5528e", size = 251712 },
+    { url = "https://files.pythonhosted.org/packages/4e/90/06f6a79d0c75dc195d5ec4558d93ce558c5e0c0d2e2698c46564c0d4d457/pycontree-1.0.4-cp312-cp312-musllinux_1_1_i686.whl", hash = "sha256:ef0262168ae7e49797f162fabd6e08d893205fc53db7a9bfb376e577ff2d0e46", size = 824477 },
+    { url = "https://files.pythonhosted.org/packages/31/75/dde60738aa26ab2ffd7a5ccc735c68205240f1b74a02151b85b0c97152a6/pycontree-1.0.4-cp312-cp312-musllinux_1_1_x86_64.whl", hash = "sha256:1779dbfa94e59417a13a0f6f1d821411370de7552f43b59431f4f4386bd00874", size = 761215 },
+    { url = "https://files.pythonhosted.org/packages/8b/8e/8c27555367c8d84909091816b7b1c483252ad7f66e0a8728e0ab8dc285e3/pycontree-1.0.4-cp312-cp312-win32.whl", hash = "sha256:4e53de73c6b68eb8f1ea56a2c57381c0a223c22ff7f6722f179f7e3bb67ae5f8", size = 146649 },
+    { url = "https://files.pythonhosted.org/packages/66/69/85d3ab2033dce87b7275373a87420f3a7110369907689957cca81bfc52c1/pycontree-1.0.4-cp312-cp312-win_amd64.whl", hash = "sha256:da37626a950b8c5e5d155bf75856e5aad3690bc73b7f719e51af71afdc9b2c94", size = 156586 },
 ]
-provides-extras = ["dev"]
 
 [[package]]
 name = "pyparsing"
