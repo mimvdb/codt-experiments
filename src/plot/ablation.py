@@ -1,5 +1,6 @@
 from contextlib import redirect_stdout
 from io import StringIO
+import itertools
 from pathlib import Path
 from autorank import autorank, latex_report
 import numpy as np
@@ -343,3 +344,81 @@ def tto_table(df: pd.DataFrame, output_dir: Path):
             for j in range(len(ttop_datasets[i])):
                 end = "&" if j != len(ttop_datasets[i]) - 1 else "\\\\"
                 print(f"{ttop_datasets[i][j]:.0f} {end}% TTOS: ({ttos_datasets[i][j]:.0f}), {facets[j]}", file=f)
+
+
+def speedup_d2(df: pd.DataFrame, output_dir: Path):
+    set_style()
+    method_to_label = {
+        "leaf": "None",
+        "d1": "Depth-one",
+        "left-right": "Left/right",
+    }
+    method_order = ["Left/right", "Depth-one", "None"]
+    df["solver"] = df["p.terminal_solver"].map(method_to_label)
+
+    focus_solvers = np.logical_and(df["p.strategy"] == "bfs-balance-small-lb", df["p.branch_relaxation"] == "lowerbound")
+    df = df[np.logical_and(focus_solvers, ~df["p.tune"])]
+    depths = [2, 3, 4]
+
+    datasets = sorted(df["p.dataset"].unique())
+    speedups_d1 = []
+    speedups_left_right = []
+    for depth, dataset in itertools.product(depths, datasets):
+        this_one = df[df["p.dataset"] == dataset]
+        this_one = this_one[this_one["p.max_depth"] == depth]
+
+        if len(this_one[this_one["o.time"] < this_one["p.timeout"] - 1]) != 3:
+            print(f"Dataset {dataset} at depth {depth} not considered, one or more timeouts")
+            continue
+        leaf_y = this_one[this_one["p.terminal_solver"] == "leaf"]["o.time"].squeeze()
+        d1_y = this_one[this_one["p.terminal_solver"] == "d1"]["o.time"].squeeze()
+        left_right_y = this_one[this_one["p.terminal_solver"] == "left-right"]["o.time"].squeeze()
+        speedups_d1.append(leaf_y/d1_y)
+        speedups_left_right.append(leaf_y/left_right_y)
+
+    geomean_d1 = np.exp(np.log(speedups_d1).mean())
+    geomean_lr = np.exp(np.log(speedups_left_right).mean())
+    print(f"Geometric mean speedup of d1 is {geomean_d1:.2f}")
+    print(f"Geometric mean speedup of left/right is {geomean_lr:.2f}")
+
+    df = df[df["o.time"] < df["p.timeout"] - 1]
+    max_x = df["o.time"].max()
+
+    rel = sns.FacetGrid(df, hue="solver", hue_order=method_order, col="p.max_depth", sharey="row", xlim=(1, max_x*1.05), height=2, aspect=0.8)
+
+    # Use a custom function to extend the line to the right edge
+    def extended_ecdf(x, **kwargs):
+        ax = plt.gca()
+        sns.ecdfplot(x=x, stat="count", **kwargs)
+        # Get the current x-axis limits
+        xlim = ax.get_xlim()
+        # For each line, extend it to the right edge
+        for line in ax.lines:
+            xdata, ydata = line.get_data()
+            if len(xdata) > 0:
+                # Add a point at the right edge with the same y-value as the last point
+                extended_x = np.append(xdata, xlim[1])
+                extended_y = np.append(ydata, ydata[-1])
+                line.set_data(extended_x, extended_y)
+    
+    rel.map(extended_ecdf, "o.time")
+
+    rel.set(xscale="log")
+    rel.set_xlabels("Time (s)")
+    rel.set_ylabels("Datasets")
+
+    # Extend y-axis by 0.5 on the top
+    for ax in rel.axes.flat:
+        ylim = ax.get_ylim()
+        ax.set_ylim(ylim[0], ylim[1] + 0.5)
+
+    # Only integer tickmarks on y-axis
+    for ax in rel.axes.flat:
+        ax.yaxis.set_major_locator(plt.MaxNLocator(integer=True))
+
+    # Legend should only show method in the data
+    rel.add_legend(title="Shallow solver")
+    rel.set_titles(template="$d={col_name}$")
+    filename = f"fig-solver-ecdf.pdf"
+    plt.savefig(output_dir / filename, bbox_inches="tight", pad_inches = 0.03)
+    plt.close()
