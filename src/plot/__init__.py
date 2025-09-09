@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+from src.plot.perf import ecdf_expansions, ecdf_time
 from src.plot.plot_dataset_info import plot_dataset_info
 from src.plot.ablation import anytime_table_expansions, anytime_table_time, graph_anytime_expansions, graph_anytime_time, tto_table
 from src.plot.debug import all_strats_equal, time_expansion_ratio_analysis
@@ -14,7 +15,9 @@ PLOT_FUNCS = {
     "anytime_table_time": anytime_table_time,
     "tto_table": tto_table,
     "time_expansion_ratio": time_expansion_ratio_analysis,
-    "dataset_info": plot_dataset_info
+    "dataset_info": plot_dataset_info,
+    "ecdf_time": ecdf_time,
+    "ecdf_expansions": ecdf_expansions,
 }
 
 def split_by_attr(attribute, include_all = True):
@@ -41,7 +44,7 @@ def filter_best(df):
     not_codt = ~(df["p.method"] == "codt")
     all_best = np.logical_and(df["p.terminal_solver"] == "left-right", np.logical_and(df["p.strategy"] == "bfs-balance-small-lb", df["p.branch_relaxation"] == "lowerbound"))
     df = df[np.logical_or(not_codt, np.logical_and(all_best, ~df["p.tune"]))]
-    assert not df.duplicated(subset=["p.max_depth", "p.dataset"]).any()
+    assert not df.duplicated(subset=["p.max_depth", "p.dataset", "p.method"]).any()
     return [("best", df)]
 
 def split_by_strategy_category(df: pd.DataFrame):

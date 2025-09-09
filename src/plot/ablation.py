@@ -85,12 +85,12 @@ def graph_anytime(df: pd.DataFrame, output_dir: Path, x_key: str, x_label: str):
         this_df = df[np.logical_and(df["p.dataset"] == dataset, df["p.max_depth"] == depth)]
         baseline_ub = get_baseline_ub(this_df)
 
-        final_lbs = []
+        final_ubs = []
         for facet in facets:
             single = this_df[this_df[facet_dim] == facet]
-            lbs = single["o.intermediate_lbs"].squeeze()
-            final_lbs.append(lbs[-1][0])
-        baseline_lb = max(final_lbs)
+            ubs = single["o.intermediate_ubs"].squeeze()
+            final_ubs.append(ubs[-1][0])
+        baseline_lb = min(final_ubs)
 
         combined = None
         for facet in facets:
@@ -168,13 +168,13 @@ def anytime_table(df: pd.DataFrame, output_dir: Path, x_max_key: str, x_key: int
         this_df = df[np.logical_and(df["p.dataset"] == dataset, df["p.max_depth"] == depth)]
         baseline_ub = get_baseline_ub(this_df)
 
-        final_lbs = []
+        final_ubs = []
         for facet in facets:
             single = this_df[this_df[facet_dim] == facet]
-            lbs = single["o.intermediate_lbs"].squeeze()
-            final_lbs.append(lbs[-1][0])
+            ubs = single["o.intermediate_ubs"].squeeze()
+            final_ubs.append(ubs[-1][0])
+        baseline_lb = min(final_ubs)
 
-        baseline_lb = max(final_lbs)
         max_x = this_df[x_max_key].max()
 
         for facet in facets:
@@ -225,19 +225,19 @@ def anytime_table(df: pd.DataFrame, output_dir: Path, x_max_key: str, x_key: int
                 integral = single["objective_integral"].squeeze()
                 print(f"{integral:.2f} {end} % ({dataset} d={depth}) {facet}", file=f)
     
-    with open(output_dir / "gap_integral_table.tex", "w") as f:
-        print(f"%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%", file=f)
-        print(f"% Gap integral table for x={x_label}", file=f)
-        print(f"%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%", file=f)
-        for dataset, depth in datasetXdepth:
-            print(f"{dataset}-d{depth} &", file=f)
-            this_df = result_df[np.logical_and(result_df["dataset"] == dataset, result_df["depth"] == depth)]
+    # with open(output_dir / "gap_integral_table.tex", "w") as f:
+    #     print(f"%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%", file=f)
+    #     print(f"% Gap integral table for x={x_label}", file=f)
+    #     print(f"%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%", file=f)
+    #     for dataset, depth in datasetXdepth:
+    #         print(f"{dataset}-d{depth} &", file=f)
+    #         this_df = result_df[np.logical_and(result_df["dataset"] == dataset, result_df["depth"] == depth)]
 
-            for facet in facets:
-                single = this_df[this_df[facet_name] == facet]
-                end = "&" if facet != facets[-1] else "\\\\"
-                integral = single["gap_integral"].squeeze()
-                print(f"{integral:.2f} {end} % ({dataset} d={depth}) {facet}", file=f)
+    #         for facet in facets:
+    #             single = this_df[this_df[facet_name] == facet]
+    #             end = "&" if facet != facets[-1] else "\\\\"
+    #             integral = single["gap_integral"].squeeze()
+    #             print(f"{integral:.2f} {end} % ({dataset} d={depth}) {facet}", file=f)
 
     with open(output_dir / "fig.tex", "w") as f:
         set_style()
@@ -258,21 +258,21 @@ def anytime_table(df: pd.DataFrame, output_dir: Path, x_max_key: str, x_key: int
 \\end{figure}""", file=f)
         
 
-        rel = sns.FacetGrid(data=result_df, col="task", row="depth", height=0.8 + 0.25*len(facets), aspect=np.sqrt(8)/np.sqrt(len(facets)))
-        rel.map(sns.boxplot, "gap_integral", facet_name, order=facets)
-        rel.set_xlabels("Gap integral")
-        rel.set_ylabels(facet_name)
-        filename = f"fig-anytime-gap-integral-box-{x_name}.pdf"
-        plt.savefig(output_dir / filename, bbox_inches="tight", pad_inches = 0.03)
-        plt.close()
-        caption = f"Integral of the gap between upper and lower bounds over {x_name} per {facet_name.lower()}."
-        label = f"fig:anytime_gap_integral_box_{x_name}"
-        print("""\\begin{figure}
-    \\centering
-    \\includegraphics[width=\\textwidth]{figures/""" + filename + """}
-    \\caption{""" + caption + """}
-    \\label{""" + label + """}
-\\end{figure}""", file=f)
+#         rel = sns.FacetGrid(data=result_df, col="task", row="depth", height=0.8 + 0.25*len(facets), aspect=np.sqrt(8)/np.sqrt(len(facets)))
+#         rel.map(sns.boxplot, "gap_integral", facet_name, order=facets)
+#         rel.set_xlabels("Gap integral")
+#         rel.set_ylabels(facet_name)
+#         filename = f"fig-anytime-gap-integral-box-{x_name}.pdf"
+#         plt.savefig(output_dir / filename, bbox_inches="tight", pad_inches = 0.03)
+#         plt.close()
+#         caption = f"Integral of the gap between upper and lower bounds over {x_name} per {facet_name.lower()}."
+#         label = f"fig:anytime_gap_integral_box_{x_name}"
+#         print("""\\begin{figure}
+#     \\centering
+#     \\includegraphics[width=\\textwidth]{figures/""" + filename + """}
+#     \\caption{""" + caption + """}
+#     \\label{""" + label + """}
+# \\end{figure}""", file=f)
         
 
 def tto_table(df: pd.DataFrame, output_dir: Path):

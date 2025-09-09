@@ -1,6 +1,7 @@
 import argparse
 import json
 from pathlib import Path
+import numpy as np
 import pandas as pd
 from src.methods.base import RunParams
 from src.plot import FILTER_FUNCS, PLOT_FUNCS
@@ -29,6 +30,7 @@ def plot(args):
     
     df = pd.json_normalize(all_results, max_level=1)
     df["p.max_depth"] = df["p.max_depth"].fillna("Unlimited")
+    df = df[np.logical_or(df["p.max_depth"] <= 3, df["p.method"] != "quantbnb")]
     dfs = [("", df)]
     if args.s is not None:
         for s in sorted(args.s):
