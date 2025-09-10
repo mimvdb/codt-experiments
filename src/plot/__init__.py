@@ -57,6 +57,11 @@ def split_by_strategy_category(df: pd.DataFrame):
     dfs = [("dfs", df_dfs), ("other", df_other), ("bfs", df_bfs)]
     return dfs
 
+def ss_only(df):
+    df_s = df[np.logical_and(df["p.terminal_solver"] == "left-right", df["p.branch_relaxation"] == "lowerbound")]
+    dfs = [("strategies", df_s)]
+    return dfs
+
 FILTER_FUNCS = {
     "split_tasks": split_by_attr("p.task"),
     "split_tasks_no_all": split_by_attr("p.task", False),
@@ -65,4 +70,5 @@ FILTER_FUNCS = {
     "split_strategy_type": split_by_strategy_category,
     "ablation_split": ablation_split,
     "filter_best": filter_best,
+    "ss_only": ss_only,
 }
