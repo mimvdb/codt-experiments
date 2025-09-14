@@ -48,7 +48,11 @@ def do_ecdf(df: pd.DataFrame, output_dir: Path, x_key: str, x_label: str):
 
     max_x = df[x_key].max()
 
-    rel = sns.FacetGrid(df, hue="method", hue_order=method_order, row="p.task", row_order=["classification", "regression"], col="p.max_depth", sharey="row", xlim=(1, max_x*1.05), height=2, aspect=0.8)
+    row_order = df["p.task"].unique()
+    row_order.sort()
+    height = 2 if len(row_order) == 1 else 1.8
+    aspect = 0.8 if len(row_order) == 1 else 0.9
+    rel = sns.FacetGrid(df, hue="method", hue_order=method_order, row="p.task", row_order=row_order, col="p.max_depth", sharey="row", xlim=(1, max_x*1.05), height=height, aspect=aspect, legend_out=False)
 
     # Use a custom function to extend the line to the right edge
     def extended_ecdf(x, **kwargs):
@@ -84,6 +88,13 @@ def do_ecdf(df: pd.DataFrame, output_dir: Path, x_key: str, x_label: str):
     methods = df["method"].unique()
     label_order = [method for method in method_order if method in methods]
     rel.add_legend(title="Method", label_order=label_order)
+
+    # Move the legend to the last ax of the first row of the FacetGrid
+    handles, labels = rel.axes.flat[0].get_legend_handles_labels()
+    rel.legend.remove()
+    leg = rel.axes[0][-1].legend(handles, labels, title=None, loc="upper left", fontsize="6")
+    # leg.set_title("Method", prop={"size": "6"})
+
     rel.set_titles(template="{row_name} $d={col_name}$")
     filename = f"fig-methods-ecdf-{x_key[2:]}.pdf"
     plt.savefig(output_dir / filename, bbox_inches="tight", pad_inches = 0.03)

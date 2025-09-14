@@ -73,15 +73,17 @@ def graph_anytime(df: pd.DataFrame, output_dir: Path, x_key: str, x_label: str):
     # Clear file for appending later
     with open(output_dir / "fig.tex", "w") as f:
         f.write("")
-
+    
     datasets = df["p.dataset"].unique()
     datasetXdepth = []
     for dataset in datasets:
         depths = df[df["p.dataset"] == dataset]["p.max_depth"].unique()
         datasetXdepth.extend([(dataset, d) for d in depths])
-
+    datasetXdepth.sort(key=lambda x: (x[1], x[0]))
     facet_dim, facet_name = get_facet_dim(df)
     facets = df[facet_dim].unique()
+    df = df_with_integral(df, "o.time", 2, facet_dim, datasetXdepth, facets)
+    df = df[df["ss"] != "notinthisgraph"]
 
     for dataset, depth in datasetXdepth:
         this_df = df[np.logical_and(df["p.dataset"] == dataset, df["p.max_depth"] == depth)]
@@ -97,6 +99,9 @@ def graph_anytime(df: pd.DataFrame, output_dir: Path, x_key: str, x_label: str):
         combined = None
         for facet in facets:
             single = this_df[this_df[facet_dim] == facet]
+            ss = single["ss"].squeeze()
+            if ss not in ["DFS", "DFS-Random", "$h_{SmalltLB}$", "LDS", "DFS-ConTree", "AND/OR"]:
+                continue
             ubs = single["o.intermediate_ubs"].squeeze()
             lbs = single["o.intermediate_lbs"].squeeze()
             df_u = pd.DataFrame(ubs, columns=["score", "expansions", "time"])
@@ -105,6 +110,7 @@ def graph_anytime(df: pd.DataFrame, output_dir: Path, x_key: str, x_label: str):
             df_l["type"] = "Lower bound"
             both = pd.concat([df_u, df_l], ignore_index=True)
             both[facet_name] = facet
+            both["ss"] = ss
             if combined is not None:
                 combined = pd.concat([combined, both], ignore_index=True)
             else:
@@ -112,7 +118,7 @@ def graph_anytime(df: pd.DataFrame, output_dir: Path, x_key: str, x_label: str):
 
         max_x = combined[x_key].max()
 
-        rel = sns.FacetGrid(combined, hue="type", col=facet_name, col_wrap=4, height=2, aspect=0.8, xlim=(0, max_x * 1.05), ylim=(0,baseline_ub * 1.1))
+        rel = sns.FacetGrid(combined, hue="type", col="ss", col_wrap=3, height=1.8, aspect=1.1, xlim=(0, max_x * 1.05), ylim=(0,baseline_ub * 1.1))
         rel.map(sns.lineplot, x_key, "score", drawstyle="steps-post")
         rel.refline(y=baseline_ub, linestyle="--")
         rel.refline(y=baseline_lb, linestyle="--")
@@ -134,6 +140,7 @@ def graph_anytime(df: pd.DataFrame, output_dir: Path, x_key: str, x_label: str):
         # rel.set(xscale="log")
         rel.set_xlabels(x_label)
         rel.set_ylabels("Objective")
+        rel.set_titles(template="{col_name}")
         filename = f"fig-anytime-{x_key}-{dataset}-d{depth}.pdf"
         plt.savefig(output_dir / filename, bbox_inches="tight", pad_inches = 0.03)
         plt.close()
@@ -154,6 +161,7 @@ def anytime_table_time(df: pd.DataFrame, output_dir: Path):
     anytime_table(df, output_dir, "o.time", 2, "Time (s)")
 
 def df_with_integral(df: pd.DataFrame, x_max_key: str, x_key: int, facet_dim, datasetXdepth, facets):
+    df = df.copy()
     integrals = {}
 
     for dataset, depth in datasetXdepth:
@@ -199,26 +207,20 @@ def df_with_integral(df: pd.DataFrame, x_max_key: str, x_key: int, facet_dim, da
             gap_integral /= baseline_ub
 
             integrals[(dataset, depth, facet)] = (objective_integral, gap_integral)
-
+    
     def to_saved(i):
         return lambda row: integrals[(row["p.dataset"], row["p.max_depth"], row[facet_dim])][i]
+    
+    df["objective_integral"] = df.apply(to_saved(0), axis=1)
+    df["gap_integral"] = df.apply(to_saved(1), axis=1)
+    df["invalid"] = np.logical_or(df["o.memory_usage_bytes"] >= df["p.memory_limit"], df["o.time"] >= df["p.timeout"])
+    df["is_trivial"] = df.groupby(["p.dataset", "p.max_depth"])["o.time"].transform("max") < 1
+    df["is_easy"] = df.groupby(["p.dataset", "p.max_depth"])["o.time"].transform("max") < 10
+    df["is_unsolved"] = df.groupby(["p.dataset", "p.max_depth"])["invalid"].transform("all")
+    df["is_solved"] = ~df.groupby(["p.dataset", "p.max_depth"])["invalid"].transform("any")
+    df["ttop"] = df.apply(lambda row: row["p.timeout"] if row["invalid"] else row["o.time"], axis=1)
+    df["ttos"] = df.apply(lambda row: row["p.timeout"] if row["invalid"] else row["o.intermediate_ubs"][-1][2], axis=1)
 
-    return (df.apply(to_saved(0), axis=1), df.apply(to_saved(1), axis=1))
-
-def anytime_table(df: pd.DataFrame, output_dir: Path, x_max_key: str, x_key: int, x_label: str):
-    datasets = df["p.dataset"].unique()
-    datasetXdepth = []
-    for dataset in datasets:
-        depths = df[df["p.dataset"] == dataset]["p.max_depth"].unique()
-        datasetXdepth.extend([(dataset, d) for d in depths])
-    datasetXdepth.sort(key=lambda x: (x[1], x[0]))
-    facet_dim, facet_name = get_facet_dim(df)
-    facets = df[facet_dim].unique()
-    objective_integral, gap_integral = df_with_integral(df, x_max_key, x_key, facet_dim, datasetXdepth, facets)
-    df = df.copy()
-    df["objective_integral"] = objective_integral
-    df["gap_integral"] = gap_integral
-    df["is_trivial"] = df.groupby(["p.dataset", "p.max_depth"])["o.time"].transform("max") < 5
     # method_to_label = {
     #     "dfs": "DFS-ConTree",
     #     "dfs-random": "DFS-Random",
@@ -245,8 +247,23 @@ def anytime_table(df: pd.DataFrame, output_dir: Path, x_max_key: str, x_key: int
     }
     method_to_label = defaultdict(lambda: "notinthisgraph", method_to_label)
     df["ss"] = df[facet_dim].map(method_to_label)
+    return df
+
+def anytime_table(df: pd.DataFrame, output_dir: Path, x_max_key: str, x_key: int, x_label: str):
+    set_style()
+    datasets = df["p.dataset"].unique()
+    datasetXdepth = []
+    for dataset in datasets:
+        depths = df[df["p.dataset"] == dataset]["p.max_depth"].unique()
+        datasetXdepth.extend([(dataset, d) for d in depths])
+    datasetXdepth.sort(key=lambda x: (x[1], x[0]))
+    facet_dim, facet_name = get_facet_dim(df)
+    facets = df[facet_dim].unique()
+    df = df_with_integral(df, x_max_key, x_key, facet_dim, datasetXdepth, facets)
     df = df[df["ss"] != "notinthisgraph"]
-    df = df[~df["is_trivial"]]
+    df = df[~df["is_easy"]]
+
+    do_autorank(pd.pivot(df, columns="ss", index=["p.dataset", "p.max_depth"], values="objective_integral"), output_dir / "autorank", width=6)
 
     x_name = x_max_key[2:]
     with open(output_dir / "objective_integral_table.tex", "w") as f:
@@ -256,11 +273,8 @@ def anytime_table(df: pd.DataFrame, output_dir: Path, x_max_key: str, x_key: int
         for dataset, depth in datasetXdepth:
             this_df = df[np.logical_and(df["p.dataset"] == dataset, df["p.max_depth"] == depth)]
             if len(this_df) == 0:
-                print(f"% Skipping {dataset} d={depth}, all SS less than five seconds", file=f)
+                print(f"% Skipping {dataset} d={depth}, all SS searched less than ten seconds (including OoM)", file=f)
                 continue
-            # if this_df["o.time"].min() > this_df["p.timeout"].min() - 1:
-            #     print(f"% Skipping {dataset} d={depth}, all SS timed out", file=f)
-            #     continue
 
             print(f"{dataset}-d{depth} &", file=f)
             for facet in facets:
@@ -269,21 +283,19 @@ def anytime_table(df: pd.DataFrame, output_dir: Path, x_max_key: str, x_key: int
                 integral = single["objective_integral"].squeeze()
                 print(f"{integral:.2f} {end} % ({dataset} d={depth}) {facet}", file=f)
 
-    # set_style()
-    # rel = sns.FacetGrid(data=df, col="p.task", row="p.max_depth", height=0.8 + 0.25*len(facets), aspect=np.sqrt(8)/np.sqrt(len(facets)))
-    # rel.map(sns.boxplot, "objective_integral", facet_dim, order=facets)
-    # rel.set_xlabels("Objective integral")
-    # rel.set_ylabels(facet_name)
-    # filename = f"fig-anytime-objective-integral-box-{x_name}.pdf"
-    # plt.savefig(output_dir / filename, bbox_inches="tight", pad_inches = 0.03)
-    # plt.close()
+    df = df[df["p.max_depth"] >= 3]
+    df = df[df["ss"].isin(["DFS", "DFS-Random", "$h_{SmalltLB}$"])]
 
-    rel = sns.FacetGrid(df, hue="ss", row="p.task", row_order=["classification", "regression"], col="p.max_depth", sharex="col", sharey="row", height=2, aspect=0.8)
+    row_order = df["p.task"].unique()
+    row_order.sort()
+    height = 2 if len(row_order) == 1 else 1.8
+    aspect = 0.8 if len(row_order) == 1 else 1.4
+    rel = sns.FacetGrid(df, hue="ss", row="p.task", row_order=["classification", "regression"], col="p.max_depth", sharex="col", sharey="row", height=height, aspect=aspect, legend_out=False)
 
     # Use a custom function to extend the line to the right edge
     def extended_ecdf(x, **kwargs):
         ax = plt.gca()
-        sns.ecdfplot(x=x, stat="count", complementary=True, **kwargs)
+        sns.ecdfplot(x=x, stat="count", complementary=False, **kwargs)
         # Get the current x-axis limits
         xlim = ax.get_xlim()
         # For each line, extend it to the right edge
@@ -310,32 +322,40 @@ def anytime_table(df: pd.DataFrame, output_dir: Path, x_max_key: str, x_key: int
     for ax in rel.axes.flat:
         ax.yaxis.set_major_locator(plt.MaxNLocator(integer=True))
 
-    rel.add_legend(title="Strategy")
+    # Legend should only show ss in the data
+    methods = sorted(df["ss"].unique())
+    rel.add_legend(title="Method", label_order=methods)
+
+    # Move the legend to the last ax of the first row of the FacetGrid
+    handles, labels = rel.axes.flat[0].get_legend_handles_labels()
+    rel.legend.remove()
+    leg = rel.axes[1][-1].legend(handles, labels, title=None, loc="upper left", fontsize="6")
+    # leg.set_title("Method", prop={"size": "6"})
+
     rel.set_titles(template="{row_name} $d={col_name}$")
     filename = f"fig-oi-ecdf-{x_max_key[2:]}.pdf"
     plt.savefig(output_dir / filename, bbox_inches="tight", pad_inches = 0.03)
     plt.close()
 
-    autorank_df = pd.pivot(df, columns="ss", index=["p.dataset", "p.max_depth"], values="objective_integral")
-    autorank_path = output_dir / "autorank"
-    autorank_path.mkdir(parents=True, exist_ok=True)
+def do_autorank(df, path, width=4.3):
+    path.mkdir(parents=True, exist_ok=True)
     stdout_io = StringIO()
     with redirect_stdout(stdout_io):
-        result = autorank(autorank_df, order="ascending", approach="frequentist", force_mode="nonparametric")
-        latex_report(result, figure_path=str(autorank_path), complete_document=False)
+        result = autorank(df, order="ascending", approach="frequentist", force_mode="nonparametric")
+        latex_report(result, figure_path=str(path), complete_document=False)
         plt.close()
         set_style()
-        plot_stats(result, width=4.3, allow_insignificant=True)
-        plt.savefig(output_dir / "fig-oi-significance.pdf", bbox_inches="tight", pad_inches = 0.03)
+        plot_stats(result, width=width, allow_insignificant=True)
+        plt.savefig(path / "fig-significance.pdf", bbox_inches="tight", pad_inches = 0.03)
         plt.close()
         
     stdout_str = stdout_io.getvalue()
-    with open(output_dir / "autorank.tex", "w") as f:
+    with open(path / "autorank.tex", "w") as f:
         f.write(stdout_str)
 
-        
 
 def tto_table(df: pd.DataFrame, output_dir: Path):
+    set_style()
     datasets = df["p.dataset"].unique()
     datasetXdepth = []
     for dataset in datasets:
@@ -345,64 +365,102 @@ def tto_table(df: pd.DataFrame, output_dir: Path):
 
     facet_dim, facet_name = get_facet_dim(df)
     facets = df[facet_dim].unique()
+    df = df_with_integral(df, "o.time", 2, facet_dim, datasetXdepth, facets)
+    # df = df[~df["is_easy"]]
 
-    names = []
-    ttop_datasets = []
-    ttos_datasets = []
+    ttop_df = pd.pivot(df, columns="ss", index=["p.dataset", "p.max_depth"], values="ttop")
+    ttos_df = pd.pivot(df, columns="ss", index=["p.dataset", "p.max_depth"], values="ttos")
 
-    for dataset, depth in datasetXdepth:
-        this_df = df[np.logical_and(df["p.dataset"] == dataset, df["p.max_depth"] == depth)]
+    do_autorank(ttop_df, output_dir / "autorank_ttop", 6)
+    do_autorank(ttos_df, output_dir / "autorank_ttos", 6)
+    
+    non_trivial_nor_unsolved = df[np.logical_and(~df["is_unsolved"], ~df["is_trivial"])]
+    # non_trivial_nor_unsolved = df[df["is_trivial"]]
+    with open(output_dir / "tto_table.tex", "w") as f:
+        print(f"%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%", file=f)
+        print(f"% TTOP/TTOS table", file=f)
+        print(f"%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%", file=f)
+        for dataset, depth in datasetXdepth:
+            this_df = non_trivial_nor_unsolved[np.logical_and(non_trivial_nor_unsolved["p.dataset"] == dataset, non_trivial_nor_unsolved["p.max_depth"] == depth)]
 
-        ttop_facets = []
-        ttos_facets = []
-        for facet in facets:
-            single = this_df[this_df[facet_dim] == facet]
-            timeout = single["p.timeout"].squeeze()
-            mem_limit = single["p.memory_limit"].squeeze()
-            mem_used = single["o.memory_usage_bytes"].squeeze()
-            ttop = single["o.time"].squeeze()
-            invalid = ttop >= timeout or mem_used >= mem_limit
-            if invalid:
-                ttop = timeout
-            last_ub = single["o.intermediate_ubs"].squeeze()[-1]
-            last_ub_t = last_ub[2]
-            ttos = last_ub_t if not invalid else timeout
-            ttop_facets.append(ttop)
-            ttos_facets.append(ttos)
-        names.append(f"{dataset}")
-        ttop_datasets.append(ttop_facets)
-        ttos_datasets.append(ttos_facets)
+            if len(this_df) == 0:
+                print(f"% Skipping {dataset} d={depth}, all SS trivial or unsolved", file=f)
+                continue
 
-    ttop_df = pd.DataFrame(ttop_datasets, columns=facets)
-    ttop_path = output_dir / "ttop"
-    ttop_path.mkdir(parents=True, exist_ok=True)
-    stdout_io = StringIO()
-    with redirect_stdout(stdout_io):
-        result = autorank(ttop_df, order="ascending", approach="frequentist", force_mode="nonparametric")
-        latex_report(result, figure_path=str(ttop_path), complete_document=False)
-        
-    stdout_str = stdout_io.getvalue()
-    with open(output_dir / "ttop_report.tex", "w") as f:
-        f.write(stdout_str)
+            best_ttop = this_df["ttop"].min()
 
-    ttos_df = pd.DataFrame(ttos_datasets, columns=facets)
-    ttos_path = output_dir / "ttos"
-    ttos_path.mkdir(parents=True, exist_ok=True)
-    stdout_io = StringIO()
-    with redirect_stdout(stdout_io):
-        result = autorank(ttos_df, order="ascending", approach="frequentist", force_mode="nonparametric")
-        latex_report(result, figure_path=str(ttos_path), complete_document=False)
-        
-    stdout_str = stdout_io.getvalue()
-    with open(output_dir / "ttos_report.tex", "w") as f:
-        f.write(stdout_str)
+            print(f"{dataset}-d{depth} &", file=f)
+            for facet in facets:
+                single = this_df[this_df[facet_dim] == facet]
+                end = "&" if facet != facets[-1] else "\\\\"
+                ttop = single["ttop"].squeeze()
+                ttos = single["ttos"].squeeze()
+                if single["o.memory_usage_bytes"].squeeze() >= single["p.memory_limit"].squeeze():
+                    result = "OoM"
+                elif single["invalid"].squeeze():
+                    result = "-"
+                else:
+                    result = f"{ttop:.0f}"
+                    if best_ttop == ttop:
+                        result = "\\textbf{" + result + "}"
+                print(f"{result} {end} % TTOS: {ttos:.0f} ({dataset} d={depth}) {facet}", file=f)
+    
+    df = df[~df["invalid"]]
+    df = df[df["ss"].isin(["DFS-Random", "$h_{SmalltLB}$", "AND/OR"])]
+    # df = df[df["ss"].isin(["DFS", "DFS-Random", "DFS-ConTree"])]
+    # df = df[df["ss"].isin(["DFS", "DFS-Random", "DFS-ConTree", "AND/OR", "$h_{SmalltLB}$"])]
+    max_x = df["o.time"].max()
 
-    with open(output_dir / "table.tex", "w") as f:
-        for i in range(len(names)):
-            print(f"{names[i]}&", file=f)
-            for j in range(len(ttop_datasets[i])):
-                end = "&" if j != len(ttop_datasets[i]) - 1 else "\\\\"
-                print(f"{ttop_datasets[i][j]:.0f} {end}% TTOS: ({ttos_datasets[i][j]:.0f}), {facets[j]}", file=f)
+    row_order = df["p.task"].unique()
+    row_order.sort()
+    height = 2 if len(row_order) == 1 else 1.8
+    aspect = 0.8 if len(row_order) == 1 else 0.9
+    rel = sns.FacetGrid(df, hue="ss", row="p.task", row_order=["classification", "regression"], col="p.max_depth", sharey="row", xlim=(1, max_x*1.05), height=height, aspect=aspect, legend_out=False)
+
+    # Use a custom function to extend the line to the right edge
+    def extended_ecdf(x, **kwargs):
+        ax = plt.gca()
+        sns.ecdfplot(x=x, stat="count", **kwargs)
+        # Get the current x-axis limits
+        xlim = ax.get_xlim()
+        # For each line, extend it to the right edge
+        for line in ax.lines:
+            xdata, ydata = line.get_data()
+            if len(xdata) > 0:
+                # Add a point at the right edge with the same y-value as the last point
+                extended_x = np.append(xdata, xlim[1])
+                extended_y = np.append(ydata, ydata[-1])
+                line.set_data(extended_x, extended_y)
+    
+    rel.map(extended_ecdf, "o.time")
+
+    rel.set(xscale="log")
+    rel.set_xlabels("Time (s)")
+    rel.set_ylabels("Datasets")
+
+    # Extend y-axis by 0.5 on the top
+    for ax in rel.axes.flat:
+        ylim = ax.get_ylim()
+        ax.set_ylim(ylim[0], ylim[1] + 0.5)
+
+    # Only integer tickmarks on y-axis
+    for ax in rel.axes.flat:
+        ax.yaxis.set_major_locator(plt.MaxNLocator(integer=True))
+
+    # Legend should only show ss in the data
+    methods = sorted(df["ss"].unique())
+    rel.add_legend(title="Method", label_order=methods)
+
+    # Move the legend to the last ax of the first row of the FacetGrid
+    handles, labels = rel.axes.flat[0].get_legend_handles_labels()
+    rel.legend.remove()
+    leg = rel.axes[0][-1].legend(handles, labels, title=None, loc="upper left", fontsize="6")
+    # leg.set_title("Method", prop={"size": "6"})
+
+    rel.set_titles(template="{row_name} $d={col_name}$")
+    filename = f"fig-ss-ecdf-time.pdf"
+    plt.savefig(output_dir / filename, bbox_inches="tight", pad_inches = 0.03)
+    plt.close()
 
 
 def speedup_d2(df: pd.DataFrame, output_dir: Path):
@@ -443,7 +501,7 @@ def speedup_d2(df: pd.DataFrame, output_dir: Path):
     df = df[df["o.time"] < df["p.timeout"] - 1]
     max_x = df["o.time"].max()
 
-    rel = sns.FacetGrid(df, hue="solver", hue_order=method_order, col="p.max_depth", sharey="row", xlim=(1, max_x*1.05), height=2, aspect=0.8)
+    rel = sns.FacetGrid(df, hue="solver", hue_order=method_order, col="p.max_depth", sharey="row", xlim=(1, max_x*1.05), height=2, aspect=0.8, legend_out=False)
 
     # Use a custom function to extend the line to the right edge
     def extended_ecdf(x, **kwargs):
@@ -478,6 +536,13 @@ def speedup_d2(df: pd.DataFrame, output_dir: Path):
     # Legend should only show method in the data
     rel.add_legend(title="Shallow solver")
     rel.set_titles(template="$d={col_name}$")
+
+    # Move the legend to the last ax of the first row of the FacetGrid
+    handles, labels = rel.axes.flat[0].get_legend_handles_labels()
+    rel.legend.remove()
+    leg = rel.axes[0][-1].legend(handles, labels, title=None, loc="upper left", fontsize="6")
+    # leg.set_title("Method", prop={"size": "6"})
+
     filename = f"fig-solver-ecdf.pdf"
     plt.savefig(output_dir / filename, bbox_inches="tight", pad_inches = 0.03)
     plt.close()
