@@ -546,3 +546,81 @@ def speedup_d2(df: pd.DataFrame, output_dir: Path):
     filename = f"fig-solver-ecdf.pdf"
     plt.savefig(output_dir / filename, bbox_inches="tight", pad_inches = 0.03)
     plt.close()
+
+
+def speedup_clustering(df: pd.DataFrame, output_dir: Path):
+    set_style()
+    method_to_label = {
+        "none": "Disabled",
+        "lowerbound": "Enabled",
+    }
+    method_order = ["Enabled", "Disabled"]
+    df["solver"] = df["p.branch_relaxation"].map(method_to_label)
+
+    focus_solvers = np.logical_and(df["p.strategy"] == "bfs-balance-small-lb", df["p.terminal_solver"] == "left-right")
+    df = df[np.logical_and(focus_solvers, ~df["p.tune"])]
+    depths = [2, 3, 4]
+
+    datasets = sorted(df["p.dataset"].unique())
+    expansions_fraction = []
+    for depth, dataset in itertools.product(depths, datasets):
+        this_one = df[df["p.dataset"] == dataset]
+        this_one = this_one[this_one["p.max_depth"] == depth]
+
+        if len(this_one[this_one["o.time"] < this_one["p.timeout"] - 1]) != 2:
+            print(f"Dataset {dataset} at depth {depth} not considered, one or more timeouts")
+            continue
+        none_y = this_one[this_one["p.branch_relaxation"] == "none"]["o.time"].squeeze()
+        cluster_y = this_one[this_one["p.branch_relaxation"] == "lowerbound"]["o.time"].squeeze()
+        expansions_fraction.append(cluster_y/none_y)
+
+    geomean_fraction = np.exp(np.log(expansions_fraction).mean())
+    print(f"Geometric mean fraction is {geomean_fraction:.2f}")
+
+    df = df[df["o.time"] < df["p.timeout"] - 1]
+
+    rel = sns.FacetGrid(df, hue="solver", hue_order=method_order, col="p.max_depth", row="p.task", sharey="row", height=2, aspect=0.8, legend_out=False)
+
+    # Use a custom function to extend the line to the right edge
+    def extended_ecdf(x, **kwargs):
+        ax = plt.gca()
+        sns.ecdfplot(x=x, stat="count", **kwargs)
+        # Get the current x-axis limits
+        xlim = ax.get_xlim()
+        # For each line, extend it to the right edge
+        for line in ax.lines:
+            xdata, ydata = line.get_data()
+            if len(xdata) > 0:
+                # Add a point at the right edge with the same y-value as the last point
+                extended_x = np.append(xdata, xlim[1])
+                extended_y = np.append(ydata, ydata[-1])
+                line.set_data(extended_x, extended_y)
+    
+    rel.map(extended_ecdf, "o.time")
+
+    rel.set(xscale="log")
+    rel.set_xlabels("Graph expansions")
+    rel.set_ylabels("Datasets")
+
+    # Extend y-axis by 0.5 on the top
+    for ax in rel.axes.flat:
+        ylim = ax.get_ylim()
+        ax.set_ylim(ylim[0], ylim[1] + 0.5)
+
+    # Only integer tickmarks on y-axis
+    for ax in rel.axes.flat:
+        ax.yaxis.set_major_locator(plt.MaxNLocator(integer=True))
+
+    # Legend should only show method in the data
+    rel.add_legend(title="Clustering lower bound")
+    rel.set_titles(template="$d={col_name}$")
+
+    # Move the legend to the last ax of the first row of the FacetGrid
+    handles, labels = rel.axes.flat[0].get_legend_handles_labels()
+    rel.legend.remove()
+    leg = rel.axes[0][-1].legend(handles, labels, title=None, loc="upper left", fontsize="6")
+    # leg.set_title("Method", prop={"size": "6"})
+
+    filename = f"fig-solver-ecdf.pdf"
+    plt.savefig(output_dir / filename, bbox_inches="tight", pad_inches = 0.03)
+    plt.close()

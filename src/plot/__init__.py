@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 from src.plot.perf import ecdf_expansions, ecdf_time
 from src.plot.plot_dataset_info import plot_dataset_info
-from src.plot.ablation import anytime_table_expansions, anytime_table_time, graph_anytime_expansions, graph_anytime_time, speedup_d2, tto_table
+from src.plot.ablation import anytime_table_expansions, anytime_table_time, graph_anytime_expansions, graph_anytime_time, speedup_clustering, speedup_d2, tto_table
 from src.plot.debug import all_strats_equal, time_expansion_ratio_analysis
 from src.plot.generalisation import oos_table
 
@@ -19,6 +19,7 @@ PLOT_FUNCS = {
     "ecdf_time": ecdf_time,
     "ecdf_expansions": ecdf_expansions,
     "speedup_d2": speedup_d2,
+    "speedup_clustering": speedup_clustering,
 }
 
 def split_by_attr(attribute, include_all = True):
